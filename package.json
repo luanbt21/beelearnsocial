@@ -25,6 +25,7 @@
 		"postcss": "^8.4.14",
 		"prettier": "^2.7.1",
 		"prettier-plugin-svelte": "^2.7.0",
+		"prisma": "^4.1.0",
 		"svelte": "^3.49.0",
 		"svelte-check": "^2.8.0",
 		"svelte-preprocess": "^4.10.7",
@@ -36,6 +37,7 @@
 	"type": "module",
 	"dependencies": {
 		"@fontsource/fira-mono": "^4.5.8",
+		"@prisma/client": "^4.1.0",
 		"cookie": "^0.5.0",
 		"daisyui": "^2.19.0"
 	}

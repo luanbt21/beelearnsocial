@@ -23,5 +23,8 @@ jobs:
             git pull
             printf "${{ secrets.ENV }}" > .env
             pnpm i
-            node build/index.js
+            pnpm build
+            PID=$(lsof -t -i:3000)
+            [ "$PID" != "" ] && kill $PID
+            RUNNER_TRACKING_ID="" && node build/index.js &
             

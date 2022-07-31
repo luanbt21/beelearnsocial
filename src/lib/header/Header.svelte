@@ -1,6 +1,13 @@
 <script lang="ts">
+	import LL, { locale } from '$i18n/i18n-svelte';
+	import LocaleSwitcher from '$lib/LocaleSwitcher.svelte';
+
+	let name = 'NONAME';
 </script>
 
 <header>
-	<h1>Header</h1>
+	<a href="{$locale}/about">About page</a> <br />
+	<input type="text" bind:value={name} />
+	<h1>Header {$LL.HI({ name })}</h1>
+	<LocaleSwitcher />
 </header>

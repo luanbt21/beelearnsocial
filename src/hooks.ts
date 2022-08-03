@@ -9,7 +9,6 @@ const htmlLanguageAttributeReplacer =
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const [, lang] = event.url.pathname.split('/');
-	console.log('lang', lang);
 
 	return resolve(event, { transformPageChunk: htmlLanguageAttributeReplacer(lang) });
 };

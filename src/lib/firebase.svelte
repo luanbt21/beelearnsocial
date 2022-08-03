@@ -1,12 +1,14 @@
 <script>
 	import { onMount } from 'svelte';
 	import { initializeApp, getApps } from 'firebase/app';
+	import { getFirestore } from 'firebase/firestore';
 
 	onMount(() => {
 		if (!getApps().length) {
-			initializeApp({
+			const app = initializeApp({
 				apiKey: 'AIzaSyCxAbVlyNaOQ6pnRDlpqJVzxg7QPtDTce8',
 				authDomain: 'bayquamon.firebaseapp.com',
+				databaseURL: 'https://bayquamon-default-rtdb.asia-southeast1.firebasedatabase.app',
 				projectId: 'bayquamon',
 				storageBucket: 'bayquamon.appspot.com',
 				messagingSenderId: '808682107804',

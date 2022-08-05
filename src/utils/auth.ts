@@ -4,10 +4,8 @@ export const loginWithGoogle = async () => {
 	try {
 		const auth = getAuth();
 		const provider = new GoogleAuthProvider();
-		await signInWithPopup(auth, provider).then((value) => console.log(value));
-	} catch (e) {
-		console.log(e);
-	}
+		await signInWithPopup(auth, provider);
+	} catch (e) {}
 };
 
 export const logout = async () => {

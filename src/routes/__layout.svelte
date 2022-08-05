@@ -2,7 +2,6 @@
 	import type { Load } from '@sveltejs/kit';
 	import type { Locales } from '$i18n/i18n-types';
 	import { replaceLocaleInUrl } from '$utils';
-	import { loginWithGoogle } from '$utils/auth';
 	import { baseLocale, locales } from '$i18n/i18n-util';
 	import { loadLocaleAsync } from '$i18n/i18n-util.async';
 
@@ -43,11 +42,13 @@
 	import Header from '$lib/ui/Header.svelte';
 	import { setLocale } from '$i18n/i18n-svelte';
 	import Firebase from '$lib/firebase.svelte';
+	import Navbar from '$lib/components/Navbar.svelte';
 
 	export let locale: Locales;
 	setLocale(locale);
 </script>
 
+<Firebase />
 <div class="drawer">
 	<input id="drawer" type="checkbox" class="drawer-toggle" />
 	<div class="drawer-content flex flex-col">
@@ -72,9 +73,7 @@
 			<div class="flex-1 px-2 mx-2">Navbar Title</div>
 			<div class="flex-none hidden lg:block">
 				<ul class="menu menu-horizontal">
-					<!-- Navbar menu content here -->
-					<li><button class="btn" on:click={loginWithGoogle}>login</button></li>
-					<li><a>Navbar Item 2</a></li>
+					<Navbar />
 				</ul>
 			</div>
 		</div>
@@ -82,7 +81,6 @@
 		<Header />
 
 		<main>
-			<Firebase />
 			<slot />
 		</main>
 
@@ -94,8 +92,7 @@
 		<label for="drawer" class="drawer-overlay" />
 		<ul class="menu p-4 overflow-y-auto w-80 bg-base-100">
 			<!-- Sidebar content here -->
-			<li><button class="btn" on:click={loginWithGoogle}>login</button></li>
-			<li><a>Sidebar Item 2</a></li>
+			<Navbar />
 		</ul>
 	</div>
 </div>

@@ -30,20 +30,30 @@ class RTC {
 }
 
 export const getUserMedia = async () => {
-	const localStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+	const localStream = await navigator.mediaDevices.getUserMedia({
+		video: true,
+		audio: true
+	});
 	const remoteStream = new MediaStream();
 
+	const pc = RTC.getInstance();
 	localStream.getTracks().forEach((track) => {
-		RTC.getInstance().addTrack(track, localStream);
+		pc.addTrack(track, localStream);
 	});
 
-	RTC.getInstance().ontrack = (event) => {
+	pc.ontrack = (event) => {
+		console.log(event.streams[0].getTracks().length)
 		event.streams[0].getTracks().forEach((track) => {
 			remoteStream.addTrack(track);
 		});
 	};
 
-	return { localStream, remoteStream };
+	return {
+		localStream: await navigator.mediaDevices.getUserMedia({
+			video: true
+		}),
+		remoteStream
+	};
 };
 
 export const createOffer = async () => {
@@ -53,12 +63,13 @@ export const createOffer = async () => {
 		const offerCandidates = collection(callDoc, 'offerCandidates');
 		const answerCandidates = collection(callDoc, 'answerCandidates');
 
-		RTC.getInstance().onicecandidate = (event) => {
+		const pc = RTC.getInstance();
+		pc.onicecandidate = (event) => {
 			event.candidate && addDoc(offerCandidates, event.candidate.toJSON());
 		};
 
-		const offerDescription = await RTC.getInstance().createOffer();
-		await RTC.getInstance().setLocalDescription(offerDescription);
+		const offerDescription = await pc.createOffer();
+		await pc.setLocalDescription(offerDescription);
 
 		const offer = {
 			sdp: offerDescription.sdp,
@@ -69,9 +80,10 @@ export const createOffer = async () => {
 
 		onSnapshot(callDoc, (snapshot) => {
 			const data = snapshot.data();
-			if (!RTC.getInstance().currentLocalDescription && data?.answer) {
+			if (!pc.currentLocalDescription && data?.answer) {
+				console.log(data)
 				const answerDescription = new RTCSessionDescription(data.answer);
-				RTC.getInstance().setRemoteDescription(answerDescription);
+				pc.setRemoteDescription(answerDescription);
 			}
 		});
 
@@ -79,7 +91,7 @@ export const createOffer = async () => {
 			snapshot.docChanges().forEach((change) => {
 				if (change.type === 'added') {
 					const candidate = new RTCIceCandidate(change.doc.data());
-					RTC.getInstance().addIceCandidate(candidate);
+					pc.addIceCandidate(candidate);
 				}
 			});
 		});
@@ -90,13 +102,14 @@ export const createOffer = async () => {
 	}
 };
 
-export const answerCall = async (id: string) => {
-	const pc = RTC.getInstance();
+export const answerCall = async (id?: string) => {
+	if (!id) return;
 	const db = getFirestore();
 	const callDoc = doc(collection(db, 'calls'), id);
 	const answerCandidates = collection(callDoc, 'answerCandidates');
 	const offerCandidates = collection(callDoc, 'offerCandidates');
 
+	const pc = RTC.getInstance();
 	pc.onicecandidate = (event) => {
 		event.candidate && addDoc(answerCandidates, event.candidate.toJSON());
 	};

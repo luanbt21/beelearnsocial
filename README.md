@@ -6,6 +6,7 @@ For write translation:
 
 ```bash
 yarn typesafe-i18n
+```
 
 Once you've created a project and installed dependencies with `yarn install` start a development server:
 

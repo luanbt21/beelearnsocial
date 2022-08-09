@@ -24,7 +24,7 @@ jobs:
             printf "${{ secrets.ENV }}" > .env
             pnpm i
             pnpm build
-            PID=$(lsof -t -i:3000)
+            set PID $(lsof -t -i:3000)
             [ "$PID" != "" ] && kill $PID
             RUNNER_TRACKING_ID="" && node build/index.js &
             

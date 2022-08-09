@@ -26,5 +26,5 @@ jobs:
             yarn build
             set PID $(lsof -t -i:3000)
             [ "$PID" != "" ] && kill $PID
-            RUNNER_TRACKING_ID="" && node build/index.js &
+            set RUNNER_TRACKING_ID "" && node build/index.js &
             

@@ -18,6 +18,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           script: |
+            bash
             git clone https://github.com/btl01/bayquamon
             cd bayquamon
             git pull
@@ -26,5 +27,6 @@ jobs:
             yarn build
             set PID $(lsof -t -i:3000)
             [ "$PID" != "" ] && kill $PID
-            set RUNNER_TRACKING_ID "" && node build/index.js &
+            node build/index.js &
+            disown $(lsof -t -i:3000)
             

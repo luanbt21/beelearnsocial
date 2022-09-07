@@ -10,9 +10,18 @@ const config = {
 
 	kit: {
 		adapter: process.env.NODE ? adapterNode() : adapterAuto(),
-
-		methodOverride: {
-			allowed: ['PATCH', 'DELETE']
+		alias: {
+			'$i18n/*': 'src/i18n/*',
+			$stores: 'src/stores/index.ts',
+			'$stores/*': 'src/stores/*',
+			$utils: 'src/utils/index.ts',
+			'$utils/*': 'src/utils/*',
+			$components: 'src/lib/components/index.ts',
+			'$components/*': 'src/lib/components/*',
+			$ui: 'src/lib/ui/index.ts',
+			'$ui/*': 'src/lib/ui/*',
+			$models: 'src/models/index.ts',
+			'$models/*': 'src/models/*'
 		}
 	}
 };

@@ -1,12 +1,6 @@
-# create-svelte
+# bayquamon
 
 ## Developing
-
-For write translation:
-
-```bash
-yarn typesafe-i18n
-```
 
 Once you've created a project and installed dependencies with `yarn install` start a development server:
 
@@ -15,6 +9,12 @@ yarn dev
 
 # or start the server and open the app in a new browser tab
 yarn dev -- --open
+```
+
+For write translation:
+
+```bash
+yarn typesafe-i18n
 ```
 
 ## Building

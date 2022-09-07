@@ -9,20 +9,5 @@
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true,
-		"paths": {
-			"$i18n/*": ["src/i18n/*"],
-			"$lib": ["src/lib"],
-			"$lib/*": ["src/lib/*"],
-			"$stores": ["src/stores/index.ts"],
-			"$stores/*": ["src/stores/*"],
-			"$utils": ["src/utils/index.ts"],
-			"$utils/*": ["src/utils/*"],
-			"$components": ["src/lib/components/index.ts"],
-			"$components/*": ["src/lib/components/*"],
-			"$ui": ["src/lib/ui/index.ts"],
-			"$ui/*": ["src/lib/ui/*"],
-			"$models": ["src/models/index.ts"],
-			"$models/*": ["src/models/*"]
-		}
 	}
 }

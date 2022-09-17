@@ -4,6 +4,7 @@ import { prisma } from '$lib/prisma';
 import { error } from '@sveltejs/kit';
 
 interface Detail {
+	type?: string | number;
 	media?: string;
 	description?: string;
 	keyword?: string;
@@ -55,13 +56,13 @@ async function saveSection(sectionRow: SectionRow) {
 		});
 		const result = data
 			? await prisma.section.update({
-					data: section,
+					data: { ...section, type: section.type ? Number(section.type) : undefined },
 					where: {
 						id: data.id
 					}
 			  })
 			: await prisma.section.create({
-					data: section
+					data: { ...section, type: section.type ? Number(section.type) : undefined }
 			  });
 		return result;
 	} catch (error) {
@@ -73,6 +74,14 @@ async function saveItem(sectionId: string, itemRow: ItemRow, options: Option[]) 
 	if (!itemRow.Item) return;
 	const { Item, ...detail } = itemRow;
 	const item: Item = { value: Item, ...detail };
+	const optionsData = options.length
+		? options.map((option) => {
+				return {
+					...option,
+					type: option.type ? Number(option.type) : undefined
+				};
+		  })
+		: undefined;
 	try {
 		const data = await prisma.item.findFirst({
 			where: {
@@ -84,7 +93,8 @@ async function saveItem(sectionId: string, itemRow: ItemRow, options: Option[]) 
 			? await prisma.item.update({
 					data: {
 						...item,
-						options: options.length ? options : undefined
+						type: item.type ? Number(item.type) : undefined,
+						options: optionsData
 					},
 					where: {
 						id: data.id
@@ -94,7 +104,8 @@ async function saveItem(sectionId: string, itemRow: ItemRow, options: Option[]) 
 					data: {
 						sectionId,
 						...item,
-						options: options.length ? options : undefined
+						type: item.type ? Number(item.type) : undefined,
+						options: optionsData
 					}
 			  });
 		return result;

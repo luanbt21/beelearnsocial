@@ -9,7 +9,7 @@ const config = {
 	}),
 
 	kit: {
-		adapter: process.env.NODE ? adapterNode() : adapterAuto(),
+		adapter: process.env.NODE_SERVER ? adapterNode() : adapterAuto(),
 		alias: {
 			'$i18n/*': 'src/i18n/*',
 			$stores: 'src/stores/index.ts',

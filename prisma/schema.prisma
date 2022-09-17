@@ -6,26 +6,69 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
-model Post {
-  id       String    @id @default(auto()) @map("_id") @db.ObjectId
-  slug     String    @unique
-  title    String
-  body     String
-  comments Comment[]
-  author   User      @relation(fields: [authorId], references: [id])
-  authorId String    @db.ObjectId
+
+model Section {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  name        String  @unique
+  Item        String?
+  items       Item[]
+  type        Int?
+  media       String?
+  description String?
+  keyword     String?
+  url         String?
+  data        String?
+  assets      String?
+  cloud       String?
+  icon        String?
+  background  String?
 }
 
-model Comment {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  post    Post   @relation(fields: [postId], references: [id])
-  postId  String @db.ObjectId
-  comment String
+type Option {
+  value       String
+  type        Int?
+  media       String?
+  description String?
+  keyword     String?
+  url         String?
+  data        String?
+  assets      String?
+  cloud       String?
+  icon        String?
+  background  String?
 }
 
-model User {
-  id    String  @id @default(auto()) @map("_id") @db.ObjectId
-  email String  @unique
-  name  String?
-  posts Post[]
+model Item {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  value       String
+  section     Section  @relation(fields: [sectionId], references: [id])
+  sectionId   String   @map("sectionId") @db.ObjectId
+  options     Option[]
+  type        Int?
+  media       String?
+  description String?
+  keyword     String?
+  url         String?
+  data        String?
+  assets      String?
+  cloud       String?
+  icon        String?
+  background  String?
 }
+
+// model Option {
+//   id          String  @id @default(auto()) @map("_id") @db.ObjectId
+//   item        Item    @relation(fields: [itemId], references: [id])
+//   itemId      String  @map("itemId") @db.ObjectId
+//   value       String
+//   type        Int?
+//   media       String?
+//   description String?
+//   keyword     String?
+//   url         String?
+//   data        String?
+//   assets      String?
+//   cloud       String?
+//   icon        String?
+//   background  String?
+// }

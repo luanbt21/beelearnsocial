@@ -124,6 +124,7 @@ export const POST: RequestHandler = async (req) => {
 
 		const last = { sectionId: '' };
 		let item: ItemRow = { Item: '' };
+		let isFirstItem = true;
 		const options: Option[] = [];
 
 		const count = { section: 0, item: 0, option: 0 };
@@ -140,12 +141,19 @@ export const POST: RequestHandler = async (req) => {
 				count.section++;
 				const section = await saveSection(row as SectionRow);
 				last.sectionId = section?.id || '';
-				item = { Item: '' };
 			} else if (row.Item) {
 				count.item++;
+				if (isFirstItem) {
+					await saveItem(last.sectionId, item, options);
+				}
+				isFirstItem = !item.Item;
+				console.log(isFirstItem, row.Item);
 				item = row as ItemRow;
+				if (isFirstItem) continue;
 			}
 
+			if (item.Item == 'Is Susan ................. home? ')
+				console.log({ isFirstItem, item, options });
 			await saveItem(last.sectionId, item, options);
 			options.length = 0;
 		}

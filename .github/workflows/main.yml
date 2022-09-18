@@ -2,16 +2,16 @@ name: CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
 jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: executing remote ssh commands using password
+      - name: executing remote ssh commands using key
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
@@ -27,7 +27,4 @@ jobs:
             yarn build
             set PID $(lsof -t -i:3000)
             [ "$PID" != "" ] && kill $PID
-            node build/index.js &
-            disown $(lsof -t -i:3000)
-            exit
-            
+            node build/index.js & && disown $(lsof -t -i:3000) && exit

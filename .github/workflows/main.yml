@@ -29,4 +29,5 @@ jobs:
             [ "$PID" != "" ] && kill $PID
             node build/index.js &
             disown $(lsof -t -i:3000)
+            exit
             

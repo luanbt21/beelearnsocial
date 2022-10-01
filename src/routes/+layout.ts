@@ -10,7 +10,7 @@ export const load: LayoutLoad<{ locale: Locales }> = async ({ url, params }) => 
 
 	// redirect to base locale if language is not present
 	if (!locales.includes(lang)) {
-		throw redirect(302, replaceLocaleInUrl('/' + url.pathname, baseLocale))
+		throw redirect(302, replaceLocaleInUrl(url.pathname, baseLocale))
 	}
 
 	await loadLocaleAsync(lang)

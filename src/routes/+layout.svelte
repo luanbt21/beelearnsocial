@@ -1,61 +1,76 @@
 <script lang="ts">
-	import '../app.css';
-	import Header from '$lib/ui/Header.svelte';
-	import { setLocale } from '$i18n/i18n-svelte';
-	import Firebase from '$lib/firebase.svelte';
-	import Navbar from '$lib/components/Navbar.svelte';
-	import type { LayoutData } from './$types';
+	import '../app.css'
+	import Header from '$lib/ui/Header.svelte'
+	import { setLocale } from '$i18n/i18n-svelte'
+	import Firebase from '$lib/firebase.svelte'
+	import Navbar from '$lib/components/Navbar.svelte'
+	import type { LayoutData } from './$types'
+	import Sidebar from '$components/Sidebar.svelte'
 
-	export let data: LayoutData;
+	export let data: LayoutData
 
-	setLocale(data.locale);
+	setLocale(data.locale)
 </script>
 
 <Firebase />
 <div class="drawer">
-	<input id="drawer" type="checkbox" class="drawer-toggle" />
+	<input id="drawer-left" type="checkbox" class="drawer-toggle" />
 	<div class="drawer-content flex flex-col">
 		<!-- Navbar -->
-		<div class="w-full navbar bg-base-300">
-			<div class="flex-none lg:hidden">
-				<label for="drawer" class="btn btn-square btn-ghost">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 24 24"
-						class="inline-block w-6 h-6 stroke-current"
-						><path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M4 6h16M4 12h16M4 18h16"
-						/></svg
-					>
-				</label>
+		<div class="w-full navbar">
+			<div class="navbar-start">
+				<div class="flex-none lg:hidden">
+					<label for="drawer-left" class="btn btn-square btn-sm btn-ghost">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							class="inline-block w-6 h-6 stroke-current"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M4 6h16M4 12h16M4 18h16"
+							/>
+						</svg>
+					</label>
+				</div>
+				<a href="/">
+					<div class="flex flex-1 mx-1">
+						<img class="mr-2" src="/logo.svg" alt="" />
+						<div class="hidden lg:block">
+							<h3 class="font-medium leading-tight text-xl">BeeLearnSocial</h3>
+							<p class="text-xs text-gray-300">enjoy learning - keep learning</p>
+						</div>
+					</div>
+				</a>
 			</div>
-			<div class="flex-1 px-2 mx-2">Navbar Title</div>
-			<div class="flex-none hidden lg:block">
-				<ul class="menu menu-horizontal">
-					<Navbar />
-				</ul>
+
+			<div class="navbar-center">
+				<div class="form-control hidden lg:block">
+					<input type="text" placeholder="Search" class="input input-bordered" />
+				</div>
+			</div>
+
+			<div class="navbar-end">
+				<Navbar />
 			</div>
 		</div>
-		<!-- Page content here -->
-		<Header />
 
-		<main>
-			<slot />
-		</main>
-
-		<footer>
-			<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-		</footer>
+		<div class="flex">
+			<aside class="w-64 hidden lg:block">
+				<Sidebar />
+			</aside>
+			<main class="container mx-auto">
+				<slot />
+			</main>
+		</div>
 	</div>
 	<div class="drawer-side">
-		<label for="drawer" class="drawer-overlay" />
+		<label for="drawer-left" class="drawer-overlay" />
 		<ul class="menu p-4 overflow-y-auto w-80 bg-base-100">
-			<!-- Sidebar content here -->
-			<Navbar />
+			<Sidebar />
 		</ul>
 	</div>
 </div>

@@ -22,7 +22,7 @@ jobs:
             git clone https://github.com/btl01/bayquamon
             cd bayquamon
             git pull origin main
-            printf "${{ secrets.ENV }}" > .env
+            echo ${{ secrets.ENV }} | base64 > .env
             yarn
             yarn build
             pm2 restart bayquamon

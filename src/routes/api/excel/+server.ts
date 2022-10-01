@@ -147,13 +147,10 @@ export const POST: RequestHandler = async (req) => {
 					await saveItem(last.sectionId, item, options);
 				}
 				isFirstItem = !item.Item;
-				console.log(isFirstItem, row.Item);
 				item = row as ItemRow;
 				if (isFirstItem) continue;
 			}
 
-			if (item.Item == 'Is Susan ................. home? ')
-				console.log({ isFirstItem, item, options });
 			await saveItem(last.sectionId, item, options);
 			options.length = 0;
 		}

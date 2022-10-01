@@ -13,6 +13,8 @@ export const locales: Locales[] = [
 	'vi'
 ]
 
+export const isLocale = (locale: string) => locales.includes(locale as Locales)
+
 export const loadedLocales = {} as Record<Locales, Translations>
 
 export const loadedFormatters = {} as Record<Locales, Formatters>

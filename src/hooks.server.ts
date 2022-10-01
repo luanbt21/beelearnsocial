@@ -10,23 +10,14 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 		return new Response(null, {
 			status: 302,
-			headers: { 'Location': `/${locale}` }
+			headers: { Location: `/${locale}` },
 		})
 	}
 
 	return resolve(event, { transformPageChunk: ({ html }) => html.replace('%lang%', lang) })
 }
 
-const getPreferredLocale = (event: RequestEvent) => {
-	const headers = transformHeaders(event)
-	const acceptLanguageDetector = initAcceptLanguageHeaderDetector({ headers })
-
+const getPreferredLocale = ({ request }: RequestEvent) => {
+	const acceptLanguageDetector = initAcceptLanguageHeaderDetector(request)
 	return detectLocale(acceptLanguageDetector)
-}
-
-const transformHeaders = ({ request }: RequestEvent) => {
-	const headers: Record<string, string> = {}
-	request.headers.forEach((value, key) => (headers[key] = value))
-
-	return headers
 }

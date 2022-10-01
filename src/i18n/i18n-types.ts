@@ -15,7 +15,7 @@ export type Translations = RootTranslation
 
 type RootTranslation = {
 	/**
-	 * Chào {name}!
+	 * C​h​à​o​ ​{​n​a​m​e​}​!
 	 * @param {string} name
 	 */
 	HI: RequiredParams<'name'>

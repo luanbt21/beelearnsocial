@@ -5,7 +5,9 @@ export const loginWithGoogle = async () => {
 		const auth = getAuth();
 		const provider = new GoogleAuthProvider();
 		await signInWithPopup(auth, provider);
-	} catch (e) {}
+	} catch (e) {
+		console.log(e);
+	}
 };
 
 export const logout = async () => {

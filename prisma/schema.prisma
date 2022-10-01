@@ -7,6 +7,10 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator dbml {
+  provider = "prisma-dbml-generator"
+}
+
 model Section {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   name        String  @unique
@@ -56,19 +60,141 @@ model Item {
   background  String?
 }
 
-// model Option {
-//   id          String  @id @default(auto()) @map("_id") @db.ObjectId
-//   item        Item    @relation(fields: [itemId], references: [id])
-//   itemId      String  @map("itemId") @db.ObjectId
-//   value       String
-//   type        Int?
-//   media       String?
-//   description String?
-//   keyword     String?
-//   url         String?
-//   data        String?
-//   assets      String?
-//   cloud       String?
-//   icon        String?
-//   background  String?
-// }
+model Post {
+  id          String             @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  caption     String
+  description String
+  content     String
+  images      String[]
+  videos      String[]
+  author      User               @relation(fields: [authorId], references: [id])
+  authorId    String             @map("authorId") @db.ObjectId
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  reactions   Reaction[]
+  comments    Comment[]
+  learnLevels LearnLevel[]
+  tags        TagOnPost[]
+  collections CollectionOnPost[]
+}
+
+model User {
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  email         String
+  uid           String
+  displayName   String
+  isAnonymous   Boolean
+  photoURL      String
+  introduction  String?
+  posts         Post[]
+  reactions     Reaction[]
+  comments      Comment[]
+  learnLevels   LearnLevel[]
+  collections   Collection[]
+  followedBy    User[]       @relation("UserFollows", fields: [followedByIDs], references: [id])
+  followedByIDs String[]     @db.ObjectId
+  following     User[]       @relation("UserFollows", fields: [followingIDs], references: [id])
+  followingIDs  String[]     @db.ObjectId
+}
+
+enum ReactionType {
+  LIKE
+  LOVE
+  HAHA
+  WOW
+  SAD
+  ANGRY
+}
+
+model Reaction {
+  id        String       @id @default(auto()) @map("_id") @db.ObjectId
+  post      Post         @relation(fields: [postId], references: [id])
+  postId    String       @map("postId") @db.ObjectId
+  user      User         @relation(fields: [userId], references: [id])
+  userId    String       @map("userId") @db.ObjectId
+  type      ReactionType
+  icon      String
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  analytics Analytics?
+}
+
+model Comment {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    String   @map("postId") @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @map("userId") @db.ObjectId
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model LearnLevel {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  post        Post     @relation(fields: [postId], references: [id])
+  postId      String   @map("postId") @db.ObjectId
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String   @map("userId") @db.ObjectId
+  description String
+  icon        String
+  level       Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Tag {
+  id          String      @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  Posts       TagOnPost[]
+  analytics   Analytics?
+}
+
+model TagOnPost {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    String   @map("postId") @db.ObjectId
+  tag       Tag      @relation(fields: [tagId], references: [id])
+  tagId     String   @map("tagId") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+type Count {
+  amount Int
+  date   DateTime
+}
+
+model Analytics {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  tag        Tag      @relation(fields: [tagId], references: [id])
+  tagId      String   @unique @map("tagId") @db.ObjectId
+  reaction   Reaction @relation(fields: [reactionId], references: [id])
+  reactionId String   @unique @map("reactionId") @db.ObjectId
+  count      Count[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Collection {
+  id          String             @id @default(auto()) @map("_id") @db.ObjectId
+  user        User               @relation(fields: [userId], references: [id])
+  userId      String             @map("userId") @db.ObjectId
+  name        String
+  description String
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  posts       CollectionOnPost[]
+}
+
+model CollectionOnPost {
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  post         Post       @relation(fields: [postId], references: [id])
+  postId       String     @map("postId") @db.ObjectId
+  collection   Collection @relation(fields: [collectionId], references: [id])
+  collectionId String     @map("collectionId") @db.ObjectId
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}

@@ -21,10 +21,8 @@ jobs:
             bash
             git clone https://github.com/btl01/bayquamon
             cd bayquamon
-            git pull
+            git pull origin main
             printf "${{ secrets.ENV }}" > .env
             yarn
             yarn build
-            set PID $(lsof -t -i:3000)
-            [ "$PID" != "" ] && kill $PID
-            node build/index.js & && disown $(lsof -t -i:3000) && exit
+            pm2 restart bayquamon

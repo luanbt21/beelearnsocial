@@ -2,6 +2,9 @@
 	"name": "statement",
 	"license": "apache-2.0",
 	"version": "0.0.1",
+	"prisma": {
+		"seed": "node prisma/seed.js"
+	},
 	"scripts": {
 		"dev": "vite dev",
 		"generate": "prisma generate",

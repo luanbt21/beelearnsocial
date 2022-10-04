@@ -46,7 +46,7 @@ model Item {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   value       String
   section     Section  @relation(fields: [sectionId], references: [id])
-  sectionId   String   @map("sectionId") @db.ObjectId
+  sectionId   String   @db.ObjectId
   options     Option[]
   type        Int?
   media       String?
@@ -61,22 +61,24 @@ model Item {
 }
 
 model Post {
-  id          String             @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  caption     String
-  description String
-  content     String
-  images      String[]
-  videos      String[]
-  author      User               @relation(fields: [authorId], references: [id])
-  authorId    String             @map("authorId") @db.ObjectId
-  createdAt   DateTime           @default(now())
-  updatedAt   DateTime           @updatedAt
-  reactions   Reaction[]
-  comments    Comment[]
-  learnLevels LearnLevel[]
-  tags        TagOnPost[]
-  collections CollectionOnPost[]
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  title         String
+  caption       String
+  description   String
+  content       String
+  images        String[]
+  videos        String[]
+  author        User         @relation(fields: [authorId], references: [id])
+  authorId      String       @db.ObjectId
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  learnLevels   LearnLevel[]
+  reactions     Reaction[]
+  comments      Comment[]
+  tagIDs        String[]     @db.ObjectId
+  tags          Tag[]        @relation(fields: [tagIDs], references: [id])
+  collectionIDs String[]     @db.ObjectId
+  collections   Collection[] @relation(fields: [collectionIDs], references: [id])
 }
 
 model User {
@@ -145,26 +147,12 @@ model LearnLevel {
 }
 
 model Tag {
-  id          String      @id @default(auto()) @map("_id") @db.ObjectId
-  name        String
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  name        String     @unique
   description String
-  Posts       TagOnPost[]
+  postIDs     String[]   @db.ObjectId
+  posts       Post[]     @relation(fields: [postIDs], references: [id])
   analytics   Analytics?
-}
-
-model TagOnPost {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  post      Post     @relation(fields: [postId], references: [id])
-  postId    String   @map("postId") @db.ObjectId
-  tag       Tag      @relation(fields: [tagId], references: [id])
-  tagId     String   @map("tagId") @db.ObjectId
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-type Count {
-  amount Int
-  date   DateTime
 }
 
 model Analytics {
@@ -173,28 +161,20 @@ model Analytics {
   tagId      String   @unique @map("tagId") @db.ObjectId
   reaction   Reaction @relation(fields: [reactionId], references: [id])
   reactionId String   @unique @map("reactionId") @db.ObjectId
-  count      Count[]
+  count      Int
+  date       String   @unique
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }
 
 model Collection {
-  id          String             @id @default(auto()) @map("_id") @db.ObjectId
-  user        User               @relation(fields: [userId], references: [id])
-  userId      String             @map("userId") @db.ObjectId
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String   @map("userId") @db.ObjectId
   name        String
   description String
-  createdAt   DateTime           @default(now())
-  updatedAt   DateTime           @updatedAt
-  posts       CollectionOnPost[]
-}
-
-model CollectionOnPost {
-  id           String     @id @default(auto()) @map("_id") @db.ObjectId
-  post         Post       @relation(fields: [postId], references: [id])
-  postId       String     @map("postId") @db.ObjectId
-  collection   Collection @relation(fields: [collectionId], references: [id])
-  collectionId String     @map("collectionId") @db.ObjectId
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  postIDs     String[] @db.ObjectId
+  posts       Post[]   @relation(fields: [postIDs], references: [id])
 }

@@ -63,12 +63,14 @@ async function main() {
 		},
 	})
 
-	post.tagIDs.forEach((tagId) => {
-		prisma.analytics.upsert({
+	console.log({ reaction })
+
+	for (const tagId of post.tagIDs) {
+		await prisma.analytics.upsert({
 			where: {
 				reactionId: reaction.id,
-				tagId,
-				date: new Date().toDateString(),
+				// tagId,
+				// date: new Date().toLocaleDateString(),
 			},
 			update: {
 				count: { increment: 1 },
@@ -76,11 +78,11 @@ async function main() {
 			create: {
 				reactionId: reaction.id,
 				tagId,
-				date: new Date().toDateString(),
+				date: new Date().toLocaleDateString(),
 				count: 1,
 			},
 		})
-	})
+	}
 }
 
 main()

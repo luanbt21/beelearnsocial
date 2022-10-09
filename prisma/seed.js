@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client'
+import dayjs from 'dayjs'
 
 async function main() {
 	const prisma = new PrismaClient()
@@ -66,11 +67,35 @@ async function main() {
 	console.log({ reaction })
 
 	for (const tagId of post.tagIDs) {
+		const analytic = await prisma.analytics.findFirst({
+			where: {
+				tagId,
+				reactionId: reaction.id,
+				createdAt: dayjs().startOf('day').toDate(),
+			},
+			select: {
+				id: true,
+			},
+		})
+		if (analytic) {
+			await prisma.analytics.update({
+				where: {
+					id: analytic.id,
+				},
+				data: {
+					count: {
+						increment: 1,
+					},
+				},
+			})
+		} else {
+			await prisma.analytics.create({
+				
+			})
+		}
 		await prisma.analytics.upsert({
 			where: {
-				reactionId: reaction.id,
-				// tagId,
-				// date: new Date().toLocaleDateString(),
+				tagId,
 			},
 			update: {
 				count: { increment: 1 },
@@ -78,7 +103,6 @@ async function main() {
 			create: {
 				reactionId: reaction.id,
 				tagId,
-				date: new Date().toLocaleDateString(),
 				count: 1,
 			},
 		})

@@ -62,7 +62,7 @@
 			<aside class="w-64 hidden lg:block">
 				<Sidebar />
 			</aside>
-			<main class="container mx-auto">
+			<main class="container mx-auto p-6">
 				<slot />
 			</main>
 		</div>

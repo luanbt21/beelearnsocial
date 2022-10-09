@@ -22,7 +22,7 @@ const config = {
 			'$ui/*': 'src/lib/ui/*',
 			$models: 'src/models/index.ts',
 			'$models/*': 'src/models/*'
-		}
+		},
 	}
 };
 

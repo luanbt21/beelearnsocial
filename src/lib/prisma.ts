@@ -1,4 +1,4 @@
-import Prisma, * as PrismaAll from '@prisma/client';
+import Prisma, * as PrismaAll from '@prisma/client'
 
-const PrismaClient = Prisma?.PrismaClient || PrismaAll.PrismaClient;
-export const prisma = new PrismaClient();
+const PrismaClient = Prisma?.PrismaClient || PrismaAll.PrismaClient
+export const prisma = new PrismaClient()

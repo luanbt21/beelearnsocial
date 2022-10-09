@@ -1,3 +1,74 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.carousel:hover::-webkit-scrollbar {
+	display: initial;
+}
+
+.carousel:hover {
+	-ms-overflow-style: initial;
+	scrollbar-width: initial;
+}
+
+::-webkit-scrollbar {
+	width: 12px;
+	height: 12px;
+}
+
+::-webkit-scrollbar-track {
+	border-radius: 100vh;
+	background: #f7f4ed;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #e0cbcb;
+	border-radius: 100vh;
+	border: 2px solid #f6f7ed;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #c0a0b9;
+}
+
+::-webkit-scrollbar-button:single-button {
+	background-color: #f7f4ed;
+	display: block;
+	border-style: solid;
+	height: 8px;
+	width: 8px;
+}
+::-webkit-scrollbar-button:single-button:vertical:decrement {
+	border-width: 0 8px 8px 8px;
+	border-color: transparent transparent #e0cbcb transparent;
+}
+
+::-webkit-scrollbar-button:single-button:vertical:decrement:hover {
+	border-color: transparent transparent #c0a0b9 transparent;
+}
+::-webkit-scrollbar-button:single-button:vertical:increment {
+	border-width: 8px 8px 0 8px;
+	border-color: #e0cbcb transparent transparent transparent;
+}
+
+::-webkit-scrollbar-button:single-button:vertical:increment:hover {
+	border-color: #c0a0b9 transparent transparent transparent;
+}
+
+::-webkit-scrollbar-button:single-button:horizontal:decrement {
+	border-width: 8px 8px 8px 0px;
+	border-color: transparent #e0cbcb transparent transparent;
+}
+
+::-webkit-scrollbar-button:single-button:horizontal:decrement:hover {
+	border-color: transparent #c0a0b9 transparent transparent;
+}
+
+::-webkit-scrollbar-button:single-button:horizontal:increment {
+	border-width: 8px 0px 8px 8px;
+	border-color: transparent transparent transparent #e0cbcb;
+}
+
+::-webkit-scrollbar-button:single-button:horizontal:increment:hover {
+	border-color: transparent transparent transparent #c0a0b9;
+}

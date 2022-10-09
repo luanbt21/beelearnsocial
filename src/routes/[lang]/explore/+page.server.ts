@@ -1,15 +1,9 @@
 import type { PageServerLoad } from './$types'
-import { prisma } from '$lib/prisma'
+import { getTopTags } from '$lib/db/tag'
 
 export const load: PageServerLoad = async () => {
-	const tags = await prisma.analytics.findMany({
-		where: {
-			date: new Date().toLocaleDateString(),
-		},
-		orderBy: {
-			count: 'asc',
-		},
-	})
-	console.log(tags)
-	return { tags }
+	const tags = await getTopTags()
+	return {
+		tags,
+	}
 }

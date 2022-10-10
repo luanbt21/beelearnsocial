@@ -51,6 +51,7 @@
 		"daisyui": "^2.31.0",
 		"dayjs": "^1.11.5",
 		"firebase": "^9.11.0",
+		"firebase-admin": "^11.1.0",
 		"typesafe-i18n": "^5.14.0",
 		"xlsx": "^0.18.5"
 	}

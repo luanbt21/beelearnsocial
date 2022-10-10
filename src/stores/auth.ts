@@ -1,8 +1,13 @@
-import { readable } from 'svelte/store';
-import { getAuth, type User } from 'firebase/auth';
+import { readable } from 'svelte/store'
+import { getAuth, type User } from 'firebase/auth'
+import { browser } from '$app/environment'
 
 export const user = readable<User | null>(null, (set) => {
-	getAuth().onAuthStateChanged((user) => {
-		set(user);
-	});
-});
+	getAuth().onAuthStateChanged(async (user) => {
+		const token = await user?.getIdToken()
+		if (browser) {
+			document.cookie = `token=${token ?? ''}; path=/`
+		}
+		set(user)
+	})
+})

@@ -8,6 +8,14 @@ export const load: PageServerLoad = async ({ params }) => {
 			where: {
 				uid,
 			},
+			include: {
+				collections: true,
+				followedBy: {
+					include: {
+						_count: true,
+					},
+				},
+			},
 		}),
 	}
 }

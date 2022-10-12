@@ -19,6 +19,22 @@ type RootTranslation = {
 	 * @param {string} name
 	 */
 	HI: RequiredParams<'name'>
+	/**
+	 * n​g​ư​ờ​i​ ​t​h​e​o​ ​d​õ​i
+	 */
+	follower: string
+	/**
+	 * G​i​ớ​i​ ​t​h​i​ệ​u​ ​t​ổ​n​g​ ​q​u​a​n
+	 */
+	introduction: string
+	/**
+	 * M​ô​ ​t​ả
+	 */
+	description: string
+	/**
+	 * B​ộ​ ​s​ư​u​ ​t​ậ​p
+	 */
+	collection: string
 }
 
 export type TranslationFunctions = {
@@ -26,6 +42,22 @@ export type TranslationFunctions = {
 	 * Chào {name}!
 	 */
 	HI: (arg: { name: string }) => LocalizedString
+	/**
+	 * người theo dõi
+	 */
+	follower: () => LocalizedString
+	/**
+	 * Giới thiệu tổng quan
+	 */
+	introduction: () => LocalizedString
+	/**
+	 * Mô tả
+	 */
+	description: () => LocalizedString
+	/**
+	 * Bộ sưu tập
+	 */
+	collection: () => LocalizedString
 }
 
 export type Formatters = {}

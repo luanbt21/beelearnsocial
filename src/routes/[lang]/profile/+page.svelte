@@ -1,8 +1,11 @@
 <script lang="ts">
-	import type { PageData } from './$types'
+	import { goto } from '$app/navigation'
+	import { user } from '$stores/auth'
+	import { locale } from '$i18n/i18n-svelte'
 
-	export let data: PageData
+	if ($user) {
+		goto(`/${$locale}/profile/${$user.uid}`)
+	} else {
+		goto(`/${$locale}/login`)
+	}
 </script>
-
-<h1>Profile</h1>
-{JSON.stringify(data, null, 2)}

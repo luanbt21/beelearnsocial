@@ -3,13 +3,15 @@ import { detectLocale, i18n, isLocale } from '$i18n/i18n-util'
 import { loadAllLocales } from '$i18n/i18n-util.sync'
 import type { Handle, RequestEvent } from '@sveltejs/kit'
 import { initAcceptLanguageHeaderDetector } from 'typesafe-i18n/detectors'
-import { initializeApp, applicationDefault } from 'firebase-admin/app'
+import { initializeApp, applicationDefault, getApps } from 'firebase-admin/app'
 import { getAuth } from 'firebase-admin/auth'
 import { saveUser } from '$lib/db/user'
 
-initializeApp({
-	credential: applicationDefault(),
-})
+if (!getApps().length) {
+	initializeApp({
+		credential: applicationDefault(),
+	})
+}
 
 loadAllLocales()
 const L = i18n()

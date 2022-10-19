@@ -16,7 +16,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
+          password: ${{ secrets.PASSWORD }}
           script: |
             bash
             git clone https://github.com/btl01/bayquamon

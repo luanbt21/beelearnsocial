@@ -6,9 +6,10 @@ import { initAcceptLanguageHeaderDetector } from 'typesafe-i18n/detectors'
 import { initializeApp, getApps, cert } from 'firebase-admin/app'
 import { getAuth } from 'firebase-admin/auth'
 import { saveUser } from '$lib/db/user'
+import { FIREBASE_SERVICE_ACCOUNT_KEY } from '$env/static/private'
 
 if (!getApps().length) {
-	const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY as string)
+	const serviceAccount = JSON.parse(FIREBASE_SERVICE_ACCOUNT_KEY)
 	initializeApp({
 		credential: cert(serviceAccount),
 	})

@@ -6,7 +6,7 @@
 		"seed": "node prisma/seed.js"
 	},
 	"scripts": {
-		"dev": "vite dev",
+		"dev": "npm-run-all --parallel vite typesafe-i18n",
 		"generate": "prisma generate",
 		"prebuild": "yarn generate",
 		"build": "vite build",
@@ -16,6 +16,7 @@
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --check --plugin-search-dir=. . && eslint .",
 		"format": "prettier --write --plugin-search-dir=. .",
+		"vite": "vite",
 		"typesafe-i18n": "typesafe-i18n"
 	},
 	"devDependencies": {
@@ -51,7 +52,9 @@
 		"daisyui": "^2.31.0",
 		"dayjs": "^1.11.5",
 		"firebase": "^9.11.0",
+		"firebase-admin": "^11.1.0",
 		"typesafe-i18n": "^5.14.0",
-		"xlsx": "^0.18.5"
+		"xlsx": "^0.18.5",
+		"yarn-run-all": "^3.1.1"
 	}
 }

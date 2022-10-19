@@ -1,7 +1,11 @@
 <script lang="ts">
-    import type { PageData } from './$types';
-    
-    export let data: PageData;
-</script>
+	import { goto } from '$app/navigation'
+	import { user } from '$stores/auth'
+	import { locale } from '$i18n/i18n-svelte'
 
-<h1>Profile</h1>
+	if ($user) {
+		goto(`/${$locale}/profile/${$user.uid}`)
+	} else {
+		goto(`/${$locale}/login`)
+	}
+</script>

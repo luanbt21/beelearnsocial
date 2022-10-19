@@ -3,11 +3,31 @@ import { detectLocale, i18n, isLocale } from '$i18n/i18n-util'
 import { loadAllLocales } from '$i18n/i18n-util.sync'
 import type { Handle, RequestEvent } from '@sveltejs/kit'
 import { initAcceptLanguageHeaderDetector } from 'typesafe-i18n/detectors'
+import { initializeApp, applicationDefault, getApps } from 'firebase-admin/app'
+import { getAuth } from 'firebase-admin/auth'
+import { saveUser } from '$lib/db/user'
+
+if (!getApps().length) {
+	initializeApp({
+		credential: applicationDefault(),
+	})
+}
 
 loadAllLocales()
 const L = i18n()
 
 export const handle: Handle = async ({ event, resolve }) => {
+	const token = event.cookies.get('token')
+	if (token) {
+		const user = await getAuth()
+			.verifyIdToken(token)
+			.catch(() => {
+				event.cookies.delete('token')
+			})
+		saveUser(user)
+		event.locals.uid = user?.uid ?? ''
+	}
+
 	const [, lang] = event.url.pathname.split('/')
 
 	if (!lang || !isLocale(lang)) {

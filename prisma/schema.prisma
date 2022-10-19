@@ -83,11 +83,10 @@ model Post {
 
 model User {
   id            String       @id @default(auto()) @map("_id") @db.ObjectId
-  email         String
-  uid           String
+  email         String?
+  uid           String       @unique
   displayName   String
-  isAnonymous   Boolean
-  photoURL      String
+  photoURL      String?
   introduction  String?
   posts         Post[]
   reactions     Reaction[]

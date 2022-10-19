@@ -3,13 +3,14 @@ import { detectLocale, i18n, isLocale } from '$i18n/i18n-util'
 import { loadAllLocales } from '$i18n/i18n-util.sync'
 import type { Handle, RequestEvent } from '@sveltejs/kit'
 import { initAcceptLanguageHeaderDetector } from 'typesafe-i18n/detectors'
-import { initializeApp, applicationDefault, getApps } from 'firebase-admin/app'
+import { initializeApp, getApps, cert } from 'firebase-admin/app'
 import { getAuth } from 'firebase-admin/auth'
 import { saveUser } from '$lib/db/user'
 
 if (!getApps().length) {
+	const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY as string)
 	initializeApp({
-		credential: applicationDefault(),
+		credential: cert(serviceAccount),
 	})
 }
 

@@ -17,7 +17,7 @@ jobs:
           node-version: 16
 
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/node_modules
           key: cache-${{ hashFiles('**/yarn.lock') }}
@@ -30,7 +30,7 @@ jobs:
         run: |
           yarn
           yarn build
-          zip build.zip build
+          zip -r build.zip build
 
       - name: copy file via ssh password
         uses: appleboy/scp-action@master
@@ -47,9 +47,11 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
+          env: DATABASE_URL = ${{ secrets.DATABASE_URL }}
           script: |
-            git clone https://github.com/btl01/bayquamon
             cd bayquamon
+            unzip build.zip
             git pull origin main
             yarn
+            yarn generate
             pm2 restart bayquamon

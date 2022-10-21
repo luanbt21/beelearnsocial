@@ -1,7 +1,29 @@
 <script lang="ts">
-    import type { PageData } from './$types';
-    
-    export let data: PageData;
+	import PostCard from '$components/PostCard.svelte'
+	import type { PageData } from './$types'
+	import { goto } from '$app/navigation'
+	import { user } from '$stores/auth'
+	import { locale } from '$i18n/i18n-svelte'
+	import { browser } from '$app/environment'
+	import { LL } from '$i18n/i18n-svelte'
+
+	if (browser && !$user) {
+		goto(`/${$locale}/login`)
+	}
+
+	export let data: PageData
 </script>
 
-<h1>Collection</h1>
+{#each data.collections as collection (collection.name)}
+	<div class="mb-12">
+		<h2 class="text-xl font-bold">{collection.name}</h2>
+		<p>{collection.postIDs.length} {$LL.posts()}</p>
+		<div class="p-1 space-x-4 rounded-box">
+			{#each collection.posts as post (post.id)}
+				<div class="carousel-item">
+					<PostCard {post} showCap={false} />
+				</div>
+			{/each}
+		</div>
+	</div>
+{/each}

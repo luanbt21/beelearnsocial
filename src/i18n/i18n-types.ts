@@ -35,6 +35,10 @@ type RootTranslation = {
 	 * B​ộ​ ​s​ư​u​ ​t​ậ​p
 	 */
 	collection: string
+	/**
+	 * b​a​̀​i​ ​đ​ă​n​g
+	 */
+	posts: string
 }
 
 export type TranslationFunctions = {
@@ -58,6 +62,10 @@ export type TranslationFunctions = {
 	 * Bộ sưu tập
 	 */
 	collection: () => LocalizedString
+	/**
+	 * bài đăng
+	 */
+	posts: () => LocalizedString
 }
 
 export type Formatters = {}

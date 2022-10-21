@@ -26,8 +26,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 			.catch(() => {
 				event.cookies.delete('token')
 			})
-		saveUser(user)
-		event.locals.uid = user?.uid ?? ''
+		event.locals.user = await saveUser(user) 
 	}
 
 	const [, lang] = event.url.pathname.split('/')

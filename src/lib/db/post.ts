@@ -1,9 +1,33 @@
 import { prisma } from '$lib/prisma'
 import type { Post } from '@prisma/client'
 
-export const savePost = async (post: Post) => {
+export const savePost = async (post: Post & { tags: string[] }) => {
+	const { tags, ...data } = post
+	const tagsId = []
+	for (const t of tags) {
+		tagsId.push(
+			await prisma.tag.upsert({
+				where: {
+					name: t,
+				},
+				update: {},
+				create: {
+					name: t,
+					description: '',
+				},
+				select: {
+					id: true,
+				},
+			}),
+		)
+	}
 	prisma.post.create({
-		data: post,
+		data: {
+			...data,
+			tags: {
+				connect: tagsId,
+			},
+		},
 	})
 }
 

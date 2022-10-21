@@ -7,7 +7,6 @@ async function main() {
 		data: {
 			displayName: 'Luan',
 			email: 'luan.vy.yb@gmail.com',
-			isAnonymous: false,
 			photoURL:
 				'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGfWfmEO79zsR9zg_Qeu1DR36KDElNr3jo-w&usqp=CAU',
 			uid: '12345',
@@ -90,22 +89,13 @@ async function main() {
 			})
 		} else {
 			await prisma.analytics.create({
-				
+				data: {
+					tagId,
+					reactionId: reaction.id,
+					count: 1,
+				},
 			})
 		}
-		await prisma.analytics.upsert({
-			where: {
-				tagId,
-			},
-			update: {
-				count: { increment: 1 },
-			},
-			create: {
-				reactionId: reaction.id,
-				tagId,
-				count: 1,
-			},
-		})
 	}
 }
 

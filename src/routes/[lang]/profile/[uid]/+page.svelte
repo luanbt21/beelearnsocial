@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types'
 	import { LL } from '$i18n/i18n-svelte'
-	import PostCard from '$components/PostCard.svelte'
+	import CollectionCard from '$components/CollectionCard.svelte'
 
 	export let data: PageData
 	const { user } = data
@@ -46,7 +46,7 @@
 	</h3>
 	{#if user?.collections}
 		{#each user?.collections as collection (collection.id)}
-			{JSON.stringify(collection)}
+			<CollectionCard {collection} />
 		{/each}
 	{/if}
 </div>

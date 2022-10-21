@@ -3,7 +3,7 @@ import type { DecodedIdToken } from 'firebase-admin/auth'
 
 export const saveUser = async (user: DecodedIdToken | void) => {
 	if (!user) return
-	await prisma.user.upsert({
+	return await prisma.user.upsert({
 		where: {
 			uid: user.uid,
 		},

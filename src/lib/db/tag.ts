@@ -5,7 +5,7 @@ export async function getTopTags() {
 	const tagIDs = await prisma.analytics.groupBy({
 		where: {
 			createdAt: {
-				gte: dayjs().startOf('day').subtract(7, 'day').toDate(),
+				gte: dayjs().startOf('day').subtract(30, 'day').toDate(),
 			},
 		},
 		by: ['tagId'],

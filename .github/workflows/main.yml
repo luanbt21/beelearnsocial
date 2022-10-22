@@ -11,18 +11,47 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: ~/node_modules
+          key: cache-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install and build
+        env:
+          NODE_SERVER: true
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          FIREBASE_SERVICE_ACCOUNT_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
+        run: |
+          yarn
+          yarn build
+          zip -r build.zip build
+
+      - name: copy file via ssh password
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          source: 'build.zip'
+          target: 'bayquamon'
+
       - name: executing remote ssh commands using key
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
+          password: ${{ secrets.PASSWORD }}
+          env: DATABASE_URL = ${{ secrets.DATABASE_URL }}
           script: |
-            bash
-            git clone https://github.com/btl01/bayquamon
             cd bayquamon
+            unzip build.zip
             git pull origin main
-            echo ${{ secrets.ENV }} > .env
             yarn
-            yarn build
+            yarn generate
             pm2 restart bayquamon

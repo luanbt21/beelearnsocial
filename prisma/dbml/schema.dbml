@@ -60,11 +60,10 @@ Table Post {
 
 Table User {
   id String [pk]
-  email String [not null]
-  uid String [not null]
+  email String
+  uid String [unique, not null]
   displayName String [not null]
-  isAnonymous Boolean [not null]
-  photoURL String [not null]
+  photoURL String
   introduction String
   posts Post [not null]
   reactions Reaction [not null]

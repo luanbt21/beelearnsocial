@@ -1,6 +1,19 @@
 import { prisma } from '$lib/prisma'
 import type { Post } from '@prisma/client'
 
+export const getPosts = async () => {
+	return prisma.post.findMany({
+		include: {
+			author: true,
+			tags: {
+				select: {
+					name: true,
+				},
+			},
+		},
+	})
+}
+
 export const savePost = async (post: Post & { tags: string[] }) => {
 	const { tags, ...data } = post
 	const tagsId = []

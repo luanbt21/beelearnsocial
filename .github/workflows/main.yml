@@ -54,4 +54,4 @@ jobs:
             git pull origin main
             yarn
             yarn generate
-            pm2 restart bayquamon
+            pm2 start build/index.js --name bayquamon

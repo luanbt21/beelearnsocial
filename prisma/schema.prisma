@@ -62,12 +62,12 @@ model Item {
 
 model Post {
   id            String       @id @default(auto()) @map("_id") @db.ObjectId
-  title         String
-  caption       String
-  description   String
-  content       String
+  title         String?
+  description   String?
+  audio         String[]
   images        String[]
   videos        String[]
+  options       Option[]
   author        User         @relation(fields: [authorId], references: [id])
   authorId      String       @db.ObjectId
   createdAt     DateTime     @default(now())

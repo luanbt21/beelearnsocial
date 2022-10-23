@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types'
-	import FeedPostCard from '$components/FeedPostCard.svelte'
+	import FeedPostCard from '$ui/FeedPostCard.svelte'
+
 	export let data: PageData
 </script>
 

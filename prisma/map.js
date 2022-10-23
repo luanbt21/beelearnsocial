@@ -15,9 +15,8 @@ async function main() {
 		await prisma.post.create({
 			data: {
 				title: item.value,
-				description: item.description ?? '',
-				content: JSON.stringify(item.options),
-				caption: item.value,
+				description: item.description,
+				options: item.options,
 				author: {
 					connect: {
 						id: user?.id,

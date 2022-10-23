@@ -7,6 +7,7 @@ import { initializeApp, getApps, cert } from 'firebase-admin/app'
 import { getAuth } from 'firebase-admin/auth'
 import { saveUser } from '$lib/db/user'
 import { FIREBASE_SERVICE_ACCOUNT_KEY } from '$env/static/private'
+import dayjs from 'dayjs'
 
 if (!getApps().length) {
 	const serviceAccount = JSON.parse(FIREBASE_SERVICE_ACCOUNT_KEY)
@@ -26,17 +27,17 @@ export const handle: Handle = async ({ event, resolve }) => {
 			.catch(() => {
 				event.cookies.delete('token')
 			})
-		event.locals.user = await saveUser(user) 
+		event.locals.user = await saveUser(user)
 	}
 
-	const [, lang] = event.url.pathname.split('/')
+	const [, lang, ...path] = event.url.pathname.split('/')
 
 	if (!lang || !isLocale(lang)) {
 		const locale = getPreferredLocale(event)
 
 		return new Response(null, {
 			status: 302,
-			headers: { Location: `/${locale}` },
+			headers: { Location: `/${locale}/${path}` },
 		})
 	}
 
@@ -45,6 +46,15 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	event.locals.locale = locale
 	event.locals.LL = LL
+
+	switch (locale) {
+		case 'vi':
+			dayjs.locale('vi')
+			break
+		default:
+			dayjs.locale('en')
+			break
+	}
 
 	return resolve(event, { transformPageChunk: ({ html }) => html.replace('%lang%', lang) })
 }

@@ -4,4 +4,4 @@
     export let data: PageData;
 </script>
 
-<h1>Following</h1>
+<h1>User</h1>

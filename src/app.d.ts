@@ -8,7 +8,7 @@ declare namespace App {
 	interface Locals {
 		locale: Locales
 		LL: TranslationFunctions
-		user: User
+		user?: User
 	}
 
 	// interface Platform {}

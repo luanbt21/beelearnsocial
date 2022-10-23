@@ -4,7 +4,7 @@
 
 	type MenuItem = { icon: string; title: string; href: string }
 
-	const titles = ['feed', 'explore', 'plan', 'course', 'collection', 'following', 'profile']
+	const titles = ['feed', 'explore', 'plans', 'collections', 'users', 'profile']
 
 	const menu: MenuItem[] = titles.map((title) => ({
 		title,
@@ -21,7 +21,11 @@
 
 <ul class="menu w-64 p-2 rounded-box">
 	{#each menu as item}
-		<li on:click={() => (activeTitle = item.title)} class="my-2">
+		<li
+			on:click={() => (activeTitle = item.title)}
+			on:keydown={() => (activeTitle = item.title)}
+			class="my-2"
+		>
 			<a class:active={item.title === activeTitle} href={item.href}>
 				<img src={item.icon} alt="" />
 				<span class="capitalize">

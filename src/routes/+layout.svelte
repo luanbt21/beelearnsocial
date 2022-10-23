@@ -6,18 +6,27 @@
 	import Navbar from '$lib/components/Navbar.svelte'
 	import type { LayoutData } from './$types'
 	import Sidebar from '$components/Sidebar.svelte'
+	import dayjs from 'dayjs'
+	import 'dayjs/locale/vi'
+	import { page } from '$app/stores'
 
 	export let data: LayoutData
 
 	setLocale(data.locale)
+	switch ($page.params.lang) {
+		case 'vi':
+			dayjs.locale('vi')
+			break
+	}
 </script>
 
 <Firebase />
+<Header />
 <div class="drawer">
 	<input id="drawer-left" type="checkbox" class="drawer-toggle" />
 	<div class="drawer-content flex flex-col">
 		<!-- Navbar -->
-		<div class="w-full navbar">
+		<div class="w-full navbar sticky top-0 bg-base-200 z-50">
 			<div class="navbar-start">
 				<div class="flex-none lg:hidden">
 					<label for="drawer-left" class="btn btn-square btn-sm btn-ghost">

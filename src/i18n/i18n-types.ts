@@ -3,7 +3,7 @@
 import type { BaseTranslation as BaseTranslationType, LocalizedString, RequiredParams } from 'typesafe-i18n'
 
 export type BaseTranslation = BaseTranslationType
-export type BaseLocale = 'vi'
+export type BaseLocale = 'en'
 
 export type Locales =
 	| 'en'
@@ -15,57 +15,65 @@ export type Translations = RootTranslation
 
 type RootTranslation = {
 	/**
-	 * C​h​à​o​ ​{​n​a​m​e​}​!
-	 * @param {string} name
+	 * H​e​l​l​o​ ​{​n​a​m​e​}​!
+	 * @param {unknown} name
 	 */
 	HI: RequiredParams<'name'>
 	/**
-	 * n​g​ư​ờ​i​ ​t​h​e​o​ ​d​õ​i
+	 * f​o​l​l​o​w​e​r
 	 */
 	follower: string
 	/**
-	 * G​i​ớ​i​ ​t​h​i​ệ​u​ ​t​ổ​n​g​ ​q​u​a​n
+	 * I​n​t​r​o​d​u​c​t​i​o​n
 	 */
 	introduction: string
 	/**
-	 * M​ô​ ​t​ả
+	 * D​e​s​c​r​i​p​t​i​o​n
 	 */
 	description: string
 	/**
-	 * B​ộ​ ​s​ư​u​ ​t​ậ​p
+	 * C​o​l​l​e​c​t​i​o​n
 	 */
 	collection: string
 	/**
-	 * b​a​̀​i​ ​đ​ă​n​g
+	 * p​o​s​t​s
 	 */
 	posts: string
+	/**
+	 * C​h​e​c​k
+	 */
+	check: string
 }
 
 export type TranslationFunctions = {
 	/**
-	 * Chào {name}!
+	 * Hello {name}!
 	 */
-	HI: (arg: { name: string }) => LocalizedString
+	HI: (arg: { name: unknown }) => LocalizedString
 	/**
-	 * người theo dõi
+	 * follower
 	 */
 	follower: () => LocalizedString
 	/**
-	 * Giới thiệu tổng quan
+	 * Introduction
 	 */
 	introduction: () => LocalizedString
 	/**
-	 * Mô tả
+	 * Description
 	 */
 	description: () => LocalizedString
 	/**
-	 * Bộ sưu tập
+	 * Collection
 	 */
 	collection: () => LocalizedString
 	/**
-	 * bài đăng
+	 * posts
 	 */
 	posts: () => LocalizedString
+	/**
+	 * Check
+	 */
+	check: () => LocalizedString
 }
 
 export type Formatters = {}

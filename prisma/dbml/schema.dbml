@@ -41,7 +41,7 @@ Table Post {
   id String [pk]
   title String
   description String
-  audio String[] [not null]
+  audios String[] [not null]
   images String[] [not null]
   videos String[] [not null]
   options Option[] [not null]

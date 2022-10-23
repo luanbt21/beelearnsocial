@@ -2,9 +2,13 @@
 	import type { Tag } from '@prisma/client'
 	import { locale } from '$i18n/i18n-svelte'
 
-	export let tag: Tag
+	export let tag: Omit<Tag, 'postIDs'>
 </script>
 
-<a class="link link-hover font-medium" href="/{$locale}/explore/posts?tag={tag.name}">
+<a
+	class="link link-hover font-medium mr-2"
+	href="/{$locale}/explore/posts?tag={tag.name}"
+	title={tag.description}
+>
 	#{tag.name}
 </a>

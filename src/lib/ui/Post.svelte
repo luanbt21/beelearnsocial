@@ -1,25 +1,26 @@
 <script lang="ts">
-	import type { Post, User } from '@prisma/client'
+	import type { Post, Reaction, Tag, User } from '@prisma/client'
 	import { locale } from '$i18n/i18n-svelte'
 	import { fade } from 'svelte/transition'
 	import dayjs from 'dayjs'
 	import relativeTime from 'dayjs/plugin/relativeTime'
+	import Hashtag from '$components/Hashtag.svelte'
+	import PostBody from '$components/PostBody.svelte'
 
 	dayjs.extend(relativeTime)
 
 	export let post: Post & {
 		author: User
-		tags: {
-			name: string
-		}[]
+		tags: Tag[]
+		reactions: Reaction[]
 	}
 </script>
 
 <div in:fade>
-	<div class="flex max-w-xl mx-auto mb-4 py-6 overflow-hidden card shadow-md">
+	<div class="flex max-w-xl mx-auto mb-4 px-4 py-6 overflow-hidden card shadow-md">
 		<div class="flex items-center w-full">
 			<div class="w-full">
-				<div class="flex flex-row items-center w-full px-4 pb-4">
+				<div class="flex flex-row items-center w-full  pb-4">
 					<div class="w-12 h-12 rounded-full">
 						<a href="/{$locale}/profile/{post.author.uid}">
 							<img
@@ -40,22 +41,22 @@
 						</div>
 					</div>
 				</div>
-				<div
-					class="px-4 mb-2 text-lg font-bold leading-6 text-gray-800 line-clamp-2 font-montserrat"
-				>
+
+				<div class=" mb-2">
+					{#each post.tags as tag}
+						<Hashtag {tag} />
+					{/each}
+				</div>
+				<div class=" mb-2 text-lg font-bold leading-6 text-gray-800 line-clamp-2 font-montserrat">
 					{post.title}
 				</div>
 				<div
-					class="px-4 mb-2 text-s
+					class=" mb-2 text-s
           m text-gray-700 break-all line-clamp-5 font-karla"
 				>
 					{post.description || ''}
 				</div>
-				{#if post.images.length}
-					<div class="px-4 my-4 text-sm font-medium text-gray-400">
-						<img class="" alt={post.title} src={post.images[0]} />
-					</div>
-				{/if}
+				<PostBody props={post} />
 
 				<!-- <div class="flex justify-start mt-4">
           <div class="flex gap-4 px-2">

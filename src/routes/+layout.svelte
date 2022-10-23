@@ -1,6 +1,5 @@
 <script lang="ts">
 	import '../app.css'
-	import Header from '$lib/ui/Header.svelte'
 	import { setLocale } from '$i18n/i18n-svelte'
 	import Firebase from '$lib/firebase.svelte'
 	import Navbar from '$lib/components/Navbar.svelte'
@@ -21,7 +20,6 @@
 </script>
 
 <Firebase />
-<Header />
 <div class="drawer">
 	<input id="drawer-left" type="checkbox" class="drawer-toggle" />
 	<div class="drawer-content flex flex-col">

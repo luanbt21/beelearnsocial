@@ -15,12 +15,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-
-      - name: Cache node modules
-        uses: actions/cache@v3
-        with:
-          path: ~/node_modules
-          key: cache-${{ hashFiles('**/yarn.lock') }}
+          cache: 'yarn'
 
       - name: Install and build
         env:
@@ -28,7 +23,7 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           FIREBASE_SERVICE_ACCOUNT_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
         run: |
-          yarn
+          yarn --prefer-offline
           yarn build
           zip -r build.zip build
 
@@ -43,14 +38,16 @@ jobs:
 
       - name: executing remote ssh commands using key
         uses: appleboy/ssh-action@master
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          env: DATABASE_URL = ${{ secrets.DATABASE_URL }}
+          envs: DATABASE_URL
           script: |
             cd bayquamon
-            unzip build.zip
+            unzip -o build.zip
             git pull origin main
             yarn
             yarn generate

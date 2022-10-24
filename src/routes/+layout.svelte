@@ -65,8 +65,8 @@
 			</div>
 		</div>
 
-		<div class="flex">
-			<aside class="w-64 hidden lg:block">
+		<div class="flex relative top-0 overflow-auto">
+			<aside class="w-64 hidden lg:block sticky top-0">
 				<Sidebar />
 			</aside>
 			<main class="container mx-auto p-6">

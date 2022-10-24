@@ -1,7 +1,21 @@
 import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
+
+async function options() {
+	const items = await prisma.item.findMany()
+	for (const item of items) {
+		await prisma.post.updateMany({
+			where: {
+				title: item.value,
+			},
+			data: {
+				options: item.options,
+			},
+		})
+	}
+}
 
 async function main() {
-	const prisma = new PrismaClient()
 	const items = await prisma.item.findMany()
 	const tag = await prisma.tag.findFirst({
 		where: {
@@ -32,4 +46,4 @@ async function main() {
 	}
 }
 
-main()
+options()

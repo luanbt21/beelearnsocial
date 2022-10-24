@@ -8,7 +8,9 @@ const vi: BaseTranslation = {
 	description: 'Mô tả',
 	collection: 'Bộ sưu tập',
 	posts: 'bài đăng',
-	check: 'Kiểm tra',
+	check: 'kiểm tra',
+	reset: 'đặt lại',
+	learn: 'học',
 }
 
 export default vi

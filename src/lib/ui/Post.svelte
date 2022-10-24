@@ -5,7 +5,9 @@
 	import dayjs from 'dayjs'
 	import relativeTime from 'dayjs/plugin/relativeTime'
 	import Hashtag from '$components/Hashtag.svelte'
-	import PostBody from '$components/PostBody.svelte'
+	import PostMedia from '$components/PostMedia.svelte'
+	import Exercise from '$components/Exercise.svelte'
+	import PostInteractive from '$components/PostInteractive.svelte'
 
 	dayjs.extend(relativeTime)
 
@@ -47,44 +49,12 @@
 						<Hashtag {tag} />
 					{/each}
 				</div>
-				<div class=" mb-2 text-lg font-bold leading-6 text-gray-800 line-clamp-2 font-montserrat">
-					{post.title}
-				</div>
-				<div
-					class=" mb-2 text-s
-          m text-gray-700 break-all line-clamp-5 font-karla"
-				>
-					{post.description || ''}
-				</div>
-				<PostBody props={post} />
 
-				<!-- <div class="flex justify-start mt-4">
-          <div class="flex gap-4 px-2">
-            <button title="loves" on:click="{() => lovePost(post._id)}" class="{mediaButtonClass}">
-              {#if post.isLovedByMe}
-                <Svg name="red-love" height="16" width="16" />
-              {:else}
-                <Svg name="love" height="16" width="16" />
-              {/if}
-              <span>{post.loveCount}</span>
-            </button>
-            <a href="#/post/{post._id}" title="comments" class="{mediaButtonClass}">
-              <Svg name="comment" height="16" width="16" />
-              <span>{post.commentCount}</span>
-            </a>
-            {#if post.author == $loggedUsername}
-              <button title="delete" on:click="{onDelete}" class="{mediaButtonClass}">
-                <Svg name="delete" height="16" width="16" />
-              </button>
-            {/if}
-            <button title="bookmark" on:click="{() => bookmarkPost(post._id)}" class="{mediaButtonClass}">
-              <Svg name="bookmark" height="16" width="16" />
-            </button>
-            <a title="visit link" href="{post.url}" target="_blank" class="{mediaButtonClass}">
-              <Svg name="external" height="16" width="16" />
-            </a>
-          </div>
-        </div> -->
+				<PostMedia {post} />
+
+				<Exercise {post} />
+
+				<PostInteractive {post} />
 			</div>
 		</div>
 	</div>

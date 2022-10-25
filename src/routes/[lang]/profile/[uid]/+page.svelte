@@ -2,12 +2,13 @@
 	import type { PageData } from './$types'
 	import { LL } from '$i18n/i18n-svelte'
 	import CollectionCard from '$components/CollectionCard.svelte'
+  import { fade } from 'svelte/transition'
 
 	export let data: PageData
 	const { user } = data
 </script>
 
-<div class="mt-6">
+<div in:fade class="p-4">
 	<div class="card bg-base-200 h-72 rounded">
 		<img
 			src="https://toanthaydinh.com/wp-content/uploads/2020/04/13624171783_9f287bafdb_o.jpg"

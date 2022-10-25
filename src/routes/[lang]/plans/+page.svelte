@@ -1,7 +1,10 @@
 <script lang="ts">
-    import type { PageData } from './$types';
-    
-    export let data: PageData;
+	import { fade } from 'svelte/transition'
+	import type { PageData } from './$types'
+
+	export let data: PageData
 </script>
 
-<h1>Plan</h1>
+<div in:fade class="p-4">
+	<h1>Plan</h1>
+</div>

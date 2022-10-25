@@ -9,7 +9,7 @@
 	{#if tag}
 		<div class="mb-12">
 			<h2 class="text-xl">#{tag?.name}</h2>
-			<div class="carousel overflow-x-auto p-1 space-x-4 rounded-box">
+			<div class="carousel p-1 space-x-4 rounded-box">
 				{#each tag.posts as post (post.id)}
 					<div class="carousel-item">
 						<PostCard {post} />

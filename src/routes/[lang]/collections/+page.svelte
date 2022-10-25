@@ -21,7 +21,7 @@
 		<div class="p-1 space-x-4 rounded-box">
 			{#each collection.posts as post (post.id)}
 				<div class="carousel-item">
-					<PostCard {post} showCap={false} />
+					<PostCard {post} />
 				</div>
 			{/each}
 		</div>

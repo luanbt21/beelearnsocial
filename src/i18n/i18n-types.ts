@@ -40,9 +40,17 @@ type RootTranslation = {
 	 */
 	posts: string
 	/**
-	 * C​h​e​c​k
+	 * c​h​e​c​k
 	 */
 	check: string
+	/**
+	 * r​e​s​e​t
+	 */
+	reset: string
+	/**
+	 * l​e​a​r​n
+	 */
+	learn: string
 }
 
 export type TranslationFunctions = {
@@ -71,9 +79,17 @@ export type TranslationFunctions = {
 	 */
 	posts: () => LocalizedString
 	/**
-	 * Check
+	 * check
 	 */
 	check: () => LocalizedString
+	/**
+	 * reset
+	 */
+	reset: () => LocalizedString
+	/**
+	 * learn
+	 */
+	learn: () => LocalizedString
 }
 
 export type Formatters = {}

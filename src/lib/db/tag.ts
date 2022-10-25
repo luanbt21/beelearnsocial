@@ -1,7 +1,7 @@
 import { prisma } from '$lib/prisma'
 import dayjs from 'dayjs'
 
-export async function getTopTags() {
+export async function getTopTags(include = { posts: true }) {
 	const tagIDs = await prisma.analytics.groupBy({
 		where: {
 			createdAt: {
@@ -9,9 +9,6 @@ export async function getTopTags() {
 			},
 		},
 		by: ['tagId'],
-		// _sum: {
-		// 	count: true,
-		// },
 		orderBy: {
 			_sum: {
 				count: 'desc',
@@ -25,15 +22,16 @@ export async function getTopTags() {
 				where: {
 					id: tagId,
 				},
-				select: {
-					name: true,
-					posts: {
-						orderBy: {
-							reactions: {
-								_count: 'desc',
-							},
-						},
-					},
+				include: {
+					posts: include.posts
+						? {
+								orderBy: {
+									reactions: {
+										_count: 'desc',
+									},
+								},
+						  }
+						: false,
 				},
 			})
 		}),

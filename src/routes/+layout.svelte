@@ -5,6 +5,7 @@
 	import Navbar from '$lib/components/Navbar.svelte'
 	import type { LayoutData } from './$types'
 	import Sidebar from '$components/Sidebar.svelte'
+	import Rightbar from '$ui/Rightbar.svelte'
 	import dayjs from 'dayjs'
 	import 'dayjs/locale/vi'
 	import { page } from '$app/stores'
@@ -56,7 +57,7 @@
 
 			<div class="navbar-center">
 				<div class="form-control hidden lg:block">
-					<input type="text" placeholder="Search" class="input input-bordered" />
+					<input type="text" placeholder="Search" class="input input-bordered w-[500px]" />
 				</div>
 			</div>
 
@@ -65,13 +66,16 @@
 			</div>
 		</div>
 
-		<div class="flex">
-			<aside class="w-64 hidden lg:block">
+		<div class="flex container mx-auto relative top-0 overflow-hidden">
+			<aside class="w-72 hidden lg:block">
 				<Sidebar />
 			</aside>
-			<main class="container mx-auto p-6">
+			<main class="flex flex-col w-full max-w-4xl mx-auto px-6 relative top-0 overflow-auto">
 				<slot />
 			</main>
+			<aside class="w-72 hidden lg:block">
+				<Rightbar tags={data.tags} />
+			</aside>
 		</div>
 	</div>
 	<div class="drawer-side">

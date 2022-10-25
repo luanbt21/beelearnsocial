@@ -64,7 +64,7 @@ model Post {
   id            String       @id @default(auto()) @map("_id") @db.ObjectId
   title         String?
   description   String?
-  audio         String[]
+  audios        String[]
   images        String[]
   videos        String[]
   options       Option[]

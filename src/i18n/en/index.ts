@@ -8,7 +8,9 @@ const en: Translation = {
 	description: 'Description',
 	collection: 'Collection',
 	posts: 'posts',
-	check: 'Check',
+	check: 'check',
+	reset: 'reset',
+	learn: 'learn',
 }
 
 export default en

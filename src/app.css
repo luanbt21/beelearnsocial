@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-.carousel:hover::-webkit-scrollbar {
+/* .carousel:hover::-webkit-scrollbar {
 	display: initial;
-}
+} */
 
 .carousel:hover {
 	-ms-overflow-style: initial;
@@ -30,7 +30,7 @@
 ::-webkit-scrollbar-thumb:hover {
 	background: #c0a0b9;
 }
-
+/* 
 ::-webkit-scrollbar-button:single-button {
 	background-color: #f7f4ed;
 	display: block;
@@ -71,4 +71,4 @@
 
 ::-webkit-scrollbar-button:single-button:horizontal:increment:hover {
 	border-color: transparent transparent transparent #c0a0b9;
-}
+} */

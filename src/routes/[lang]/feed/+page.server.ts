@@ -1,14 +1,6 @@
-import { prisma } from '$lib/prisma'
 import type { PageServerLoad } from './$types'
+import { getPosts } from './service'
 
 export const load: PageServerLoad = async () => {
-	return {
-		posts: prisma.post.findMany({
-			include: {
-				author: true,
-				tags: true,
-				reactions: true,
-			},
-		}),
-	}
+	return { posts: await getPosts() }
 }

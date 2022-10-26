@@ -70,10 +70,10 @@
 			<aside class="w-72 hidden lg:block">
 				<Sidebar />
 			</aside>
-			<main class="flex flex-col w-full max-w-4xl mx-auto px-6 relative top-0 overflow-auto">
+			<main class="flex flex-col w-full max-w-4xl mx-auto px-4 relative top-0 overflow-auto">
 				<slot />
 			</main>
-			<aside class="w-72 hidden lg:block">
+			<aside class="w-72 ml-2 hidden lg:block">
 				<Rightbar tags={data.tags} />
 			</aside>
 		</div>

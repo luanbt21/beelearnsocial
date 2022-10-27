@@ -8,6 +8,6 @@ export const load: PageServerLoad = async ({ locals }) => {
 		throw redirect(307, `/${locale}/login`)
 	}
 	return {
-		collections: await getCollections(locals.user.id),
+		collections: await getCollections(user.id),
 	}
 }

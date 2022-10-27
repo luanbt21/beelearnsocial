@@ -26,6 +26,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 			.verifyIdToken(token)
 			.catch(() => {
 				event.cookies.delete('token')
+				event.cookies.delete('userId')
 			})
 		event.locals.user = await saveUser(user)
 	}
@@ -56,7 +57,14 @@ export const handle: Handle = async ({ event, resolve }) => {
 			break
 	}
 
-	return resolve(event, { transformPageChunk: ({ html }) => html.replace('%lang%', lang) })
+	const response = await resolve(event, {
+		transformPageChunk: ({ html }) => html.replace('%lang%', lang),
+	})
+	if (event.locals.user) {
+		response.headers.append('Set-Cookie', `userId=${event.locals.user.id}; path=/`)
+	}
+
+	return response
 }
 
 const getPreferredLocale = ({ request }: RequestEvent) => {

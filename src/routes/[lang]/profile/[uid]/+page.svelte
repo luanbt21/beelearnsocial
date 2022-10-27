@@ -2,7 +2,7 @@
 	import type { PageData } from './$types'
 	import { LL } from '$i18n/i18n-svelte'
 	import CollectionCard from '$components/CollectionCard.svelte'
-  import { fade } from 'svelte/transition'
+	import { fade } from 'svelte/transition'
 
 	export let data: PageData
 	const { user } = data

@@ -18,7 +18,7 @@
 	$: posts = [...posts, ...newPost]
 </script>
 
-<div in:fade class="relative top-0 overflow-auto max-w-3xl pr-2">
+<div in:fade class="relative top-0 overflow-auto">
 	{#each posts as post (post.id)}
 		<Post {post} />
 	{/each}

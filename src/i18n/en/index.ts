@@ -9,8 +9,9 @@ const en: Translation = {
 	check: 'check',
 	reset: 'reset',
 	learn: 'learn',
-	follow: 'theo dõi',
-	unfollow: 'bỏ theo dõi',
+	follow: 'follow',
+	unfollow: 'unfollow',
+	linkCopied: 'Link copied!',
 }
 
 export default en

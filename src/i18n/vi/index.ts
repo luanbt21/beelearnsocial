@@ -9,8 +9,9 @@ const vi: BaseTranslation = {
 	check: 'kiểm tra',
 	reset: 'đặt lại',
 	learn: 'học',
-	follow: 'follow',
-	unfollow: 'unfollow',
+	follow: 'theo dõi',
+	unfollow: 'bỏ theo dõi',
+	linkCopied: 'Đã sao chép liên kết',
 }
 
 export default vi

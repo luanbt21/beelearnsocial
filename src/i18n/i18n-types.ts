@@ -47,13 +47,17 @@ type RootTranslation = {
 	 */
 	learn: string
 	/**
-	 * t​h​e​o​ ​d​o​̃​i
+	 * f​o​l​l​o​w
 	 */
 	follow: string
 	/**
-	 * b​o​̉​ ​t​h​e​o​ ​d​o​̃​i
+	 * u​n​f​o​l​l​o​w
 	 */
 	unfollow: string
+	/**
+	 * L​i​n​k​ ​c​o​p​i​e​d​!
+	 */
+	linkCopied: string
 }
 
 export type TranslationFunctions = {
@@ -90,13 +94,17 @@ export type TranslationFunctions = {
 	 */
 	learn: () => LocalizedString
 	/**
-	 * theo dõi
+	 * follow
 	 */
 	follow: () => LocalizedString
 	/**
-	 * bỏ theo dõi
+	 * unfollow
 	 */
 	unfollow: () => LocalizedString
+	/**
+	 * Link copied!
+	 */
+	linkCopied: () => LocalizedString
 }
 
 export type Formatters = {}

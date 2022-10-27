@@ -4,7 +4,8 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["extendedWhereUnique", "filteredRelationCount", "fullTextIndex", "fullTextSearch"]
 }
 
 generator dbml {
@@ -79,6 +80,8 @@ model Post {
   tags          Tag[]        @relation(fields: [tagIDs], references: [id])
   collectionIDs String[]     @db.ObjectId
   collections   Collection[] @relation(fields: [collectionIDs], references: [id])
+
+  @@fulltext([title])
 }
 
 model User {
@@ -97,6 +100,8 @@ model User {
   followedByIDs String[]     @db.ObjectId
   following     User[]       @relation("UserFollows", fields: [followingIDs], references: [id])
   followingIDs  String[]     @db.ObjectId
+
+  @@fulltext([displayName, email])
 }
 
 enum ReactionType {

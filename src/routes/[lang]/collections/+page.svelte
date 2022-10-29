@@ -22,7 +22,7 @@
 			<p>{collection.postIDs.length} {$LL.posts()}</p>
 			<div class="p-1 space-x-4 rounded-box">
 				{#each collection.posts as post (post.id)}
-					<div class="carousel-item">
+					<div class="carousel-item rounded-box bg-base-100">
 						<PostCard {post} />
 					</div>
 				{/each}

@@ -12,7 +12,7 @@
 	{#each data.users as user (user.id)}
 		{#if user.id !== getUserId()}
 			<div
-				class="card card-compact shadow-xl text-center transition duration-200 transform border border-transparent hover:border-current"
+				class="card card-compact shadow-xl text-center transition duration-200 transform border border-transparent hover:border-current bg-base-100"
 			>
 				<a href={`/${$locale}/profile/${user.uid}`}>
 					<figure class="pt-10">

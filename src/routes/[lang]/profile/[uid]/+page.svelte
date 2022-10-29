@@ -8,8 +8,8 @@
 	const { user } = data
 </script>
 
-<div in:fade class="p-4">
-	<div class="card bg-base-200 h-72 rounded">
+<div in:fade class="p-4 bg-base-100">
+	<div class="card  h-72 rounded">
 		<img
 			src="https://toanthaydinh.com/wp-content/uploads/2020/04/13624171783_9f287bafdb_o.jpg"
 			alt="user cover"

@@ -22,7 +22,6 @@
 		ui = ui ? ui : new firebaseui.auth.AuthUI(getAuth())
 		ui.disableAutoSignIn()
 		ui.start(authComponent, {
-			signInSuccessUrl: $page.url.href,
 			signInFlow: 'popup',
 			signInOptions: [
 				{

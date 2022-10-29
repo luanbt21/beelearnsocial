@@ -24,9 +24,9 @@
 <Firebase />
 <div class="drawer">
 	<input id="drawer-left" type="checkbox" class="drawer-toggle" />
-	<div class="drawer-content flex flex-col">
+	<div class="drawer-content flex flex-col min-h-screen bg-base-200">
 		<!-- Navbar -->
-		<div class="w-full navbar sticky top-0 bg-base-100 z-50">
+		<div class="w-full navbar bg-base-100 z-50">
 			<div class="navbar-start">
 				<div class="flex-none lg:hidden">
 					<label for="drawer-left" class="btn btn-square btn-sm btn-ghost">
@@ -67,7 +67,7 @@
 			</div>
 		</div>
 
-		<div class="flex w-full mx-auto pt-4 overflow-hidden bg-base-200">
+		<div class="flex w-full mx-auto pt-4 overflow-hidden min-h-[90%]">
 			<aside class="w-72 hidden lg:block rounded-box bg-base-100">
 				<Sidebar />
 			</aside>

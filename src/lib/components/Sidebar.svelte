@@ -19,7 +19,7 @@
 	})
 </script>
 
-<ul class="menu lg:w-48 xl:w-64 p-2 rounded-box">
+<ul class="menu lg:w-48 xl:w-64 p-2 rounded-box mx-auto">
 	{#each menu as item}
 		<li
 			on:click={() => (activeTitle = item.title)}

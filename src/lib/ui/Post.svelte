@@ -18,7 +18,7 @@
 	}
 </script>
 
-<div in:fade class="flex mx-auto mb-4 px-4 py-6 overflow-hidden card shadow-md">
+<div in:fade class="flex mx-auto mb-4 px-4 py-6 overflow-hidden card shadow-md bg-base-100">
 	<div class="flex items-center w-full">
 		<div class="w-full">
 			<div class="flex flex-row items-center w-full  pb-4">

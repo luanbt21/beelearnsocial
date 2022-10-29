@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../app.css'
 	import { setLocale } from '$i18n/i18n-svelte'
-	import Firebase from '$lib/firebase.svelte'
+	import Firebase from '$lib/Firebase.svelte'
 	import Navbar from '$lib/components/Navbar.svelte'
 	import type { LayoutData } from './$types'
 	import Sidebar from '$components/Sidebar.svelte'
@@ -26,7 +26,7 @@
 	<input id="drawer-left" type="checkbox" class="drawer-toggle" />
 	<div class="drawer-content flex flex-col">
 		<!-- Navbar -->
-		<div class="w-full navbar sticky top-0 bg-base-200 z-50">
+		<div class="w-full navbar sticky top-0 bg-base-100 z-50">
 			<div class="navbar-start">
 				<div class="flex-none lg:hidden">
 					<label for="drawer-left" class="btn btn-square btn-sm btn-ghost">
@@ -67,14 +67,14 @@
 			</div>
 		</div>
 
-		<div class="flex container mx-auto relative top-0 overflow-hidden">
-			<aside class="w-72 hidden lg:block">
+		<div class="flex w-full mx-auto pt-4 overflow-hidden bg-base-200">
+			<aside class="w-72 hidden lg:block rounded-box bg-base-100">
 				<Sidebar />
 			</aside>
-			<main class="flex flex-col w-full relative top-0 overflow-auto">
+			<main class="flex flex-col w-full max-w-5xl ml-auto overflow-auto">
 				<slot />
 			</main>
-			<aside class="w-72 ml-2 hidden lg:block">
+			<aside class="w-72 mx-auto hidden lg:block">
 				<Rightbar tags={data.tags} />
 			</aside>
 		</div>

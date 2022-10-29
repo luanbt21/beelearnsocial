@@ -5,8 +5,8 @@
 	export let tags: (Tag | null)[]
 </script>
 
-<div class="my-8">
-	<div>
+<div>
+	<div class="bg-base-100 p-4 rounded-box">
 		<h3 class="text-2xl font-bold mb-3">Tags</h3>
 		{#each tags as tag}
 			{#if tag}

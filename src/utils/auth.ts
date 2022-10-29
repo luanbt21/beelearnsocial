@@ -1,15 +1,7 @@
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-
-export const loginWithGoogle = async () => {
-	try {
-		const auth = getAuth();
-		const provider = new GoogleAuthProvider();
-		await signInWithPopup(auth, provider);
-	} catch (e) {
-		console.log(e);
-	}
-};
+import { getAuth } from 'firebase/auth'
+import { invalidateAll } from '$app/navigation'
 
 export const logout = async () => {
-	await getAuth().signOut();
-};
+	await getAuth().signOut()
+	invalidateAll()
+}

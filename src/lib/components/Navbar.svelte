@@ -1,11 +1,12 @@
 <script lang="ts">
-	import { loginWithGoogle, logout } from '$utils/auth'
+	import { logout } from '$utils/auth'
 	import { user } from '$stores/auth'
+	import LocaleSwitcher from '$components/LocaleSwitcher.svelte'
+	import FirebaseUI from './FirebaseUI.svelte'
 
 	type MenuItem = { icon: string; title: string }
 
 	const titles = ['note', 'timer', 'message', 'noti']
-	// const titles = ['note', 'timer']
 
 	const menu: MenuItem[] = titles.map((title) => ({
 		title,
@@ -18,9 +19,10 @@
 		<img class="w-8" src={item.icon} alt={item.title} />
 	</button>
 {/each}
+<LocaleSwitcher />
 
 {#if !$user}
-	<button class="btn btn-ghost p-2" on:click={loginWithGoogle}>login</button>
+	<FirebaseUI />
 {:else}
 	<div class="dropdown dropdown-end">
 		<button tabindex="0" class="btn btn-ghost btn-square rounded-btn">

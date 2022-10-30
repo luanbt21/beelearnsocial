@@ -12,6 +12,7 @@ const vi: BaseTranslation = {
 	follow: 'theo dõi',
 	unfollow: 'bỏ theo dõi',
 	linkCopied: 'Đã sao chép liên kết',
+	repeat: 'Lặp lại',
 }
 
 export default vi

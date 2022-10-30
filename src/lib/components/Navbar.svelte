@@ -16,7 +16,7 @@
 
 {#each menu as item}
 	<button class="btn btn-md btn-ghost btn-square" title={item.title}>
-		<img class="w-8" src={item.icon} alt={item.title} />
+		<img class="w-6" src={item.icon} alt={item.title} />
 	</button>
 {/each}
 <LocaleSwitcher />

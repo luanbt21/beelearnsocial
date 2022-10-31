@@ -36,7 +36,7 @@
 		</div>
 
 		<div>
-			<button class="btn">{$LL.learn()}</button>
+			<button class="btn">{$LL.repeat()}</button>
 		</div>
 	</div>
 	{#if showComments}

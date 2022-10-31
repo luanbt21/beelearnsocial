@@ -33,7 +33,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	const [, lang, ...path] = event.url.pathname.split('/')
 
-	if (!lang || !isLocale(lang)) {
+	if (!lang || (!isLocale(lang) && lang !== 'favicon.png')) {
 		const locale = getPreferredLocale(event)
 
 		return new Response(null, {

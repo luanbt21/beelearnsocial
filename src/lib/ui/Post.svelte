@@ -3,13 +3,10 @@
 	import { locale } from '$i18n/i18n-svelte'
 	import { fade } from 'svelte/transition'
 	import dayjs from 'dayjs'
-	import relativeTime from 'dayjs/plugin/relativeTime'
 	import Hashtag from '$components/Hashtag.svelte'
 	import PostMedia from '$components/PostMedia.svelte'
 	import Exercise from '$components/Exercise.svelte'
 	import PostInteractive from '$components/PostInteractive.svelte'
-
-	dayjs.extend(relativeTime)
 
 	export let post: Post & {
 		author: User

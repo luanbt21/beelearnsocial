@@ -11,4 +11,5 @@
 	title={tag.description}
 >
 	#{tag.name}
+	<slot />
 </a>

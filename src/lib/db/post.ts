@@ -54,9 +54,17 @@ export const updatePost = async (post: Post) => {
 }
 
 export const deletePost = async (id: string) => {
-	return await prisma.post.delete({
+	return prisma.post.delete({
 		where: {
 			id,
+		},
+	})
+}
+
+export const searchPost = async (q: string) => {
+	return prisma.post.findRaw({
+		filter: {
+			$text: { $search: q },
 		},
 	})
 }

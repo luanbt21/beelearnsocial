@@ -16,7 +16,7 @@ export async function getTopTags(include = { posts: true }) {
 		},
 	})
 
-	const tags = Promise.all(
+	const tags = await Promise.all(
 		tagIDs.map(async ({ tagId }) => {
 			return await prisma.tag.findFirst({
 				where: {
@@ -25,6 +25,7 @@ export async function getTopTags(include = { posts: true }) {
 				include: {
 					posts: include.posts
 						? {
+								include: { author: true },
 								orderBy: {
 									reactions: {
 										_count: 'desc',
@@ -37,4 +38,23 @@ export async function getTopTags(include = { posts: true }) {
 		}),
 	)
 	return tags
+}
+
+export const searchTag = async (q: string) => {
+	return await prisma.tag.findMany({
+		where: {
+			name: {
+				contains: q,
+			},
+		},
+		select: {
+			id: true,
+			name: true,
+			description: true,
+			_count: { select: { posts: true } },
+		},
+		orderBy: {
+			posts: { _count: 'desc' },
+		},
+	})
 }

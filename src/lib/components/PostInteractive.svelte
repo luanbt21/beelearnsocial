@@ -4,8 +4,10 @@
 	import Svg from '$components/Svg.svelte'
 	import { locale } from '$i18n/i18n-svelte'
 	import { toast } from '@zerodevx/svelte-toast'
+	import PostComments from './PostComments.svelte'
 
 	export let post: Post
+	export let showComments = true
 
 	const width = 20
 	const height = 20
@@ -18,7 +20,7 @@
 				<Svg name="love" {width} {height} />
 				<span class="ml-1">20</span>
 			</button>
-			<button class="btn btn-sm btn-ghost">
+			<button class="btn btn-sm btn-ghost" on:click={() => (showComments = !showComments)}>
 				<Svg name="comment" {width} {height} />
 				<span class="ml-1">12</span>
 			</button>
@@ -37,4 +39,9 @@
 			<button class="btn">{$LL.learn()}</button>
 		</div>
 	</div>
+	{#if showComments}
+		<div class="px-6">
+			<PostComments postId={post.id} />
+		</div>
+	{/if}
 </div>

@@ -8,13 +8,10 @@
 		EmailAuthProvider,
 	} from 'firebase/auth'
 	import { onMount } from 'svelte'
-	import { page } from '$app/stores'
 
 	let authComponent: HTMLElement
 
 	onMount(async () => {
-		console.log('mount auth ui')
-
 		const firebaseui = await import('firebaseui')
 		await import('firebaseui/dist/firebaseui.css')
 

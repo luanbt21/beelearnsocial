@@ -10,7 +10,7 @@
 
 <p
 	class:text-center={!isQuestion}
-	class="mb-2 text-lg font-bold leading-6 text-gray-800 line-clamp-2 font-montserrat"
+	class="mb-2 text-lg font-bold leading-6 line-clamp-2 font-montserrat"
 >
 	{post.title}
 </p>
@@ -18,7 +18,7 @@
 {#if isQuestion}
 	{#each post.options as option}
 		<label
-			class=" label justify-start cursor-pointer rounded-lg mb-1 mx-[10%]"
+			class="label justify-start cursor-pointer rounded-lg mb-1 mx-[10%]"
 			class:bg-red-400={checked && answer === option.value && !option.type}
 			class:bg-green-400={checked && option.type}
 		>

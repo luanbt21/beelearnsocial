@@ -4,6 +4,9 @@ export const getPosts = async (page = 0, limit = 5) => {
 	return await prisma.post.findMany({
 		skip: page * limit,
 		take: limit,
+		orderBy: {
+			createdAt: 'desc'
+		},
 		include: {
 			author: true,
 			tags: true,

@@ -58,6 +58,10 @@ type RootTranslation = {
 	 * L​i​n​k​ ​c​o​p​i​e​d​!
 	 */
 	linkCopied: string
+	/**
+	 * r​e​p​e​a​t
+	 */
+	repeat: string
 }
 
 export type TranslationFunctions = {
@@ -105,6 +109,10 @@ export type TranslationFunctions = {
 	 * Link copied!
 	 */
 	linkCopied: () => LocalizedString
+	/**
+	 * repeat
+	 */
+	repeat: () => LocalizedString
 }
 
 export type Formatters = {}

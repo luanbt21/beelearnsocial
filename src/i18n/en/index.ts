@@ -12,6 +12,7 @@ const en: Translation = {
 	follow: 'follow',
 	unfollow: 'unfollow',
 	linkCopied: 'Link copied!',
+	repeat: 'repeat',
 }
 
 export default en

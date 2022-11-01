@@ -13,6 +13,10 @@ const vi: BaseTranslation = {
 	unfollow: 'bỏ theo dõi',
 	linkCopied: 'Đã sao chép liên kết',
 	repeat: 'Lặp lại',
+	title: 'Tiêu đề',
+	bold: 'đậm',
+	italic: 'nghiêng',
+	strike: 'gạch ngang',
 }
 
 export default vi

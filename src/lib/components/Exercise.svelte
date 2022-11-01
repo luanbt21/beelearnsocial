@@ -35,7 +35,7 @@
 		</label>
 	{/each}
 	{#if checked}
-		<div class=" mb-2 text-sm text-gray-700 break-all line-clamp-5 font-karla">
+		<div class="mb-2 text-sm text-gray-700 break-all">
 			{@html post.description}
 		</div>
 	{/if}

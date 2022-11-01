@@ -13,6 +13,10 @@ const en: Translation = {
 	unfollow: 'unfollow',
 	linkCopied: 'Link copied!',
 	repeat: 'repeat',
+	title: 'title',
+	bold: 'bold',
+	italic: 'italic',
+	strike: 'strike',
 }
 
 export default en

@@ -62,6 +62,22 @@ type RootTranslation = {
 	 * r​e​p​e​a​t
 	 */
 	repeat: string
+	/**
+	 * t​i​t​l​e
+	 */
+	title: string
+	/**
+	 * b​o​l​d
+	 */
+	bold: string
+	/**
+	 * i​t​a​l​i​c
+	 */
+	italic: string
+	/**
+	 * s​t​r​i​k​e
+	 */
+	strike: string
 }
 
 export type TranslationFunctions = {
@@ -113,6 +129,22 @@ export type TranslationFunctions = {
 	 * repeat
 	 */
 	repeat: () => LocalizedString
+	/**
+	 * title
+	 */
+	title: () => LocalizedString
+	/**
+	 * bold
+	 */
+	bold: () => LocalizedString
+	/**
+	 * italic
+	 */
+	italic: () => LocalizedString
+	/**
+	 * strike
+	 */
+	strike: () => LocalizedString
 }
 
 export type Formatters = {}

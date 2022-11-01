@@ -36,7 +36,7 @@
 				</div>
 				<div>
 					<span class="text-sm">
-						{dayjs(comment.created).fromNow()}
+						{dayjs(comment.created).utc(true).fromNow()}
 					</span>
 				</div>
 			</div>

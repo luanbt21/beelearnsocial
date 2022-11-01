@@ -11,10 +11,12 @@
 	import { page } from '$app/stores'
 	import { SvelteToast } from '@zerodevx/svelte-toast'
 	import relativeTime from 'dayjs/plugin/relativeTime'
+	import utc from 'dayjs/plugin/utc'
 
 	export let data: LayoutData
 
 	dayjs.extend(relativeTime)
+	dayjs.extend(utc)
 	setLocale(data.locale)
 	switch ($page.params.lang) {
 		case 'vi':

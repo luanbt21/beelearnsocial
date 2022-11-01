@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { locale } from '$i18n/i18n-svelte'
-	import { onMount } from 'svelte'
-
+	import { page } from '$app/stores'
 	type MenuItem = { icon: string; title: string; href: string }
 
 	const titles = ['feed', 'explore', 'plans', 'collections', 'users', 'profile']
@@ -12,11 +11,7 @@
 		href: `/${$locale}/${title}`,
 	}))
 
-	let activeTitle: string
-
-	onMount(() => {
-		activeTitle = location.pathname.split('/')[2]
-	})
+	$: activeTitle = $page.url.pathname.split('/')[2]
 </script>
 
 <ul class="menu lg:w-48 xl:w-64 p-2 rounded-box mx-auto">

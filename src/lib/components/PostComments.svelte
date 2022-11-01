@@ -1,31 +1,55 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import PostComment from './PostComment.svelte'
-	import PocketBase from 'pocketbase'
 	import { user } from '$stores/auth'
 	import { getUserId } from '$utils'
 	import Tiptap from './Tiptap.svelte'
+	import type { Record } from 'pocketbase'
+	import { pocket } from '$stores'
 
 	export let postId: string
 	export let length = 0
-	let comments: Comment[] = []
+	let comments: Record[] = []
+	$: length = comments.length
+
 	let value = ''
-	const client = new PocketBase('https://pocket.luanbt.live')
+
+	$pocket.realtime.subscribe('comment', (e) => {
+		if (e.record.postId !== postId) return
+		switch (e.action) {
+			case 'create':
+				comments = [...comments, e.record]
+				break
+			case 'update':
+				comments = comments.map((r) => {
+					if (r.id === e.record.id) {
+						return e.record
+					}
+					return r
+				})
+				break
+			case 'delete':
+				comments = comments.filter((r) => r.id !== e.record.id)
+				break
+
+			default:
+				break
+		}
+	})
 
 	const sentComment = async () => {
-		client.records.create('comment', {
+		$pocket.records.create('comment', {
 			postId,
 			userId: getUserId(),
 			content: value,
 		})
+		value = ''
 	}
 
 	onMount(async () => {
-		// @ts-ignore
-		comments = await client.records.getFullList('comment', 200, {
+		comments = await $pocket.records.getFullList('comment', 200, {
 			filter: `postId = "${postId}"`,
 		})
-		length = comments.length
 	})
 </script>
 

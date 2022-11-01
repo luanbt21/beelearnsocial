@@ -3,9 +3,9 @@
 	import { locale } from '$i18n/i18n-svelte'
 	import type { User } from '@prisma/client'
 	import dayjs from 'dayjs'
+	import type { IComment } from 'src/global'
 
-	export let comment: Comment
-
+	export let comment: IComment
 	let user: User
 
 	onMount(async () => {

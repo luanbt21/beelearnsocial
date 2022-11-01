@@ -7,7 +7,9 @@
 	import PostComments from './PostComments.svelte'
 
 	export let post: Post
-	export let showComments = true
+	export let showComments = false
+
+	let commentCount: number
 
 	const width = 20
 	const height = 20
@@ -22,7 +24,9 @@
 			</button>
 			<button class="btn btn-sm btn-ghost" on:click={() => (showComments = !showComments)}>
 				<Svg name="comment" {width} {height} />
-				<span class="ml-1">12</span>
+				{#if commentCount}
+					<span class="ml-1">{commentCount}</span>
+				{/if}
 			</button>
 			<button
 				class="btn btn-sm btn-ghost"
@@ -36,12 +40,12 @@
 		</div>
 
 		<div>
-			<button class="btn">{$LL.repeat()}</button>
+			<button class="btn btn-primary btn-sm lg:btn-md">{$LL.repeat()}</button>
 		</div>
 	</div>
 	{#if showComments}
-		<div class="px-6">
-			<PostComments postId={post.id} />
+		<div class="px-2">
+			<PostComments postId={post.id} bind:length={commentCount} />
 		</div>
 	{/if}
 </div>

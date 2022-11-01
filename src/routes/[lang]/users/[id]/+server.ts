@@ -7,5 +7,7 @@ export const GET: RequestHandler = async ({ params }) => {
 			id: params.id,
 		},
 	})
-	return json(user)
+	return json(user, {
+		headers: { 'Cache-Control': 'max-age=3600, must-revalidate' },
+	})
 }

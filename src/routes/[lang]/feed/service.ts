@@ -5,7 +5,7 @@ export const getPosts = async (page = 0, limit = 5) => {
 		skip: page * limit,
 		take: limit,
 		orderBy: {
-			createdAt: 'desc'
+			createdAt: 'desc',
 		},
 		include: {
 			author: true,

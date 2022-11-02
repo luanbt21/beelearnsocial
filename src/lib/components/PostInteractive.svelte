@@ -39,7 +39,6 @@
 <div class="mt-4 pt-4 border-t">
 	<div class="flex justify-between items-center">
 		<div class="flex">
-			{reactions.some(({ userId }) => userId === getUserId() ?? '')}
 			<form
 				method="POST"
 				on:submit={handleForm}

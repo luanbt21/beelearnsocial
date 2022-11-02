@@ -5,7 +5,7 @@ datasource db {
 
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["extendedWhereUnique", "filteredRelationCount", "fullTextIndex", "fullTextSearch"]
+  previewFeatures = ["extendedWhereUnique", "fullTextIndex", "fullTextSearch"]
 }
 
 generator dbml {
@@ -104,26 +104,14 @@ model User {
   @@fulltext([displayName, email])
 }
 
-enum ReactionType {
-  LIKE
-  LOVE
-  HAHA
-  WOW
-  SAD
-  ANGRY
-}
-
 model Reaction {
-  id        String       @id @default(auto()) @map("_id") @db.ObjectId
-  post      Post         @relation(fields: [postId], references: [id])
-  postId    String       @db.ObjectId
-  user      User         @relation(fields: [userId], references: [id])
-  userId    String       @db.ObjectId
-  type      ReactionType
-  icon      String
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
-  analytics Analytics[]
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    String   @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Comment {
@@ -151,23 +139,11 @@ model LearnLevel {
 }
 
 model Tag {
-  id          String      @id @default(auto()) @map("_id") @db.ObjectId
-  name        String      @unique
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String   @unique
   description String
-  postIDs     String[]    @db.ObjectId
-  posts       Post[]      @relation(fields: [postIDs], references: [id])
-  analytics   Analytics[]
-}
-
-model Analytics {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  tag        Tag      @relation(fields: [tagId], references: [id])
-  tagId      String   @db.ObjectId
-  reaction   Reaction @relation(fields: [reactionId], references: [id])
-  reactionId String   @db.ObjectId
-  count      Int
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  postIDs     String[] @db.ObjectId
+  posts       Post[]   @relation(fields: [postIDs], references: [id])
 }
 
 model Collection {

@@ -1,11 +1,10 @@
 import type { Actions, PageServerLoad } from './$types'
-import { prisma } from '$lib/prisma'
-import { followUser, unfollowUser } from './service'
 import { redirect } from '@sveltejs/kit'
+import { followUser, getUsers, unfollowUser } from '$lib/db/user'
 
 export const load: PageServerLoad = async () => {
 	return {
-		users: await prisma.user.findMany(),
+		users: await getUsers(),
 	}
 }
 

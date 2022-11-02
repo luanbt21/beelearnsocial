@@ -1,7 +1,7 @@
 import type { RequestHandler } from './$types'
 import { read, utils } from 'xlsx'
 import { prisma } from '$lib/prisma'
-import { error } from '@sveltejs/kit'
+import { error, json } from '@sveltejs/kit'
 
 interface Detail {
 	type?: string | number
@@ -116,11 +116,25 @@ export const POST: RequestHandler = async (req) => {
 
 		const last = { sectionId: '' }
 		let item: ItemRow = { Item: '' }
-		let isFirstItem = true
-		const options: Option[] = []
+		let options: Option[] = []
 
 		const count = { section: 0, item: 0, option: 0 }
 		for (const row of data) {
+			if (row.Section) {
+				count.section++
+				await saveItem(last.sectionId, item, options)
+				options = []
+				const section = await saveSection(row as SectionRow)
+				last.sectionId = section?.id || ''
+				continue
+			}
+			if (row.Item) {
+				count.item++
+				await saveItem(last.sectionId, item, options)
+				options = []
+				item = row as ItemRow
+				continue
+			}
 			if (row.Option) {
 				count.option++
 				const value = row.Option
@@ -128,26 +142,11 @@ export const POST: RequestHandler = async (req) => {
 				options.push({ value, ...row })
 				continue
 			}
-
-			if (row.Section) {
-				count.section++
-				const section = await saveSection(row as SectionRow)
-				last.sectionId = section?.id || ''
-			} else if (row.Item) {
-				count.item++
-				if (isFirstItem) {
-					await saveItem(last.sectionId, item, options)
-				}
-				isFirstItem = !item.Item
-				item = row as ItemRow
-				if (isFirstItem) continue
-			}
-
-			await saveItem(last.sectionId, item, options)
-			options.length = 0
 		}
 
-		return new Response(JSON.stringify(count))
+		await saveItem(last.sectionId, item, options)
+
+		return json(count)
 	} catch (e) {
 		console.log(e)
 		return error(500, JSON.stringify(e))

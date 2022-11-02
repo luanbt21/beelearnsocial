@@ -82,11 +82,8 @@ Table Reaction {
   postId String [not null]
   user User [not null]
   userId String [not null]
-  type ReactionType [not null]
-  icon String [not null]
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
-  analytics Analytics [not null]
 }
 
 Table Comment {
@@ -119,18 +116,6 @@ Table Tag {
   description String [not null]
   postIDs String[] [not null]
   posts Post [not null]
-  analytics Analytics [not null]
-}
-
-Table Analytics {
-  id String [pk]
-  tag Tag [not null]
-  tagId String [not null]
-  reaction Reaction [not null]
-  reactionId String [not null]
-  count Int [not null]
-  createdAt DateTime [default: `now()`, not null]
-  updatedAt DateTime [not null]
 }
 
 Table Collection {
@@ -143,15 +128,6 @@ Table Collection {
   updatedAt DateTime [not null]
   postIDs String[] [not null]
   posts Post [not null]
-}
-
-Enum ReactionType {
-  LIKE
-  LOVE
-  HAHA
-  WOW
-  SAD
-  ANGRY
 }
 
 Ref: Item.sectionId > Section.id
@@ -179,10 +155,6 @@ Ref: LearnLevel.postId > Post.id
 Ref: LearnLevel.userId > User.id
 
 Ref: Tag.postIDs > Post.id
-
-Ref: Analytics.tagId > Tag.id
-
-Ref: Analytics.reactionId > Reaction.id
 
 Ref: Collection.userId > User.id
 

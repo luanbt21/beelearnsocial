@@ -10,7 +10,11 @@ export const getPosts = async (page = 0, limit = 5) => {
 		include: {
 			author: true,
 			tags: true,
-			reactions: true,
+			reactions: {
+				select: {
+					userId: true,
+				},
+			},
 		},
 	})
 }

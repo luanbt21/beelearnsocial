@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let name: string
-	export let width = 16
-	export let height = 16
+	export let width = 20
+	export let height = 20
 	export let focusable = true
 	let icons = [
 		{

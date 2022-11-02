@@ -1,43 +1,30 @@
 import { prisma } from '$lib/prisma'
 import dayjs from 'dayjs'
 
-export async function getTopTags(include = { posts: true }) {
-	const tagIDs = await prisma.analytics.groupBy({
-		where: {
-			createdAt: {
-				gte: dayjs().startOf('day').subtract(30, 'day').toDate(),
+export async function getTopTags() {
+	return await prisma.tag.findMany({
+		include: {
+			posts: {
+				take: 5,
+				include: {
+					author: true,
+					reactions: {
+						where: {
+							createdAt: {
+								gte: dayjs().startOf('day').subtract(30, 'day').toDate(),
+							},
+						},
+					},
+				},
+				orderBy: {
+					reactions: { _count: 'desc' },
+				},
 			},
 		},
-		by: ['tagId'],
 		orderBy: {
-			_sum: {
-				count: 'desc',
-			},
+			posts: { _count: 'desc' },
 		},
 	})
-
-	const tags = await Promise.all(
-		tagIDs.map(async ({ tagId }) => {
-			return await prisma.tag.findFirst({
-				where: {
-					id: tagId,
-				},
-				include: {
-					posts: include.posts
-						? {
-								include: { author: true },
-								orderBy: {
-									reactions: {
-										_count: 'desc',
-									},
-								},
-						  }
-						: false,
-				},
-			})
-		}),
-	)
-	return tags
 }
 
 export const searchTag = async (q: string) => {

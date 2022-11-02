@@ -18,39 +18,28 @@ async function options() {
 async function main() {
 	const items = await prisma.item.findMany({
 		where: {
-			type: 4,
+			sectionId: '6327403ab51aed39d050e03c',
 		},
 		include: {
 			section: true,
 		},
 	})
-	const tag = await prisma.tag.findFirst({
-		where: {
-			name: 'english',
-		},
-		select: {
-			id: true,
-			name: true,
-		},
-	})
-
-	const user = await prisma.user.findFirst({ where: { email: 'tranthybavihn@gmail.com' } })
 
 	for (const item of items) {
 		await prisma.post.create({
 			data: {
 				title: item.value,
-				description: item.section.name,
+				description: item.description || item.section.name,
 				options: item.options,
 				images: item.media ? [item.media] : undefined,
 				author: {
 					connect: {
-						id: user?.id,
+						id: '6352be67d8f9d8dd456ef829',
 					},
 				},
 				tags: {
 					connect: {
-						id: tag?.id,
+						name: 'english',
 					},
 				},
 			},
@@ -99,4 +88,4 @@ const xx = async () => {
 	}
 }
 
-xx()
+main()

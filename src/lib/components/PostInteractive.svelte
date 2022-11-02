@@ -1,29 +1,61 @@
 <script lang="ts">
-	import type { Post } from '@prisma/client'
 	import { LL } from '$i18n/i18n-svelte'
 	import Svg from '$components/Svg.svelte'
 	import { locale } from '$i18n/i18n-svelte'
 	import { toast } from '@zerodevx/svelte-toast'
 	import PostComments from './PostComments.svelte'
+	import { getUserId } from '$utils'
+	import { enhance } from '$app/forms'
 
-	export let post: Post
+	export let postId: string
+	export let reactions: {
+		userId: string
+	}[] = []
 	export let showComments = false
 
 	let commentCount: number
 
-	const width = 20
-	const height = 20
+	const handleForm = async (e: SubmitEvent) => {
+		e.preventDefault()
+		const form = e.target as HTMLFormElement
+		const data = new FormData(form)
+		const response = await fetch(form.action, {
+			method: form.method,
+			headers: {
+				accept: 'application/json',
+			},
+			body: data,
+		})
+		if (response.ok) {
+			if (form.action.includes('/dislike')) {
+				reactions = reactions.filter(({ userId }) => userId !== getUserId())
+			} else if (form.action.includes('/like') && getUserId()) {
+				reactions = [...reactions, { userId: getUserId() || '' }]
+			}
+		}
+	}
 </script>
 
 <div class="mt-4 pt-4 border-t">
-	<div class="flex flex-row justify-between items-center">
-		<div>
-			<button class="btn btn-sm btn-ghost">
-				<Svg name="love" {width} {height} />
-				<span class="ml-1">20</span>
-			</button>
+	<div class="flex justify-between items-center">
+		<div class="flex">
+			{reactions.some(({ userId }) => userId === getUserId() ?? '')}
+			<form
+				method="POST"
+				on:submit={handleForm}
+				action={reactions.some(({ userId }) => userId === getUserId() ?? '')
+					? `/${$locale}/post?/dislike`
+					: `/${$locale}/post?/like`}
+			>
+				<input type="hidden" name="postId" value={postId} />
+				<button class="btn btn-sm btn-ghost">
+					<Svg name="love" />
+					<span class="ml-1">{reactions.length}</span>
+				</button>
+			</form>
+
 			<button class="btn btn-sm btn-ghost" on:click={() => (showComments = !showComments)}>
-				<Svg name="comment" {width} {height} />
+				<Svg name="comment" />
 				{#if commentCount}
 					<span class="ml-1">{commentCount}</span>
 				{/if}
@@ -31,7 +63,7 @@
 			<button
 				class="btn btn-sm btn-ghost"
 				on:click={() => {
-					navigator.clipboard.writeText(`${location.host}/${$locale}/explore/post?id=${post.id}`)
+					navigator.clipboard.writeText(`${location.host}/${$locale}/explore/post?id=${postId}`)
 					toast.push($LL.linkCopied())
 				}}
 			>
@@ -45,7 +77,7 @@
 	</div>
 	{#if showComments}
 		<div class="px-2">
-			<PostComments postId={post.id} bind:length={commentCount} />
+			<PostComments {postId} bind:length={commentCount} />
 		</div>
 	{/if}
 </div>

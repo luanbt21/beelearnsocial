@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Post, Reaction, Tag, User } from '@prisma/client'
+	import type { Post, Tag, User } from '@prisma/client'
 	import { locale } from '$i18n/i18n-svelte'
 	import { fade } from 'svelte/transition'
 	import dayjs from 'dayjs'
@@ -10,8 +10,10 @@
 
 	export let post: Post & {
 		author: User
+		reactions: {
+			userId: string
+		}[]
 		tags: Tag[]
-		reactions: Reaction[]
 	}
 </script>
 
@@ -50,7 +52,7 @@
 
 			<Exercise {post} />
 
-			<PostInteractive {post} />
+			<PostInteractive postId={post.id} reactions={post.reactions} />
 		</div>
 	</div>
 </div>

@@ -7,7 +7,6 @@
 	export let data: PageData
 
 	let page = 0
-	let posts = [...data.posts]
 	let newPost: any[] = []
 
 	async function fetchData() {
@@ -15,7 +14,7 @@
 		newPost = await response.json()
 	}
 
-	$: posts = [...posts, ...newPost]
+	$: posts = [...data.posts, ...newPost]
 </script>
 
 <div in:fade class="relative top-0 overflow-auto pr-2">

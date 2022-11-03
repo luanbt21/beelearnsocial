@@ -1,5 +1,5 @@
 import { prisma } from '$lib/prisma'
-import type { Post } from '@prisma/client'
+import type { Option, Post, Tag, User } from '@prisma/client'
 
 export const getPosts = async () => {
 	return prisma.post.findMany({
@@ -61,10 +61,73 @@ export const deletePost = async (id: string) => {
 	})
 }
 
-export const searchPost = async (q: string) => {
-	return prisma.post.findRaw({
+export interface PostRaw {
+	_id: ID
+	title: string
+	description: string
+	authorId: ID
+	createdAt: Timestamp
+	updatedAt: Timestamp
+	options: Array<Option>
+	tagIDs: Array<ID>
+	audios: [string]
+	videos: [string]
+	images: [string]
+}
+
+export interface ID {
+	$oid: string
+}
+
+export interface Timestamp {
+	$date: string
+}
+export const searchPost = async (
+	q: string,
+	page = 0,
+): Promise<
+	(Post & {
+		author: User
+		reactions: {
+			userId: string
+		}[]
+		tags: Tag[]
+	})[]
+> => {
+	const postsRaw = (await prisma.post.findRaw({
 		filter: {
 			$text: { $search: q },
 		},
-	})
+		options: {
+			skip: page * 5,
+			limit: 5,
+		},
+	})) as unknown as PostRaw[]
+
+	return await Promise.all(
+		postsRaw.map(async (raw) => {
+			const postId = raw._id.$oid
+			const tagIDs = raw.tagIDs.map(({ $oid }) => $oid)
+			return {
+				id: postId,
+				title: raw.title,
+				description: raw.description,
+				authorId: raw.authorId.$oid,
+				author: (await prisma.user.findFirst({ where: { id: raw.authorId.$oid } })) as User,
+				createdAt: new Date(raw.createdAt.$date),
+				updatedAt: new Date(raw.updatedAt.$date),
+				options: raw.options,
+				tagIDs,
+				tags: await prisma.tag.findMany({ where: { id: { in: tagIDs } } }),
+				reactions: await prisma.reaction.findMany({
+					where: { postId },
+					select: { userId: true },
+				}),
+				audios: raw.audios || [],
+				videos: raw.videos || [],
+				images: raw.images || [],
+				collectionIDs: [],
+			}
+		}),
+	)
 }

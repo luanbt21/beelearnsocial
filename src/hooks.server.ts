@@ -35,7 +35,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	if (!lang || (!isLocale(lang) && lang !== 'favicon.png')) {
 		const locale = getPreferredLocale(event)
-
 		return new Response(null, {
 			status: 302,
 			headers: { Location: `/${locale}/${path}` },

@@ -1,12 +1,13 @@
 <script lang="ts">
 	import type { Post, Tag, User } from '@prisma/client'
-	import { locale } from '$i18n/i18n-svelte'
+	import { locale, LL } from '$i18n/i18n-svelte'
 	import { fade } from 'svelte/transition'
 	import dayjs from 'dayjs'
 	import Hashtag from '$components/Hashtag.svelte'
 	import PostMedia from '$components/PostMedia.svelte'
 	import Exercise from '$components/Exercise.svelte'
 	import PostInteractive from '$components/PostInteractive.svelte'
+	import { enhance } from '$app/forms'
 
 	export let post: Post & {
 		author: User
@@ -17,10 +18,10 @@
 	}
 </script>
 
-<div in:fade class="flex mx-auto mb-4 px-4 py-6 overflow-hidden card shadow-md bg-base-100">
-	<div class="flex items-center w-full">
-		<div class="w-full">
-			<div class="flex flex-row items-center w-full  pb-4">
+<div in:fade class="mx-auto mb-4 px-4 py-6 overflow-hidden card shadow-md bg-base-100">
+	<div class="flex place-content-between">
+		<div>
+			<div class="flex flex-row items-center w-full pb-4">
 				<div class="w-12 h-12 rounded-full">
 					<a href="/{$locale}/profile/{post.author.uid}">
 						<img
@@ -41,18 +42,35 @@
 					</div>
 				</div>
 			</div>
+		</div>
 
-			<div class=" mb-2">
-				{#each post.tags as tag}
-					<Hashtag {tag} />
-				{/each}
-			</div>
-
-			<PostMedia {post} />
-
-			<Exercise {post} />
-
-			<PostInteractive postId={post.id} reactions={post.reactions} />
+		<div class="dropdown dropdown-end">
+			<label tabindex="0" class="p-1 font-bold text-lg">&vellip;</label>
+			<ul class="dropdown-content menu p-2 shadow bg-base-200 rounded-box">
+				<li>
+					<a class="link-success">{$LL.save()}</a>
+				</li>
+				<div class="mt-4">
+					<li class="bg-red-400 rounded-md">
+						<form method="POST" action={`/${$locale}/post?/hide`} use:enhance>
+							<input type="hidden" name="postId" value={post.id} />
+							<button>{$LL.hide()}</button>
+						</form>
+					</li>
+				</div>
+			</ul>
 		</div>
 	</div>
+
+	<div class=" mb-2">
+		{#each post.tags as tag}
+			<Hashtag {tag} />
+		{/each}
+	</div>
+
+	<PostMedia {post} />
+
+	<Exercise {post} />
+
+	<PostInteractive postId={post.id} reactions={post.reactions} />
 </div>

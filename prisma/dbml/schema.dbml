@@ -74,6 +74,7 @@ Table User {
   followedByIDs String[] [not null]
   following User [not null]
   followingIDs String[] [not null]
+  hiddenPostIDs String[] [not null]
 }
 
 Table Reaction {

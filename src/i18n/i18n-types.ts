@@ -5,7 +5,9 @@ import type { BaseTranslation as BaseTranslationType, LocalizedString } from 'ty
 export type BaseTranslation = BaseTranslationType
 export type BaseLocale = 'en'
 
-export type Locales = 'en' | 'vi'
+export type Locales =
+	| 'en'
+	| 'vi'
 
 export type Translation = RootTranslation
 
@@ -76,6 +78,14 @@ type RootTranslation = {
 	 * s​t​r​i​k​e
 	 */
 	strike: string
+	/**
+	 * S​a​v​e
+	 */
+	save: string
+	/**
+	 * H​i​d​e
+	 */
+	hide: string
 }
 
 export type TranslationFunctions = {
@@ -143,6 +153,14 @@ export type TranslationFunctions = {
 	 * strike
 	 */
 	strike: () => LocalizedString
+	/**
+	 * Save
+	 */
+	save: () => LocalizedString
+	/**
+	 * Hide
+	 */
+	hide: () => LocalizedString
 }
 
 export type Formatters = {}

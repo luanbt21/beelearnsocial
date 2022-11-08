@@ -25,9 +25,9 @@
 	<FirebaseUI />
 {:else}
 	<div class="dropdown dropdown-end">
-		<button tabindex="0" class="btn btn-ghost btn-square rounded-btn">
+		<label tabindex="0" class="btn btn-ghost btn-square rounded-btn">
 			<img class="w-7" src={$user.photoURL} alt="user avatar" />
-		</button>
+		</label>
 		<ul class="menu dropdown-content p-2 shadow bg-base-100 rounded-box">
 			<li><button on:click={logout}>logout</button></li>
 		</ul>

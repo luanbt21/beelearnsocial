@@ -17,6 +17,8 @@ const en: Translation = {
 	bold: 'bold',
 	italic: 'italic',
 	strike: 'strike',
+	save: 'Save',
+	hide: 'Hide',
 }
 
 export default en

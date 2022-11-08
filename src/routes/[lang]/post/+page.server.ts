@@ -1,4 +1,5 @@
 import { likePost, dislikePost } from '$lib/db/reaction'
+import { hidePost } from '$lib/db/user'
 import { redirect } from '@sveltejs/kit'
 import type { Actions } from './$types'
 
@@ -22,5 +23,9 @@ export const actions: Actions = {
 	dislike: async ({ locals, request }) => {
 		const params = await verifyId({ locals, request })
 		return await dislikePost(params)
+	},
+	hide: async ({ locals, request }) => {
+		const params = await verifyId({ locals, request })
+		return await hidePost(params)
 	},
 }

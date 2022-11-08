@@ -50,3 +50,13 @@ export const unfollowUser = async ({ id, userId }: { id?: string; userId?: strin
 		},
 	})
 }
+
+export const hidePost = async ({ userId, postId }: { userId?: string; postId?: string }) => {
+	if (!userId || !postId) return
+	return await prisma.user.update({
+		where: { id: userId },
+		data: {
+			hiddenPostIDs: { push: postId },
+		},
+	})
+}

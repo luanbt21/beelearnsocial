@@ -6,6 +6,7 @@
 	import PostComments from './PostComments.svelte'
 	import { getUserId } from '$utils'
 	import { enhance } from '$app/forms'
+	import { user } from '$stores/auth'
 
 	export let postId: string
 	export let reactions: {
@@ -15,25 +16,7 @@
 
 	let commentCount: number
 
-	const handleForm = async (e: SubmitEvent) => {
-		e.preventDefault()
-		const form = e.target as HTMLFormElement
-		const data = new FormData(form)
-		const response = await fetch(form.action, {
-			method: form.method,
-			headers: {
-				accept: 'application/json',
-			},
-			body: data,
-		})
-		if (response.ok) {
-			if (form.action.includes('/dislike')) {
-				reactions = reactions.filter(({ userId }) => userId !== getUserId())
-			} else if (form.action.includes('/like') && getUserId()) {
-				reactions = [...reactions, { userId: getUserId() || '' }]
-			}
-		}
-	}
+	$: isLiked = $user ? reactions.some(({ userId }) => userId === getUserId()) : false
 </script>
 
 <div class="mt-4 pt-4 border-t">
@@ -41,14 +24,16 @@
 		<div class="flex">
 			<form
 				method="POST"
-				on:submit={handleForm}
-				action={reactions.some(({ userId }) => userId === getUserId() ?? '')
-					? `/${$locale}/post?/dislike`
-					: `/${$locale}/post?/like`}
+				action={isLiked ? `/${$locale}/post?/dislike` : `/${$locale}/post?/like`}
+				use:enhance
 			>
 				<input type="hidden" name="postId" value={postId} />
 				<button class="btn btn-sm btn-ghost">
-					<Svg name="love" />
+					{#if isLiked}
+						<Svg name="red-love" />
+					{:else}
+						<Svg name="love" />
+					{/if}
 					<span class="ml-1">{reactions.length}</span>
 				</button>
 			</form>

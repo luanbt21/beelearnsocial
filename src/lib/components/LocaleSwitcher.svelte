@@ -26,7 +26,7 @@
 <svelte:window on:popstate={handlePopStateEvent} />
 
 <div class="dropdown">
-	<button tabindex="0" class="btn btn-square btn-ghost m-1">{$locale}</button>
+	<label tabindex="0" class="btn btn-square btn-ghost m-1">{$locale}</label>
 	<ul class="dropdown-content menu p-2 shadow bg-base-100 rounded-box">
 		{#each locales as l}
 			<li>

@@ -17,6 +17,8 @@ const vi: BaseTranslation = {
 	bold: 'đậm',
 	italic: 'nghiêng',
 	strike: 'gạch ngang',
+	save: 'Lưu',
+	hide: 'Ẩn',
 }
 
 export default vi

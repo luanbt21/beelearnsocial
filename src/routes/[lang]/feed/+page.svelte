@@ -17,6 +17,9 @@
 	$: posts = [...data.posts, ...newPost]
 </script>
 
+<svelte:head>
+	<title>Feed</title>
+</svelte:head>
 <div in:fade class="relative top-0 overflow-auto pr-2">
 	{#each posts as post (post.id)}
 		<Post {post} />

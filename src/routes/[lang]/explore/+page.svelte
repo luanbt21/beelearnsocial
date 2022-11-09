@@ -6,6 +6,9 @@
 	export let data: PageData
 </script>
 
+<svelte:head>
+	<title>Explore</title>
+</svelte:head>
 <div in:fade class="p-4">
 	{#each data.tags as tag (tag?.name)}
 		{#if tag}

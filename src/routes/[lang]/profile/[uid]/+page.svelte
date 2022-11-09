@@ -8,6 +8,9 @@
 	const { user } = data
 </script>
 
+<svelte:head>
+	<title>{user.displayName}</title>
+</svelte:head>
 <div in:fade class="p-4 bg-base-100">
 	<div class="card  h-72 rounded">
 		<img

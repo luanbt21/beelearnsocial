@@ -35,6 +35,10 @@ type RootTranslation = {
 	 */
 	posts: string
 	/**
+	 * P​o​s​t
+	 */
+	post: string
+	/**
 	 * c​h​e​c​k
 	 */
 	check: string
@@ -63,7 +67,7 @@ type RootTranslation = {
 	 */
 	repeat: string
 	/**
-	 * t​i​t​l​e
+	 * T​i​t​l​e
 	 */
 	title: string
 	/**
@@ -86,6 +90,46 @@ type RootTranslation = {
 	 * H​i​d​e
 	 */
 	hide: string
+	/**
+	 * S​t​a​r​t​ ​a​ ​p​o​s​t
+	 */
+	startAPost: string
+	/**
+	 * w​o​r​d​s
+	 */
+	words: string
+	/**
+	 * A​d​d​ ​i​m​a​g​e​s
+	 */
+	addImages: string
+	/**
+	 * A​d​d​ ​a​u​d​i​o​s
+	 */
+	addAudios: string
+	/**
+	 * A​d​d​ ​v​i​d​e​o​s
+	 */
+	addVideos: string
+	/**
+	 * A​d​d​ ​m​u​l​t​i​p​l​e​ ​c​h​o​i​c​e
+	 */
+	addMultipleChoice: string
+	/**
+	 * R​e​m​o​v​e
+	 */
+	remove: string
+	/**
+	 * O​p​t​i​o​n
+	 */
+	option: string
+	/**
+	 * A​d​d​ ​o​p​t​i​o​n
+	 */
+	addOption: string
+	/**
+	 * T​h​i​s​ ​i​s​ ​r​i​g​h​t​ ​o​p​t​i​o​n
+	 */
+	itIsRightOption: string
 }
 
 export type TranslationFunctions = {
@@ -109,6 +153,10 @@ export type TranslationFunctions = {
 	 * posts
 	 */
 	posts: () => LocalizedString
+	/**
+	 * Post
+	 */
+	post: () => LocalizedString
 	/**
 	 * check
 	 */
@@ -138,7 +186,7 @@ export type TranslationFunctions = {
 	 */
 	repeat: () => LocalizedString
 	/**
-	 * title
+	 * Title
 	 */
 	title: () => LocalizedString
 	/**
@@ -161,6 +209,46 @@ export type TranslationFunctions = {
 	 * Hide
 	 */
 	hide: () => LocalizedString
+	/**
+	 * Start a post
+	 */
+	startAPost: () => LocalizedString
+	/**
+	 * words
+	 */
+	words: () => LocalizedString
+	/**
+	 * Add images
+	 */
+	addImages: () => LocalizedString
+	/**
+	 * Add audios
+	 */
+	addAudios: () => LocalizedString
+	/**
+	 * Add videos
+	 */
+	addVideos: () => LocalizedString
+	/**
+	 * Add multiple choice
+	 */
+	addMultipleChoice: () => LocalizedString
+	/**
+	 * Remove
+	 */
+	remove: () => LocalizedString
+	/**
+	 * Option
+	 */
+	option: () => LocalizedString
+	/**
+	 * Add option
+	 */
+	addOption: () => LocalizedString
+	/**
+	 * This is right option
+	 */
+	itIsRightOption: () => LocalizedString
 }
 
 export type Formatters = {}

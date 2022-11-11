@@ -1,6 +1,6 @@
 {
 	"typescript.tsdk": "node_modules/typescript/lib",
-	"cSpell.words": ["pocketbase", "unfollow"],
+	"cSpell.words": ["pocketbase", "Tiptap", "unfollow"],
 	"svelte.plugin.svelte.compilerWarnings": {
 		"a11y-missing-attribute": "ignore",
 		"a11y-label-has-associated-control": "ignore",

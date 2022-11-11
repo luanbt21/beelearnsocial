@@ -3,6 +3,8 @@
 	import Post from '$ui/Post.svelte'
 	import InfiniteScroll from '$components/InfiniteScroll.svelte'
 	import { fade } from 'svelte/transition'
+	import CreatePost from '$ui/CreatePost.svelte'
+	import { user } from '$stores/auth'
 
 	export let data: PageData
 
@@ -21,6 +23,9 @@
 	<title>Feed</title>
 </svelte:head>
 <div in:fade class="relative top-0 overflow-auto pr-2">
+	{#if $user}
+		<CreatePost />
+	{/if}
 	{#each posts as post (post.id)}
 		<Post {post} />
 	{/each}

@@ -14,14 +14,18 @@
 	$: activeTitle = $page.url.pathname.split('/')[2]
 </script>
 
-<ul class="menu lg:w-48 xl:w-64 p-2 rounded-box mx-auto">
+<ul class="menu w-64 p-2 rounded-box mx-auto">
 	{#each menu as item}
-		<li
-			on:click={() => (activeTitle = item.title)}
-			on:keydown={() => (activeTitle = item.title)}
-			class="my-2"
-		>
-			<a class:active={item.title === activeTitle} href={item.href}>
+		<li class="my-2">
+			<a
+				on:click={() => {
+					activeTitle = item.title
+					// @ts-ignore
+					document.getElementById('drawer-left').checked = false
+				}}
+				class:active={item.title === activeTitle}
+				href={item.href}
+			>
 				<img src={item.icon} alt="" />
 				<span class="capitalize">
 					{item.title}

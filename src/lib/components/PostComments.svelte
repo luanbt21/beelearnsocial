@@ -3,7 +3,7 @@
 	import PostComment from './PostComment.svelte'
 	import { user } from '$stores/auth'
 	import { getUserId } from '$utils'
-	import Tiptap from './Tiptap.svelte'
+	import Tiptap from './Tiptap'
 	import type { Record } from 'pocketbase'
 	import { pocket } from '$stores'
 

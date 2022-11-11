@@ -1,9 +1,13 @@
 <script lang="ts">
+	import { goto } from '$app/navigation'
+	import { user } from '$stores/auth'
+
+	if ($user) goto('feed')
 </script>
 
 <svelte:head>
 	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+	<meta name="description" content="Bee learn social" />
 </svelte:head>
 
 <!-- <section>

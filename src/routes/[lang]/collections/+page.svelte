@@ -15,6 +15,10 @@
 	export let data: PageData
 </script>
 
+<svelte:head>
+	<title>Collection</title>
+</svelte:head>
+
 <div in:fade class="p-4">
 	{#each data.collections as collection (collection.name)}
 		<div class="mb-12">

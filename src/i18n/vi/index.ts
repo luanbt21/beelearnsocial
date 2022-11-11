@@ -6,6 +6,7 @@ const vi: BaseTranslation = {
 	description: 'Mô tả',
 	collection: 'Bộ sưu tập',
 	posts: 'bài đăng',
+	post: 'Đăng',
 	check: 'kiểm tra',
 	reset: 'đặt lại',
 	learn: 'học',
@@ -19,6 +20,16 @@ const vi: BaseTranslation = {
 	strike: 'gạch ngang',
 	save: 'Lưu',
 	hide: 'Ẩn',
+	startAPost: 'Tạo bài đăng',
+	words: 'từ',
+	addImages: 'Thêm ảnh',
+	addAudios: 'Thêm âm thanh',
+	addVideos: 'Thêm video',
+	addMultipleChoice: 'Thêm đáp án',
+	remove: 'Xoá',
+	option: 'Đáp án',
+	addOption: 'Thêm đáp án',
+	itIsRightOption: 'Đây là đáp án đúng',
 }
 
 export default vi

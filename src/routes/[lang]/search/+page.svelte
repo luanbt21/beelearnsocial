@@ -18,6 +18,9 @@
 	$: posts = [...data.posts, ...newPost]
 </script>
 
+<svelte:head>
+	<title>Search</title>
+</svelte:head>
 <div in:fade class="relative top-0 overflow-auto">
 	<div class="bg-base-100 p-4 rounded-box mb-4">
 		<h3 class="text-2xl font-bold mb-3">Tags</h3>

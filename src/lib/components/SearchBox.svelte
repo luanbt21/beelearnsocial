@@ -26,7 +26,7 @@
 				class="input input-bordered w-[500px]"
 				autocomplete="off"
 				bind:value={q}
-				on:keyup={fetchSuggest}
+				on:input={fetchSuggest}
 			/>
 			{#if tags.length}
 				<ul class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-full">

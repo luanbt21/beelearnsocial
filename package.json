@@ -6,7 +6,7 @@
 		"seed": "node prisma/seed.js"
 	},
 	"scripts": {
-		"dev": "concurrently vite typesafe-i18n",
+		"dev": "concurrently 'vite --host' 'typesafe-i18n'",
 		"generate": "prisma generate",
 		"prebuild": "yarn generate",
 		"build": "vite build",
@@ -15,9 +15,7 @@
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --check --plugin-search-dir=. . && eslint .",
-		"format": "prettier --write --plugin-search-dir=. .",
-		"vite": "vite",
-		"typesafe-i18n": "typesafe-i18n"
+		"format": "prettier --write --plugin-search-dir=. ."
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "1.0.0-next.85",
@@ -38,6 +36,7 @@
 		"prettier-plugin-svelte": "^2.8.0",
 		"prisma": "^4.5.0",
 		"prisma-dbml-generator": "^0.9.1",
+		"sass": "^1.53.0",
 		"svelte": "^3.52.0",
 		"svelte-carousel": "^1.0.20",
 		"svelte-check": "^2.9.2",
@@ -52,6 +51,10 @@
 		"@fontsource/fira-mono": "^4.5.10",
 		"@prisma/client": "^4.5.0",
 		"@tiptap/core": "^2.0.0-beta.199",
+		"@tiptap/extension-character-count": "^2.0.0-beta.202",
+		"@tiptap/extension-highlight": "^2.0.0-beta.202",
+		"@tiptap/extension-link": "^2.0.0-beta.202",
+		"@tiptap/extension-placeholder": "^2.0.0-beta.202",
 		"@tiptap/starter-kit": "^2.0.0-beta.199",
 		"cookie": "^0.5.0",
 		"daisyui": "^2.36.1",
@@ -60,6 +63,7 @@
 		"firebase-admin": "^11.2.0",
 		"firebaseui": "^6.0.1",
 		"pocketbase": "^0.7.4",
+		"remixicon": "^2.5.0",
 		"svelty-picker": "^3.2.3",
 		"typesafe-i18n": "^5.15.0",
 		"xlsx": "^0.18.5"

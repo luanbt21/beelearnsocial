@@ -1,6 +1,23 @@
 import { prisma } from '$lib/prisma'
 import type { Option, Post, Tag, User } from '@prisma/client'
 
+export const getPost = async (id: string) => {
+	return prisma.post.findFirst({
+		where: {
+			id,
+		},
+		include: {
+			author: true,
+			tags: true,
+			reactions: {
+				select: {
+					userId: true,
+				},
+			},
+		},
+	})
+}
+
 export const getPosts = async () => {
 	return prisma.post.findMany({
 		include: {

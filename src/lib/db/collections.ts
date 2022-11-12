@@ -9,7 +9,9 @@ export const getCollections = async (id: string) => {
 			},
 		},
 		include: {
-			posts: true,
+			posts: {
+				include: { author: true },
+			},
 		},
 	})
 }

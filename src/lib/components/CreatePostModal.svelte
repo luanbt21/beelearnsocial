@@ -4,6 +4,7 @@
 	import CreateQuestion from '$components/CreateQuestion.svelte'
 	import { locale, LL } from '$i18n/i18n-svelte'
 	import { user } from '$stores/auth'
+	import { enhance } from '$app/forms'
 
 	export let id: string
 
@@ -76,13 +77,15 @@
 					/>
 				</div>
 
-				<Tiptap bind:value placeholder={$LL.startAPost()} className="min-h-full" />
+				<Tiptap bind:value placeholder={$LL.startAPost()} className="min-h-16" />
 
 				<form
 					id="create-post-form"
 					class="flex flex-col gap-y-2"
-					action={`/${$locale}/post/?create`}
+					action={`/${$locale}/post?/create`}
 					method="POST"
+					enctype="multipart/form-data"
+					use:enhance
 				>
 					{#if addQuestion}
 						<div class="relative border rounded-lg px-2 py-4">

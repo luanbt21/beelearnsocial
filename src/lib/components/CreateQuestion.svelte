@@ -19,7 +19,9 @@
 	]
 
 	$: isQuestionOk =
-		options.length > 0 && !options.some((option) => !option.value || option.isDuplicated)
+		options.length > 0 &&
+		!options.some((option) => !option.value || option.isDuplicated) &&
+		!!rightOption
 
 	const addOption = () => {
 		options = [
@@ -81,6 +83,7 @@
 						class="input input-bordered w-full"
 						class:input-error={option.isDuplicated}
 						class:input-success={rightOption === option.value}
+						name="option"
 						bind:value={option.value}
 						on:keyup={checkDuplicate}
 					/>

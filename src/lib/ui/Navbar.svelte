@@ -1,6 +1,7 @@
 <script>
 	import NavbarMenu from '$components/NavbarMenu.svelte'
 	import SearchBox from '$components/SearchBox.svelte'
+	import { locale } from '$i18n/i18n-svelte'
 </script>
 
 <div class="w-full navbar bg-base-100 z-50">
@@ -22,7 +23,7 @@
 				</svg>
 			</label>
 		</div>
-		<a href="/">
+		<a href={`/${$locale}`}>
 			<div class="flex flex-1 mx-1">
 				<img class="mr-2" src="/logo.svg" alt="" />
 				<div class="hidden lg:block">

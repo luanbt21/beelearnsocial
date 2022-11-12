@@ -60,4 +60,8 @@
 			{$LL.reset()}
 		</button>
 	{/if}
+{:else}
+	<div class="mb-2 text-sm text-gray-700 break-all">
+		{@html post.description}
+	</div>
 {/if}

@@ -7,5 +7,5 @@
 </script>
 
 <div in:fade class="relative top-0 overflow-auto pr-2">
-	<Post post={data.post} />
+	<Post post={data.post} showComments />
 </div>

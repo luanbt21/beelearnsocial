@@ -14,3 +14,9 @@ export const user = readable<User | null>(null, (set) => {
 		}
 	})
 })
+
+export const authLoading = readable(true, (set) => {
+	getAuth().onAuthStateChanged(() => {
+		setTimeout(() => set(false))
+	})
+})

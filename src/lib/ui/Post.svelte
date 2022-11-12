@@ -15,6 +15,7 @@
 		}[]
 		tags: Tag[]
 	}
+	export let showComments = false
 </script>
 
 <div class="mx-auto mb-4 px-4 py-6 overflow-hidden card shadow-md bg-base-100">
@@ -71,5 +72,5 @@
 
 	<Exercise {post} />
 
-	<PostInteractive postId={post.id} reactions={post.reactions} />
+	<PostInteractive postId={post.id} reactions={post.reactions} {showComments} />
 </div>

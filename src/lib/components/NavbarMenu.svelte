@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { logout } from '$utils/auth'
-	import { user } from '$stores/auth'
+	import { authLoading, user } from '$stores/auth'
 	import LocaleSwitcher from '$components/LocaleSwitcher.svelte'
 	import FirebaseUI from './FirebaseUI.svelte'
 
@@ -21,7 +21,9 @@
 {/each}
 <LocaleSwitcher />
 
-{#if !$user}
+{#if $authLoading}
+	<button class="btn btn-square btn-ghost loading" />
+{:else if !$user}
 	<FirebaseUI />
 {:else}
 	<div class="dropdown dropdown-end">

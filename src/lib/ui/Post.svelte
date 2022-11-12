@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { Post, Tag, User } from '@prisma/client'
 	import { locale, LL } from '$i18n/i18n-svelte'
-	import { fade } from 'svelte/transition'
 	import dayjs from 'dayjs'
 	import Hashtag from '$components/Hashtag.svelte'
 	import PostMedia from '$components/PostMedia.svelte'
@@ -18,7 +17,7 @@
 	}
 </script>
 
-<div in:fade class="mx-auto mb-4 px-4 py-6 overflow-hidden card shadow-md bg-base-100">
+<div class="mx-auto mb-4 px-4 py-6 overflow-hidden card shadow-md bg-base-100">
 	<div class="flex place-content-between">
 		<div>
 			<div class="flex flex-row items-center w-full pb-4">

@@ -6,7 +6,7 @@
 		"seed": "node prisma/seed.js"
 	},
 	"scripts": {
-		"dev": "concurrently 'vite --host' 'typesafe-i18n'",
+		"dev": "concurrently 'vite' 'typesafe-i18n'",
 		"generate": "prisma generate",
 		"prebuild": "yarn generate",
 		"build": "vite build",
@@ -23,6 +23,7 @@
 		"@sveltejs/kit": "1.0.0-next.528",
 		"@tailwindcss/typography": "^0.5.7",
 		"@types/cookie": "^0.5.1",
+		"@types/eventsource": "^1.1.10",
 		"@typescript-eslint/eslint-plugin": "^5.41.0",
 		"@typescript-eslint/parser": "^5.41.0",
 		"@zerodevx/svelte-toast": "^0.8.0",
@@ -59,6 +60,7 @@
 		"cookie": "^0.5.0",
 		"daisyui": "^2.36.1",
 		"dayjs": "^1.11.6",
+		"eventsource": "^2.0.2",
 		"firebase": "^9.13.0",
 		"firebase-admin": "^11.2.0",
 		"firebaseui": "^6.0.1",

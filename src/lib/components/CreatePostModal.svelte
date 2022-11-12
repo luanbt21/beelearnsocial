@@ -78,6 +78,7 @@
 				</div>
 
 				<Tiptap bind:value placeholder={$LL.startAPost()} className="min-h-16" />
+				<input type="hidden" name="description" {value} />
 
 				<form
 					id="create-post-form"

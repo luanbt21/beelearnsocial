@@ -38,7 +38,7 @@
 <label for="login" class="btn btn-ghost modal-button">Login</label>
 <input type="checkbox" id="login" class="modal-toggle" />
 <label for="login" class="modal cursor-pointer">
-	<label class="modal-box relative" for="">
+	<label class="modal-box relative">
 		<div bind:this={authComponent} />
 	</label>
 </label>

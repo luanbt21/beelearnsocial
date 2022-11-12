@@ -8,6 +8,11 @@ import { getAuth } from 'firebase-admin/auth'
 import { saveUser } from '$lib/db/user'
 import { FIREBASE_SERVICE_ACCOUNT_KEY } from '$env/static/private'
 import dayjs from 'dayjs'
+import EventSource from 'eventsource'
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+global.EventSource = EventSource
 
 if (!getApps().length) {
 	const serviceAccount = JSON.parse(FIREBASE_SERVICE_ACCOUNT_KEY)

@@ -4,7 +4,7 @@
 	import { locale } from '$i18n/i18n-svelte'
 </script>
 
-<div class="w-full navbar bg-base-100 z-50">
+<div class="navbar bg-base-100 z-50">
 	<div class="navbar-start">
 		<div class="flex-none lg:hidden">
 			<label for="drawer-left" class="btn btn-square btn-sm btn-ghost">
@@ -25,7 +25,7 @@
 		</div>
 		<a href={`/${$locale}`}>
 			<div class="flex flex-1 mx-1">
-				<img class="mr-2" src="/logo.svg" alt="" />
+				<img class="mr-2 w-7 md:w-auto" src="/logo.svg" alt="" />
 				<div class="hidden lg:block">
 					<h3 class="font-medium leading-tight text-xl">BeeLearnSocial</h3>
 					<p class="text-xs text-gray-300">enjoy learning - keep learning</p>
@@ -34,7 +34,7 @@
 		</a>
 	</div>
 
-	<div class="navbar-center">
+	<div class="navbar-center w-2/5 hidden lg:block">
 		<SearchBox />
 	</div>
 

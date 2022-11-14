@@ -17,19 +17,19 @@
 		goto(`/${$locale}/search?q=${q}`)
 	}}
 >
-	<div class="form-control hidden lg:block">
+	<div class="form-control">
 		<div class="dropdown dropdown-end">
 			<input
 				type="text"
 				name="q"
 				placeholder="Search"
-				class="input input-bordered w-[500px]"
+				class="input input-bordered w-full"
 				autocomplete="off"
 				bind:value={q}
 				on:input={fetchSuggest}
 			/>
 			{#if tags.length}
-				<ul class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-full">
+				<ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-full">
 					{#each tags as tag (tag.id)}
 						<li><button on:click={() => (q = tag.name)}>#{tag.name}</button></li>
 					{/each}

@@ -32,6 +32,7 @@ export const searchTag = async (q: string) => {
 		where: {
 			name: {
 				contains: q,
+				mode: 'insensitive',
 			},
 		},
 		select: {

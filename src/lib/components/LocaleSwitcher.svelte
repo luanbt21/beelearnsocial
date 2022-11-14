@@ -26,8 +26,8 @@
 <svelte:window on:popstate={handlePopStateEvent} />
 
 <div class="dropdown">
-	<label tabindex="0" class="btn btn-square btn-ghost m-1">{$locale}</label>
-	<ul class="dropdown-content menu p-2 shadow bg-base-100 rounded-box">
+	<label tabindex="0" class="btn btn-square btn-sm lg:btn-md btn-ghost">{$locale}</label>
+	<ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box">
 		{#each locales as l}
 			<li>
 				<button class:active={l === $locale} on:click={() => switchLocale(l)}>

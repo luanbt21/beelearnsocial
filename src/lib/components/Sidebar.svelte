@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { locale } from '$i18n/i18n-svelte'
 	import { page } from '$app/stores'
-	type MenuItem = { icon: string; title: string; href: string }
+	import SearchBox from '$components/SearchBox.svelte'
 
 	const titles = ['feed', 'explore', 'plans', 'collections', 'users', 'profile']
 
+	type MenuItem = { icon: string; title: string; href: string }
 	const menu: MenuItem[] = titles.map((title) => ({
 		title,
 		icon: `/${title}-icon.svg`,
@@ -15,6 +16,9 @@
 </script>
 
 <ul class="menu w-64 p-2 rounded-box mx-auto">
+	<div class="my-2 lg:hidden">
+		<SearchBox />
+	</div>
 	{#each menu as item}
 		<li class="my-2">
 			<a

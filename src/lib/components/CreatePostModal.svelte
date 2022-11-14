@@ -78,7 +78,6 @@
 				</div>
 
 				<Tiptap bind:value placeholder={$LL.startAPost()} className="min-h-16" />
-				<input type="hidden" name="description" {value} />
 
 				<form
 					id="create-post-form"
@@ -88,6 +87,7 @@
 					enctype="multipart/form-data"
 					use:enhance
 				>
+					<input type="hidden" name="description" {value} />
 					{#if addQuestion}
 						<div class="relative border rounded-lg px-2 py-4">
 							<button

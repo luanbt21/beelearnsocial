@@ -20,7 +20,7 @@
 	</div>
 	<div class="drawer-side">
 		<label for="drawer-left" class="drawer-overlay" />
-		<ul class="menu p-4 overflow-y-auto w-72 bg-base-100">
+		<ul class="p-4 overflow-y-auto w-72 bg-base-100">
 			<Sidebar />
 		</ul>
 	</div>

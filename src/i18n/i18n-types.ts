@@ -130,6 +130,14 @@ type RootTranslation = {
 	 * T​h​i​s​ ​i​s​ ​r​i​g​h​t​ ​o​p​t​i​o​n
 	 */
 	itIsRightOption: string
+	/**
+	 * A​d​d​ ​t​a​g​s
+	 */
+	addTags: string
+	/**
+	 * S​e​a​r​c​h
+	 */
+	search: string
 }
 
 export type TranslationFunctions = {
@@ -249,6 +257,14 @@ export type TranslationFunctions = {
 	 * This is right option
 	 */
 	itIsRightOption: () => LocalizedString
+	/**
+	 * Add tags
+	 */
+	addTags: () => LocalizedString
+	/**
+	 * Search
+	 */
+	search: () => LocalizedString
 }
 
 export type Formatters = {}

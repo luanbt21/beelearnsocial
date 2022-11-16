@@ -30,6 +30,8 @@ const en: Translation = {
 	option: 'Option',
 	addOption: 'Add option',
 	itIsRightOption: 'This is right option',
+	addTags: 'Add tags',
+	search: 'Search',
 }
 
 export default en

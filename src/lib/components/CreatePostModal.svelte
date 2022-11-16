@@ -5,6 +5,9 @@
 	import { locale, LL } from '$i18n/i18n-svelte'
 	import { user } from '$stores/auth'
 	import { enhance } from '$app/forms'
+	import { fileListToUrl } from '$utils'
+	import PostMedia from './PostMedia.svelte'
+	import InputTag from './InputTag.svelte'
 
 	export let id: string
 
@@ -12,35 +15,49 @@
 	let value = ''
 	let addQuestion = false
 	let isQuestionOk = false
+	$: isFormOk = addQuestion ? title && value && isQuestionOk : title && value
+
 	let mediaMenu: {
-		dataTip: string
+		dataTip: Function
 		icon: string
 		name: string
 		accept: string
-	}[]
-
-	$: isFormOk = addQuestion ? title && value && isQuestionOk : title && value
-
-	$: mediaMenu = [
+	}[] = [
 		{
-			dataTip: $LL.addImages(),
+			dataTip: $LL.addImages,
 			icon: 'image-2-fill',
 			name: 'images',
 			accept: 'image/*',
 		},
 		{
-			dataTip: $LL.addAudios(),
+			dataTip: $LL.addAudios,
 			icon: 'mv-fill',
 			name: 'audios',
 			accept: 'audio/*',
 		},
 		{
-			dataTip: $LL.addVideos(),
+			dataTip: $LL.addVideos,
 			icon: 'movie-fill',
 			name: 'videos',
 			accept: 'video/*',
 		},
 	]
+
+	let media: {
+		audios?: FileList
+		videos?: FileList
+		images?: FileList
+		[k: string]: FileList | undefined
+	} = {}
+
+	let mediaSrc: { audios: string[]; videos: string[]; images: string[]; [k: string]: string[] } = {
+		audios: [],
+		videos: [],
+		images: [],
+	}
+	$: for (const [k, v] of Object.entries(media)) {
+		mediaSrc[k] = fileListToUrl(v)
+	}
 </script>
 
 {#if $user}
@@ -79,6 +96,8 @@
 
 				<Tiptap bind:value placeholder={$LL.startAPost()} className="min-h-16" />
 
+				<PostMedia {...mediaSrc} />
+
 				<form
 					id="create-post-form"
 					class="flex flex-col gap-y-2"
@@ -87,6 +106,8 @@
 					enctype="multipart/form-data"
 					use:enhance
 				>
+					<InputTag />
+
 					<input type="hidden" name="description" {value} />
 					{#if addQuestion}
 						<div class="relative border rounded-lg px-2 py-4">
@@ -103,18 +124,20 @@
 
 					<div class="flex items-center flex-wrap justify-between mx-3">
 						<div class="flex flex-wrap gap-x-2">
-							{#each mediaMenu as media}
-								<div class="tooltip" data-tip={media.dataTip}>
+							{#each mediaMenu as item}
+								<div class="tooltip" data-tip={item.dataTip()}>
 									<label class="btn btn-ghost btn-square btn-sm" tabindex="0">
 										<svg class="remix w-full h-full fill-current">
-											<use href={`${remixiconUrl}#ri-${media.icon}`} />
+											<use href={`${remixiconUrl}#ri-${item.icon}`} />
 										</svg>
+										{media?.[item.name] ? media[item.name]?.length : ''}
 										<input
 											class="hidden"
 											type="file"
-											name={media.name}
-											accept={media.accept}
+											name={item.name}
+											accept={item.accept}
 											multiple
+											bind:files={media[item.name]}
 										/>
 									</label>
 								</div>
@@ -133,7 +156,7 @@
 							</div>
 						</div>
 
-						<button class="btn btn-primary ml-auto" disabled={!isFormOk}>
+						<button type="submit" class="btn btn-primary ml-auto" disabled={!isFormOk}>
 							{$LL.post()}
 						</button>
 					</div>

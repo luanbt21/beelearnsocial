@@ -30,6 +30,8 @@ const vi: BaseTranslation = {
 	option: 'Đáp án',
 	addOption: 'Thêm đáp án',
 	itIsRightOption: 'Đây là đáp án đúng',
+	addTags: 'Thêm hashtag',
+	search: 'Tìm kiếm',
 }
 
 export default vi

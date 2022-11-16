@@ -14,3 +14,12 @@ export const getUserId = () => {
 			?.split('=')[1]
 	}
 }
+
+export const fileListToUrl = (fileList?: FileList) => {
+	if (!fileList) return []
+	const urls = []
+	for (const file of fileList) {
+		urls.push(URL.createObjectURL(file))
+	}
+	return urls
+}

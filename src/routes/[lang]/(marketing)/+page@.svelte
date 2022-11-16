@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>Home</title>
+	<title>Bee Learn Social</title>
 	<meta name="description" content="Bee learn social" />
 </svelte:head>
 

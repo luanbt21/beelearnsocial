@@ -2,10 +2,12 @@
 	import { goto } from '$app/navigation'
 	import { locale } from '$i18n/i18n-svelte'
 	import type { Tag } from '@prisma/client'
+	import { LL } from '$i18n/i18n-svelte'
 	let q = ''
 	let tags: Tag[] = []
 
 	const fetchSuggest = async () => {
+		q = q.replaceAll(/\W/g, '')
 		const res = await fetch(`/${$locale}/search/tag?q=${q}`)
 		tags = await res.json()
 	}
@@ -20,9 +22,9 @@
 	<div class="form-control">
 		<div class="dropdown dropdown-end">
 			<input
-				type="text"
+				type="search"
 				name="q"
-				placeholder="Search"
+				placeholder={$LL.search()}
 				class="input input-bordered w-full"
 				autocomplete="off"
 				bind:value={q}

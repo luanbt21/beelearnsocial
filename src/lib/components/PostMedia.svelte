@@ -1,46 +1,63 @@
 <script lang="ts">
-	import type { Post } from '@prisma/client'
-	import { onMount } from 'svelte'
+	export let audios: string[]
+	export let images: string[]
+	export let videos: string[]
+	const uid = crypto.randomUUID()
 
-	export let post: Post
-	let Carousel: any
+	const genId = (name: string, index: number) => {
+		return name + uid + index
+	}
 
-	onMount(async () => {
-		if (post.audios.length + post.videos.length + post.images.length > 1) {
-			post.videos.length = 0
-			// @ts-ignore
-			const module = await import('svelte-carousel')
-			Carousel = module.default
-		}
-	})
+	let audioCarousel: HTMLDivElement
+	let mediaCarousel: HTMLDivElement
+
+	const slice = (event: MouseEvent, carousel: HTMLDivElement) => {
+		event.preventDefault()
+		const btn = event.currentTarget as Element
+		const href = btn.getAttribute('href')!
+		const target = carousel.querySelector<HTMLDivElement>(href)!
+		const left = target.offsetLeft
+		carousel.scrollTo({ left: left })
+	}
 </script>
 
-{#if post.audios.length > 1}
-	<svelte:component this={Carousel}>
-		{#each post.audios as src}
-			<div class="carousel-item mb-2">
+{#if audios.length > 0}
+	<div bind:this={audioCarousel} class="carousel w-full">
+		{#each audios as src, i}
+			<div id={genId('audio', i)} class="carousel-item w-full relative mb-2 items-center">
+				{#if audios.length > 1}
+					<a
+						on:click={(e) => slice(e, audioCarousel)}
+						href="#{genId('audio', i - 1)}"
+						class="btn btn-sm btn-outline btn-circle"
+						disabled={i === 0}
+					>
+						❮
+					</a>
+				{/if}
 				<audio class="w-full" controls>
 					<source {src} type="audio/mpeg" />
 					Fail to load audio
 				</audio>
+				{#if audios.length > 1}
+					<a
+						on:click={(e) => slice(e, audioCarousel)}
+						href="#{genId('audio', i + 1)}"
+						class="btn btn-sm btn-outline btn-circle"
+						disabled={i === audios.length - 1}
+					>
+						❯
+					</a>
+				{/if}
 			</div>
 		{/each}
-	</svelte:component>
-{:else}
-	{#each post.audios as src}
-		<div class="mb-2">
-			<audio class="w-full" controls>
-				<source {src} type="audio/mpeg" />
-				Fail to load audio
-			</audio>
-		</div>
-	{/each}
+	</div>
 {/if}
 
-{#if post.videos.length + post.images.length > 1}
-	<svelte:component this={Carousel}>
-		{#each post.videos as src}
-			<div class="carousel-item w-full">
+{#if videos.length + images.length > 0}
+	<div bind:this={mediaCarousel} class="carousel w-full">
+		{#each videos as src, i}
+			<div id={genId('media', i)} class="carousel-item w-full">
 				<video class="w-full my-auto" controls>
 					<track kind="captions" />
 					<source {src} type="video/mp4" />
@@ -48,25 +65,17 @@
 				</video>
 			</div>
 		{/each}
-		{#each post.images as src}
-			<div class="carousel-item w-full">
+		{#each images as src, i}
+			<div id={genId('media', i + videos.length)} class="carousel-item w-full">
 				<img {src} alt="" class="mx-auto my-auto" />
 			</div>
 		{/each}
-	</svelte:component>
-{:else}
-	{#each post.videos as src}
-		<div class="carousel-item w-full">
-			<video class="w-full my-auto" controls>
-				<track kind="captions" />
-				<source {src} type="video/mp4" />
-				Failed to load video
-			</video>
-		</div>
-	{/each}
-	{#each post.images as src}
-		<div class="carousel-item w-full">
-			<img {src} alt="" class="mx-auto my-auto" />
-		</div>
-	{/each}
+	</div>
+	<div class="flex justify-center w-full py-2 gap-2">
+		{#each [...videos, ...images] as _, i}
+			<a on:click={(e) => slice(e, mediaCarousel)} href="#{genId('media', i)}" class="btn btn-xs">
+				{i + 1}
+			</a>
+		{/each}
+	</div>
 {/if}

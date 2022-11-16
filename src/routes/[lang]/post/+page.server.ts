@@ -49,6 +49,7 @@ export const actions: Actions = {
 			videos: [],
 			audios: [],
 		}
+		const tags: string[] = []
 		const options: { value: string; type: number }[] = []
 		const rightOption = data.get('rightOption')
 
@@ -57,6 +58,10 @@ export const actions: Actions = {
 				const value = v as string
 				const type = v === rightOption ? 1 : 0
 				options.push({ value, type })
+				continue
+			}
+			if (k === 'tag') {
+				tags.push(v as string)
 				continue
 			}
 			if (k in media && v instanceof Blob && v.size !== 0) {
@@ -78,7 +83,17 @@ export const actions: Actions = {
 					},
 				},
 				tags: {
-					connect: [],
+					connectOrCreate: tags.map((name) => {
+						return {
+							where: {
+								name,
+							},
+							create: {
+								name,
+								description: '',
+							},
+						}
+					}),
 				},
 				...media,
 				options,

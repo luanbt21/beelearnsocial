@@ -8,13 +8,6 @@
 	let checked = false
 </script>
 
-<p
-	class:text-center={!isQuestion}
-	class="mb-2 text-lg font-bold leading-6 line-clamp-2 font-montserrat"
->
-	{post.title}
-</p>
-
 {#if isQuestion}
 	{#each post.options as option}
 		<label

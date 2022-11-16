@@ -68,7 +68,14 @@
 		{/each}
 	</div>
 
-	<PostMedia {post} />
+	<p
+		class:text-center={!post.options.length}
+		class="mb-2 text-lg font-bold leading-6 line-clamp-2 font-montserrat"
+	>
+		{post.title}
+	</p>
+
+	<PostMedia audios={post.audios} videos={post.videos} images={post.images} />
 
 	<Exercise {post} />
 

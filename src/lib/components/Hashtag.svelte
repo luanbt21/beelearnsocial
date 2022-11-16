@@ -7,7 +7,7 @@
 
 <a
 	class="link link-hover font-medium mr-2"
-	href="/{$locale}/explore/posts?tag={tag.name}"
+	href="/{$locale}/explore/tag?name={tag.name}"
 	title={tag.description}
 >
 	#{tag.name}

@@ -1,5 +1,5 @@
 import { prisma } from '$lib/prisma'
-import type { Option, Post, Tag, User } from '@prisma/client'
+import type { Option, Post, Prisma, Tag, User } from '@prisma/client'
 
 export const getPost = async (id: string) => {
 	return prisma.post.findFirst({
@@ -18,13 +18,28 @@ export const getPost = async (id: string) => {
 	})
 }
 
-export const getPosts = async () => {
+export const getPosts = async ({
+	where,
+	page = 0,
+	limit = 5,
+}: {
+	where?: Prisma.PostWhereInput
+	page?: number
+	limit?: number
+}) => {
 	return prisma.post.findMany({
+		where,
+		skip: page * limit,
+		take: limit,
+		orderBy: {
+			createdAt: 'desc',
+		},
 		include: {
 			author: true,
-			tags: {
+			tags: true,
+			reactions: {
 				select: {
-					name: true,
+					userId: true,
 				},
 			},
 		},

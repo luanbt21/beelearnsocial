@@ -14,23 +14,25 @@
 	const slice = (event: MouseEvent, carousel: HTMLDivElement) => {
 		event.preventDefault()
 		const btn = event.currentTarget as Element
-		const href = btn.getAttribute('href')!
-		const target = carousel.querySelector<HTMLDivElement>(href)!
-		const left = target.offsetLeft
-		carousel.scrollTo({ left: left })
+		const href = btn.getAttribute('href') || ''
+		const target = carousel.querySelector<HTMLDivElement>(href)
+		if (target) {
+			const left = target.offsetLeft
+			carousel.scrollTo({ left: left })
+		}
 	}
 </script>
 
 {#if audios.length > 0}
 	<div bind:this={audioCarousel} class="carousel w-full">
 		{#each audios as src, i}
-			<div id={genId('audio', i)} class="carousel-item w-full relative mb-2 items-center">
+			<div id={genId('audio', i)} class="carousel-item gap-1 w-full relative mb-2 items-center">
 				{#if audios.length > 1}
 					<a
 						on:click={(e) => slice(e, audioCarousel)}
 						href="#{genId('audio', i - 1)}"
-						class="btn btn-sm btn-outline btn-circle"
-						disabled={i === 0}
+						class="btn btn-sm btn-ghost btn-circle"
+						disabled={i === 0 ? true : undefined}
 					>
 						❮
 					</a>
@@ -43,8 +45,8 @@
 					<a
 						on:click={(e) => slice(e, audioCarousel)}
 						href="#{genId('audio', i + 1)}"
-						class="btn btn-sm btn-outline btn-circle"
-						disabled={i === audios.length - 1}
+						class="btn btn-sm btn-ghost btn-circle"
+						disabled={i === audios.length - 1 ? true : undefined}
 					>
 						❯
 					</a>

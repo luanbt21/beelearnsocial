@@ -38,7 +38,7 @@
 	})
 
 	const sentComment = async () => {
-		$pocket.records.create('comment', {
+		$pocket.collection('comment').create('comment', {
 			postId,
 			userId: getUserId(),
 			content: value,
@@ -47,7 +47,7 @@
 	}
 
 	onMount(async () => {
-		comments = await $pocket.records.getFullList('comment', 200, {
+		comments = await $pocket.collection('comment').getFullList(200, {
 			filter: `postId = "${postId}"`,
 		})
 	})

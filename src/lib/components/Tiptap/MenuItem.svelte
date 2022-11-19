@@ -1,10 +1,10 @@
 <script lang="ts">
 	import remixiconUrl from 'remixicon/fonts/remixicon.symbol.svg'
 
-	export let icon: string = ''
-	export let title: string = ''
-	export let action: Function | undefined = undefined
-	export let isActive: Function | undefined = undefined
+	export let icon = ''
+	export let title = ''
+	export let action:(()=> boolean)|undefined = undefined
+	export let isActive:(()=> boolean)| undefined = undefined
 </script>
 
 <template>

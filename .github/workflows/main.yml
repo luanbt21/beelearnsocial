@@ -24,6 +24,6 @@ jobs:
             git clone https://github.com/luanbt21/bayquamon.git
             cd bayquamon
             git pull origin main
-            yarn install --frozen-lockfile
-            yarn build
+            pnpm install --frozen-lockfile
+            pnpm build
             pm2 restart bayquamon

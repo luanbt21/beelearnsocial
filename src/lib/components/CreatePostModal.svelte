@@ -8,6 +8,7 @@
 	import { fileListToUrl } from '$utils'
 	import PostMedia from './PostMedia.svelte'
 	import InputTag from './InputTag.svelte'
+  import type { LocalizedString } from 'typesafe-i18n'
 
 	export let id: string
 
@@ -18,7 +19,7 @@
 	$: isFormOk = addQuestion ? title && value && isQuestionOk : title && value
 
 	let mediaMenu: {
-		dataTip: Function
+		dataTip: () => LocalizedString
 		icon: string
 		name: string
 		accept: string

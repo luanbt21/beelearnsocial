@@ -5,6 +5,9 @@
 	import { fade } from 'svelte/transition'
 	import CreatePost from '$ui/CreatePost.svelte'
 	import { user } from '$stores/auth'
+	import { browser } from '$app/environment'
+	import { registerServiceWorker } from '$lib/notification/client'
+	import { onMount } from 'svelte'
 
 	export let data: PageData
 
@@ -17,6 +20,12 @@
 	}
 
 	$: posts = [...data.posts, ...newPost]
+
+	onMount(() => {
+		if (browser && $user) {
+			registerServiceWorker()
+		}
+	})
 </script>
 
 <svelte:head>

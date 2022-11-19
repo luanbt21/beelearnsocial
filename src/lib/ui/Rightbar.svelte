@@ -1,9 +1,20 @@
 <script lang="ts">
-	import type { Tag } from '@prisma/client'
+	import type { Post, Reaction, Tag } from '@prisma/client'
 	import Hashtag from '$components/Hashtag.svelte'
 	import SveltyPicker from 'svelty-picker'
 
-	export let tags: (Tag | null)[]
+	export let tags: {
+		id: string
+		name: string
+		description: string
+		posts: (Post & {
+			author: User
+			reactions: Reaction[]
+		})[]
+		_count: {
+			posts: number
+		}
+	}[]
 </script>
 
 <div>

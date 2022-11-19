@@ -85,24 +85,36 @@ model Post {
 }
 
 model User {
-  id            String       @id @default(auto()) @map("_id") @db.ObjectId
-  email         String?
-  uid           String       @unique
-  displayName   String
-  photoURL      String?
-  introduction  String?
-  posts         Post[]
-  reactions     Reaction[]
-  comments      Comment[]
-  learnLevels   LearnLevel[]
-  collections   Collection[]
-  followedBy    User[]       @relation("UserFollows", fields: [followedByIDs], references: [id])
-  followedByIDs String[]     @db.ObjectId
-  following     User[]       @relation("UserFollows", fields: [followingIDs], references: [id])
-  followingIDs  String[]     @db.ObjectId
-  hiddenPostIDs String[]     @db.ObjectId
+  id                String             @id @default(auto()) @map("_id") @db.ObjectId
+  email             String?
+  uid               String             @unique
+  displayName       String
+  photoURL          String?
+  introduction      String?
+  posts             Post[]
+  reactions         Reaction[]
+  comments          Comment[]
+  learnLevels       LearnLevel[]
+  collections       Collection[]
+  followedBy        User[]             @relation("UserFollows", fields: [followedByIDs], references: [id])
+  followedByIDs     String[]           @db.ObjectId
+  following         User[]             @relation("UserFollows", fields: [followingIDs], references: [id])
+  followingIDs      String[]           @db.ObjectId
+  hiddenPostIDs     String[]           @db.ObjectId
+  pushSubscriptions PushSubscription[]
 
   @@fulltext([displayName, email])
+}
+
+type PushSubscription {
+  endpoint       String
+  expirationTime BigInt?
+  keys           Keys
+}
+
+type Keys {
+  p256dh String
+  auth   String
 }
 
 model Reaction {

@@ -37,8 +37,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 
 	const [, lang, ...path] = event.url.pathname.split('/')
+	const bypassPaths = ['api', 'favicon.png', 'service-worker.js']
 
-	if (!lang || (!isLocale(lang) && lang !== 'favicon.png')) {
+	if (!isLocale(lang) && !bypassPaths.includes(lang)) {
 		const locale = getPreferredLocale(event)
 		return new Response(null, {
 			status: 302,
@@ -46,9 +47,9 @@ export const handle: Handle = async ({ event, resolve }) => {
 		})
 	}
 
-	const locale = lang as Locales
-	const LL = L[locale]
+	const locale = isLocale(lang) ? (lang as Locales) : getPreferredLocale(event)
 
+	const LL = L[locale]
 	event.locals.locale = locale
 	event.locals.LL = LL
 

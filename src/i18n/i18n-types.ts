@@ -138,6 +138,18 @@ type RootTranslation = {
 	 * S​e​a​r​c​h
 	 */
 	search: string
+	/**
+	 * C​o​n​g​r​a​t​u​l​a​t​i​o​n
+	 */
+	congratulation: string
+	/**
+	 * W​e​l​c​o​m​e
+	 */
+	welcome: string
+	/**
+	 * t​o
+	 */
+	to: string
 }
 
 export type TranslationFunctions = {
@@ -265,6 +277,18 @@ export type TranslationFunctions = {
 	 * Search
 	 */
 	search: () => LocalizedString
+	/**
+	 * Congratulation
+	 */
+	congratulation: () => LocalizedString
+	/**
+	 * Welcome
+	 */
+	welcome: () => LocalizedString
+	/**
+	 * to
+	 */
+	to: () => LocalizedString
 }
 
 export type Formatters = {}

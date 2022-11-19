@@ -24,6 +24,7 @@
 		"@tailwindcss/typography": "^0.5.7",
 		"@types/cookie": "^0.5.1",
 		"@types/eventsource": "^1.1.10",
+		"@types/web-push": "^3.3.2",
 		"@typescript-eslint/eslint-plugin": "^5.41.0",
 		"@typescript-eslint/parser": "^5.41.0",
 		"@zerodevx/svelte-toast": "^0.8.0",
@@ -68,6 +69,7 @@
 		"remixicon": "^2.5.0",
 		"svelty-picker": "^3.2.3",
 		"typesafe-i18n": "^5.15.0",
+		"web-push": "^3.5.0",
 		"xlsx": "^0.18.5"
 	}
 }

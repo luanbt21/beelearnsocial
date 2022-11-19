@@ -3,7 +3,15 @@ import dayjs from 'dayjs'
 
 export async function getTopTags() {
 	return await prisma.tag.findMany({
-		include: {
+		select: {
+			id: true,
+			name: true,
+			description: true,
+			_count: {
+				select: {
+					posts: true,
+				},
+			},
 			posts: {
 				take: 5,
 				include: {

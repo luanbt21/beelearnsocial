@@ -32,6 +32,9 @@ const en: Translation = {
 	itIsRightOption: 'This is right option',
 	addTags: 'Add tags',
 	search: 'Search',
+	congratulation: 'Congratulation',
+	welcome: 'Welcome',
+	to: 'to',
 }
 
 export default en

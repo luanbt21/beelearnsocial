@@ -17,6 +17,10 @@
 	let element: Element
 	let editor: Editor
 
+	$: if (value === '' && editor) {
+		editor.commands.clearContent()
+	}
+
 	onMount(() => {
 		editor = new Editor({
 			element,

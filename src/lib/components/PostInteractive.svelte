@@ -15,6 +15,7 @@
 	export let showComments = false
 
 	let commentCount: number
+	let isSending = false
 
 	$: isLiked = $user ? reactions.some(({ userId }) => userId === getUserId()) : false
 </script>
@@ -25,10 +26,16 @@
 			<form
 				method="POST"
 				action={isLiked ? `/${$locale}/post?/dislike` : `/${$locale}/post?/like`}
-				use:enhance
+				use:enhance={() => {
+					isSending = true
+					return async ({ update }) => {
+						await update()
+						isSending = false
+					}
+				}}
 			>
 				<input type="hidden" name="postId" value={postId} />
-				<button class="btn btn-sm btn-ghost">
+				<button class="btn btn-sm btn-ghost" class:loading={isSending} disabled={isSending}>
 					{#if isLiked}
 						<Svg name="red-love" />
 					{:else}

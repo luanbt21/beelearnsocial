@@ -16,6 +16,7 @@
 		tags: Tag[]
 	}
 	export let showComments = false
+	let isSending = false
 </script>
 
 <div class="mx-auto mb-4 px-4 py-6 overflow-hidden card shadow-md bg-base-100">
@@ -52,7 +53,17 @@
 				</li>
 				<div class="mt-4">
 					<li class="bg-red-400 rounded-md">
-						<form method="POST" action={`/${$locale}/post?/hide`} use:enhance>
+						<form
+							method="POST"
+							action={`/${$locale}/post?/hide`}
+							use:enhance={() => {
+								isSending = true
+								return async ({ update }) => {
+									await update()
+									isSending = false
+								}
+							}}
+						>
 							<input type="hidden" name="postId" value={post.id} />
 							<button>{$LL.hide()}</button>
 						</form>

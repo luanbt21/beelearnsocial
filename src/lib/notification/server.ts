@@ -1,4 +1,4 @@
-import { sendNotification, type PushSubscription } from 'web-push'
+import webpush from 'web-push'
 import { PRIVATE_VAPID_KEY, VAPID_SUBJECT } from '$env/static/private'
 import { PUBLIC_VAPID_KEY } from '$env/static/public'
 import { prisma } from '$lib/prisma'
@@ -14,7 +14,7 @@ export async function sendNotifications({
 	title,
 	body,
 }: {
-	subscriptions: PushSubscription[]
+	subscriptions: webpush.PushSubscription[]
 	title: string
 	body: string
 }) {
@@ -26,7 +26,7 @@ export async function sendNotifications({
 	})
 	await Promise.all(
 		subscriptions.map(async (subscription) => {
-			await sendNotification(subscription, notification, {
+			await webpush.sendNotification(subscription, notification, {
 				TTL: 7 * 86400,
 				vapidDetails: vapidDetails,
 			})

@@ -32,6 +32,9 @@ const vi: BaseTranslation = {
 	itIsRightOption: 'Đây là đáp án đúng',
 	addTags: 'Thêm hashtag',
 	search: 'Tìm kiếm',
+	congratulation: 'Chúc mừng',
+	welcome: 'Chào mừng',
+	to: 'đến với',
 }
 
 export default vi

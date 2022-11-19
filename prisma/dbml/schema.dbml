@@ -75,6 +75,7 @@ Table User {
   following User [not null]
   followingIDs String[] [not null]
   hiddenPostIDs String[] [not null]
+  pushSubscriptions PushSubscription[] [not null]
 }
 
 Table Reaction {

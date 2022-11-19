@@ -2,19 +2,19 @@
 
 ## Developing
 
-Once you've created a project and installed dependencies with `yarn install` start a development server:
+Once you've created a project and installed dependencies with `pnpm install` start a development server:
 
 ```bash
-yarn dev
+pnpm dev
 
 # or start the server and open the app in a new browser tab
-yarn dev -- --open
+pnpm dev -- --open
 ```
 
 For write translation:
 
 ```bash
-yarn typesafe-i18n
+pnpm typesafe-i18n
 ```
 
 ## Building
@@ -22,9 +22,9 @@ yarn typesafe-i18n
 To create a production version of your app:
 
 ```bash
-yarn build
+pnpm build
 ```
 
-You can preview the production build with `yarn preview`.
+You can preview the production build with `pnpm preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.

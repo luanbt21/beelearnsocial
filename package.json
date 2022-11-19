@@ -8,7 +8,7 @@
 	"scripts": {
 		"dev": "concurrently 'vite --host' 'typesafe-i18n'",
 		"generate": "prisma generate",
-		"prebuild": "yarn generate",
+		"prebuild": "prisma generate",
 		"build": "vite build",
 		"package": "svelte-kit package",
 		"preview": "vite preview",

@@ -150,6 +150,10 @@ type RootTranslation = {
 	 * t​o
 	 */
 	to: string
+	/**
+	 * S​e​e​ ​m​o​r​e
+	 */
+	seeMore: string
 }
 
 export type TranslationFunctions = {
@@ -289,6 +293,10 @@ export type TranslationFunctions = {
 	 * to
 	 */
 	to: () => LocalizedString
+	/**
+	 * See more
+	 */
+	seeMore: () => LocalizedString
 }
 
 export type Formatters = {}

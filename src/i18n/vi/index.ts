@@ -35,6 +35,7 @@ const vi: BaseTranslation = {
 	congratulation: 'Chúc mừng',
 	welcome: 'Chào mừng',
 	to: 'đến với',
+	seeMore: 'Xem thêm',
 }
 
 export default vi

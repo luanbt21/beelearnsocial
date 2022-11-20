@@ -35,6 +35,7 @@ const en: Translation = {
 	congratulation: 'Congratulation',
 	welcome: 'Welcome',
 	to: 'to',
+	seeMore: 'See more',
 }
 
 export default en

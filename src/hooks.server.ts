@@ -30,8 +30,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 		const user = await getAuth()
 			.verifyIdToken(token)
 			.catch(() => {
-				event.cookies.delete('token')
-				event.cookies.delete('userId')
+				event.cookies.delete('token', { path: '/' })
+				event.cookies.delete('userId', { path: '/' })
 			})
 		event.locals.user = await saveUser(user)
 	}

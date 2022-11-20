@@ -154,6 +154,14 @@ type RootTranslation = {
 	 * S​e​e​ ​m​o​r​e
 	 */
 	seeMore: string
+	/**
+	 * h​a​v​e​ ​c​o​m​m​e​n​t​e​d​ ​o​n​ ​y​o​u​r​ ​p​o​s​t​.
+	 */
+	haveCommentedOnYourPost: string
+	/**
+	 * P​o​s​t​ ​t​i​t​l​e
+	 */
+	postTitle: string
 }
 
 export type TranslationFunctions = {
@@ -297,6 +305,14 @@ export type TranslationFunctions = {
 	 * See more
 	 */
 	seeMore: () => LocalizedString
+	/**
+	 * have commented on your post.
+	 */
+	haveCommentedOnYourPost: () => LocalizedString
+	/**
+	 * Post title
+	 */
+	postTitle: () => LocalizedString
 }
 
 export type Formatters = {}

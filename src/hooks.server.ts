@@ -9,10 +9,18 @@ import { saveUser } from '$lib/db/user'
 import { FIREBASE_SERVICE_ACCOUNT_KEY } from '$env/static/private'
 import dayjs from 'dayjs'
 import EventSource from 'eventsource'
+import PocketBase from 'pocketbase'
+import { notificationOnComment } from '$lib/notification/server'
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 global.EventSource = EventSource
+
+loadAllLocales()
+const L = i18n()
+
+const pocket = new PocketBase('https://pocket.beelearn.social')
+pocket.realtime.subscribe('comment', (data) => notificationOnComment(data, L))
 
 if (!getApps().length) {
 	const serviceAccount = JSON.parse(FIREBASE_SERVICE_ACCOUNT_KEY)
@@ -20,9 +28,6 @@ if (!getApps().length) {
 		credential: cert(serviceAccount),
 	})
 }
-
-loadAllLocales()
-const L = i18n()
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const token = event.cookies.get('token')

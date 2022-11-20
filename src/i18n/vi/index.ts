@@ -36,6 +36,8 @@ const vi: BaseTranslation = {
 	welcome: 'Chào mừng',
 	to: 'đến với',
 	seeMore: 'Xem thêm',
+	haveCommentedOnYourPost: 'đã bình luận về bài viết của bạn.',
+	postTitle: 'Tiêu đề bài đăng',
 }
 
 export default vi

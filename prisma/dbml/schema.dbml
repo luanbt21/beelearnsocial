@@ -65,6 +65,7 @@ Table User {
   displayName String [not null]
   photoURL String
   introduction String
+  locale Locale
   posts Post [not null]
   reactions Reaction [not null]
   comments Comment [not null]
@@ -130,6 +131,11 @@ Table Collection {
   updatedAt DateTime [not null]
   postIDs String[] [not null]
   posts Post [not null]
+}
+
+Enum Locale {
+  en
+  vi
 }
 
 Ref: Item.sectionId > Section.id

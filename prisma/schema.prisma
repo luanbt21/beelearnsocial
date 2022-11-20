@@ -84,6 +84,11 @@ model Post {
   @@fulltext([title])
 }
 
+enum Locale {
+  en
+  vi
+}
+
 model User {
   id                String             @id @default(auto()) @map("_id") @db.ObjectId
   email             String?
@@ -91,6 +96,7 @@ model User {
   displayName       String
   photoURL          String?
   introduction      String?
+  locale            Locale?
   posts             Post[]
   reactions         Reaction[]
   comments          Comment[]

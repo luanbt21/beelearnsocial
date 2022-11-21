@@ -4,8 +4,9 @@
 	import { user } from '$stores/auth'
 	import { getUserId } from '$utils'
 	import Tiptap from './Tiptap'
-	import type { Record } from 'pocketbase'
+	import type { Record, RecordSubscription } from 'pocketbase'
 	import { pocket } from '$stores'
+	import type { IComment } from 'src/global'
 
 	export let postId: string
 	export let length = 0
@@ -14,7 +15,7 @@
 
 	let value = ''
 
-	$pocket.realtime.subscribe('comment', (e) => {
+	$pocket.realtime.subscribe('comment', (e: RecordSubscription<IComment>) => {
 		if (e.record.postId !== postId) return
 		switch (e.action) {
 			case 'create':
@@ -38,7 +39,7 @@
 	})
 
 	const sentComment = async () => {
-		$pocket.collection('comment').create('comment', {
+		$pocket.collection('comment').create({
 			postId,
 			userId: getUserId(),
 			content: value,

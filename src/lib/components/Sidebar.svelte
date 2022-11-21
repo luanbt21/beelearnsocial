@@ -6,7 +6,8 @@
 	const titles = ['feed', 'explore', 'plans', 'collections', 'users', 'profile']
 
 	type MenuItem = { icon: string; title: string; href: string }
-	const menu: MenuItem[] = titles.map((title) => ({
+	let menu: MenuItem[]
+	$: menu = titles.map((title) => ({
 		title,
 		icon: `/${title}-icon.svg`,
 		href: `/${$locale}/${title}`,

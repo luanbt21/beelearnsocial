@@ -36,6 +36,8 @@ const en: Translation = {
 	welcome: 'Welcome',
 	to: 'to',
 	seeMore: 'See more',
+	haveCommentedOnYourPost: 'have commented on your post.',
+	postTitle: 'Post title',
 }
 
 export default en

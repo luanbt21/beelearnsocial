@@ -22,7 +22,9 @@ export const POST: RequestHandler = async ({ locals, request }) => {
 	sendNotifications({
 		subscriptions: [subscription],
 		title: locals.LL.congratulation(),
-		body: `${locals.LL.welcome()} ${user.displayName} ${locals.LL.to()} Bee learn social!`,
+		options: {
+			body: `${locals.LL.welcome()} ${user.displayName} ${locals.LL.to()} Bee learn social!`,
+		},
 	})
 	return new Response()
 }

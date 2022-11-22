@@ -42,7 +42,6 @@ export const actions: Actions = {
 			images: string[]
 			videos: string[]
 			audios: string[]
-			[key: string]: string[]
 		}
 		const media: Media = {
 			images: [],
@@ -68,7 +67,7 @@ export const actions: Actions = {
 				const name = crypto.randomUUID() + v.name
 				const data = Buffer.from(await v.arrayBuffer())
 				await appendFile(join(MEDIA_DIR_PATH, name), data)
-				media[k].push(MEDIA_BASE_URL + name)
+				media[k as keyof Media].push(MEDIA_BASE_URL + name)
 				continue
 			}
 		}

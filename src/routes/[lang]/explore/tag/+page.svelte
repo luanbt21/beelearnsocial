@@ -7,7 +7,7 @@
 	export let data: PageData
 
 	let page = 0
-	let newPost: any[] = []
+	let newPost: PageData['posts'] = []
 
 	async function fetchData() {
 		const response = await fetch(`?page=${page}&name=${data.tagName}`)

@@ -6,18 +6,46 @@
 	import PostComments from './PostComments.svelte'
 	import { getUserId } from '$utils'
 	import { enhance } from '$app/forms'
-	import { user } from '$stores/auth'
+	import { user, showLoginModal } from '$stores/auth'
 
 	export let postId: string
 	export let reactions: {
 		userId: string
 	}[] = []
 	export let showComments = false
+	export let repeating: boolean
 
 	let commentCount: number
 	let isSending = false
 
 	$: isLiked = $user ? reactions.some(({ userId }) => userId === getUserId()) : false
+
+	const repeatPost = async (e: MouseEvent) => {
+		if (!$user) {
+			$showLoginModal = true
+			return
+		}
+		const btn = e.target as HTMLButtonElement
+		try {
+			btn.disabled = true
+			btn.classList.add('loading')
+			const res = await fetch(`/api/post/repeat`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ postId }),
+			})
+			if (res.ok) {
+				btn.classList.add('hidden')
+			} else if (res.status === 401) {
+				$showLoginModal = true
+			}
+		} finally {
+			btn.disabled = false
+			btn.classList.remove('loading')
+		}
+	}
 </script>
 
 <div class="mt-4 pt-4 border-t">
@@ -62,9 +90,13 @@
 			</button>
 		</div>
 
-		<div>
-			<button class="btn btn-primary btn-sm lg:btn-md">{$LL.repeat()}</button>
-		</div>
+		{#if !repeating}
+			<div>
+				<button on:click={repeatPost} class="btn btn-primary btn-sm lg:btn-md">
+					{$LL.repeat()}
+				</button>
+			</div>
+		{/if}
 	</div>
 	{#if showComments}
 		<div class="px-2">

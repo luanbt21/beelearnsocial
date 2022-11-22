@@ -11,12 +11,13 @@
 
 	export let data: PageData
 
-	let page = 0
-	let newPost: any[] = []
+	let page = 1
+	let newPost: PageData['posts'] = []
 
 	async function fetchData() {
 		const response = await fetch(`?page=${page}`)
 		newPost = await response.json()
+		page++
 	}
 
 	$: posts = [...data.posts, ...newPost]
@@ -38,11 +39,5 @@
 	{#each posts as post (post.id)}
 		<Post {post} />
 	{/each}
-	<InfiniteScroll
-		threshold={100}
-		on:loadMore={() => {
-			page++
-			fetchData()
-		}}
-	/>
+	<InfiniteScroll threshold={100} on:loadMore={fetchData} />
 </div>

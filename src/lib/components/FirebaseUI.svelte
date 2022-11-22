@@ -8,6 +8,7 @@
 		EmailAuthProvider,
 	} from 'firebase/auth'
 	import { onMount } from 'svelte'
+	import { showLoginModal } from '$stores/auth'
 
 	let authComponent: HTMLElement
 
@@ -36,7 +37,7 @@
 </script>
 
 <label for="login" class="btn btn-ghost modal-button">Login</label>
-<input type="checkbox" id="login" class="modal-toggle" />
+<input type="checkbox" id="login" class="modal-toggle" bind:checked={$showLoginModal} />
 <label for="login" class="modal cursor-pointer">
 	<label class="modal-box relative">
 		<div bind:this={authComponent} />

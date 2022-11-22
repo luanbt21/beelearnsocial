@@ -153,6 +153,7 @@ model LearnLevel {
   description String
   icon        String
   level       Int
+  repeating   Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

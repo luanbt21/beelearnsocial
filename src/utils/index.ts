@@ -23,3 +23,12 @@ export const fileListToUrl = (fileList?: FileList) => {
 	}
 	return urls
 }
+
+/** Return space repetition time in mini seconds */
+export const calculateSpaceTime = (level: number) => {
+	const weight = 10 * 1000
+	if (level > 1) {
+		return (level - 1 + level) * weight
+	}
+	return 2 * weight
+}

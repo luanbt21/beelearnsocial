@@ -30,7 +30,6 @@
 	const handleEnter = (e: KeyboardEvent) => {
 		if (!q) return
 		if (e.key === 'Enter' || e.key === ' ') {
-			console.log('enter')
 			e.preventDefault()
 			completeTagName(suggest[0] || '')
 		}

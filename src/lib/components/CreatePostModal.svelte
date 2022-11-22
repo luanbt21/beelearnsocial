@@ -8,7 +8,7 @@
 	import { fileListToUrl } from '$utils'
 	import PostMedia from './PostMedia.svelte'
 	import InputTag from './InputTag.svelte'
-  import type { LocalizedString } from 'typesafe-i18n'
+	import type { LocalizedString } from 'typesafe-i18n'
 
 	export let id: string
 
@@ -18,10 +18,16 @@
 	let isQuestionOk = false
 	$: isFormOk = addQuestion ? title && value && isQuestionOk : title && value
 
+	type Media = {
+		audios?: FileList
+		videos?: FileList
+		images?: FileList
+	}
+
 	let mediaMenu: {
 		dataTip: () => LocalizedString
 		icon: string
-		name: string
+		name: keyof Media
 		accept: string
 	}[] = [
 		{
@@ -44,20 +50,15 @@
 		},
 	]
 
-	let media: {
-		audios?: FileList
-		videos?: FileList
-		images?: FileList
-		[k: string]: FileList | undefined
-	} = {}
+	let media: Media = {}
 
-	let mediaSrc: { audios: string[]; videos: string[]; images: string[]; [k: string]: string[] } = {
+	let mediaSrc: { audios: string[]; videos: string[]; images: string[] } = {
 		audios: [],
 		videos: [],
 		images: [],
 	}
 	$: for (const [k, v] of Object.entries(media)) {
-		mediaSrc[k] = fileListToUrl(v)
+		mediaSrc[k as keyof Media] = fileListToUrl(v)
 	}
 </script>
 

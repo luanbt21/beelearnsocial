@@ -1,0 +1,29 @@
+import type { RequestHandler } from './$types'
+import { prisma } from '$lib/prisma'
+import { calculateSpaceTime } from '$utils'
+
+export const PATCH: RequestHandler = async () => {
+	const learnLevels = await prisma.learnLevel.findMany({
+		where: {
+			repeating: false,
+		},
+	})
+	learnLevels.forEach(async (learnLevel) => {
+		const ms = calculateSpaceTime(learnLevel.level)
+		const now = new Date()
+		if (new Date(now.getTime() - ms) >= learnLevel.updatedAt) {
+			await prisma.learnLevel.update({
+				where: {
+					id: learnLevel.id,
+				},
+				data: {
+					repeating: true,
+					level: {
+						increment: 1,
+					},
+				},
+			})
+		}
+	})
+	return new Response()
+}

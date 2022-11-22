@@ -9,6 +9,7 @@
 	import { enhance } from '$app/forms'
 
 	export let post: Post & {
+		repeating: boolean
 		author: User
 		reactions: {
 			userId: string
@@ -90,5 +91,10 @@
 
 	<Exercise {post} />
 
-	<PostInteractive postId={post.id} reactions={post.reactions} {showComments} />
+	<PostInteractive
+		postId={post.id}
+		reactions={post.reactions}
+		{showComments}
+		repeating={post.repeating}
+	/>
 </div>

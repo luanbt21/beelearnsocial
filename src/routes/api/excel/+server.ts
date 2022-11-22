@@ -149,6 +149,6 @@ export const POST: RequestHandler = async (req) => {
 		return json(count)
 	} catch (e) {
 		console.log(new Date().toISOString(), e)
-		return error(500, JSON.stringify(e))
+		throw error(500, JSON.stringify(e))
 	}
 }

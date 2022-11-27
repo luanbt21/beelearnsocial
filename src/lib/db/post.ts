@@ -139,7 +139,7 @@ export const searchPost = async (
 	return await Promise.all(
 		postsRaw.map(async (raw) => {
 			const postId = raw._id.$oid
-			const tagIDs = raw.tagIDs.map(({ $oid }) => $oid)
+			const tagIDs = raw.tagIDs ? raw.tagIDs.map(({ $oid }) => $oid) : []
 			return {
 				id: postId,
 				title: raw.title,

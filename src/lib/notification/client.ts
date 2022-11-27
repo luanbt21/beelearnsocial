@@ -1,7 +1,10 @@
 import { PUBLIC_VAPID_KEY } from '$env/static/public'
+import { dev } from '$app/environment'
 
 export async function registerServiceWorker() {
-	const registration = await navigator.serviceWorker.register('/service-worker.js')
+	const registration = await navigator.serviceWorker.register('/service-worker.js', {
+		type: dev ? 'module' : 'classic',
+	})
 	if (await registration.pushManager.getSubscription()) return
 	const subscription = await registration.pushManager.subscribe({
 		userVisibleOnly: true,

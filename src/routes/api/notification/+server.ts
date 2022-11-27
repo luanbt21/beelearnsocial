@@ -24,6 +24,7 @@ export const POST: RequestHandler = async ({ locals, request }) => {
 		title: locals.LL.congratulation(),
 		options: {
 			body: `${locals.LL.welcome()} ${user.displayName} ${locals.LL.to()} Bee learn social!`,
+			lang: user.locale || 'en',
 		},
 	})
 	return new Response()

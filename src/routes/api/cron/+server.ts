@@ -11,8 +11,8 @@ export const PATCH: RequestHandler = async () => {
 	await Promise.all(
 		learnLevels.map(async (learnLevel) => {
 			const ms = calculateSpaceTime(learnLevel.level)
-
-			if (new Date(now.getTime() - ms) >= learnLevel.updatedAt) {
+			const now = new Date().getTime()
+			if (new Date(now - ms) >= learnLevel.updatedAt) {
 				await prisma.learnLevel.update({
 					where: {
 						id: learnLevel.id,

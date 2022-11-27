@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Post, Reaction, Tag } from '@prisma/client'
+	import type { Post, Reaction, User } from '@prisma/client'
 	import Hashtag from '$components/Hashtag.svelte'
 	import SveltyPicker from 'svelty-picker'
 

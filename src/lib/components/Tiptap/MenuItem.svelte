@@ -3,8 +3,8 @@
 
 	export let icon = ''
 	export let title = ''
-	export let action:(()=> boolean)|undefined = undefined
-	export let isActive:(()=> boolean)| undefined = undefined
+	export let action: (() => boolean) | undefined = undefined
+	export let isActive: (() => boolean) | undefined = undefined
 </script>
 
 <template>

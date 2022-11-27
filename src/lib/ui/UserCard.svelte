@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { User } from '@prisma/client'
 	import { locale, LL } from '$i18n/i18n-svelte'
 	import { enhance } from '$app/forms'
 	import { getUserId } from '$utils'
@@ -27,7 +28,7 @@
 		{#if user.introduction}
 			<p>{user.introduction}</p>
 		{/if}
-		<p>{$LL.followers({ nrOfFollowers: user.followedByIDs.length })}</p>
+		<p>{$LL.nFollowers({ nrOfFollowers: user.followedByIDs.length })}</p>
 		<div class="card-actions">
 			<form
 				method="POST"

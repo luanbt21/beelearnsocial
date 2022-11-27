@@ -70,6 +70,11 @@ export const loadPosts = async ({ user, page = 0 }: { user?: User; page?: number
 				id: {
 					notIn: [...user.hiddenPostIDs, ...learnLevels.map(({ post }) => post.id)],
 				},
+				learnLevels: {
+					none: {
+						userId: user.id,
+					},
+				},
 			},
 			page,
 		})

@@ -33,7 +33,7 @@
 			</h2>
 			<div>
 				<a class="link link-hover" href={`${$page.params.uid}/followers`}>
-					{$LL.followers({ nrOfFollowers: user?.followedBy.length })}
+					{$LL.nFollowers({ nrOfFollowers: user?.followedBy.length })}
 				</a>
 			</div>
 			<div>

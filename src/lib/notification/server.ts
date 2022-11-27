@@ -47,7 +47,7 @@ export async function notificationOnComment(
 	sendNotifications({
 		subscriptions: post.author.pushSubscriptions,
 		title: `${commenter?.displayName} ${LL.haveCommentedOnYourPost()}`,
-		options: { body: `${LL.postTitle()}: ${post.title}` },
+		options: { body: `${LL.postTitle()}: ${post.title}`, lang: locale },
 	})
 }
 
@@ -84,6 +84,7 @@ export async function sendNotifications({
 export async function notificationAll({ title, body }: { title: string; body: string }) {
 	const users = await prisma.user.findMany({
 		select: {
+			locale: true,
 			displayName: true,
 			pushSubscriptions: true,
 		},
@@ -93,10 +94,10 @@ export async function notificationAll({ title, body }: { title: string; body: st
 			return await sendNotifications({
 				subscriptions: user.pushSubscriptions,
 				title,
-				options: { body },
+				options: { body, lang: user.locale || 'en' },
 			})
 		}),
 	).catch((e) => {
-		console.log(new Date().toISOString(), e)
+		console.log(new Date(), e)
 	})
 }

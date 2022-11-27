@@ -8,22 +8,27 @@ export const PATCH: RequestHandler = async () => {
 			repeating: false,
 		},
 	})
-	learnLevels.forEach(async (learnLevel) => {
-		const ms = calculateSpaceTime(learnLevel.level)
-		const now = new Date()
-		if (new Date(now.getTime() - ms) >= learnLevel.updatedAt) {
-			await prisma.learnLevel.update({
-				where: {
-					id: learnLevel.id,
-				},
-				data: {
-					repeating: true,
-					level: {
-						increment: 1,
+	await Promise.all(
+		learnLevels.map(async (learnLevel) => {
+			const ms = calculateSpaceTime(learnLevel.level)
+
+			if (new Date(now.getTime() - ms) >= learnLevel.updatedAt) {
+				await prisma.learnLevel.update({
+					where: {
+						id: learnLevel.id,
 					},
-				},
-			})
-		}
+					data: {
+						repeating: true,
+						level: {
+							increment: 1,
+						},
+					},
+				})
+			}
+		}),
+	).catch((e) => {
+		console.log(new Date(), e)
 	})
+
 	return new Response()
 }

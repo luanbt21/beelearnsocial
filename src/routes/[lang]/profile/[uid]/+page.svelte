@@ -3,13 +3,14 @@
 	import { LL } from '$i18n/i18n-svelte'
 	import CollectionCard from '$components/CollectionCard.svelte'
 	import { fade } from 'svelte/transition'
+	import { page } from '$app/stores'
 
 	export let data: PageData
 	const { user } = data
 </script>
 
 <svelte:head>
-	<title>{user.displayName}</title>
+	<title>{$LL.profile()}: {user.displayName}</title>
 </svelte:head>
 <div in:fade class="p-4 bg-base-100">
 	<div class="card  h-72 rounded">
@@ -30,7 +31,17 @@
 			<h2 class="text-2xl">
 				{user?.displayName}
 			</h2>
-			<p>{user?.followedBy.length} {$LL.follower()}</p>
+			<div>
+				<a class="link link-hover" href={`${$page.params.uid}/followers`}>
+					{$LL.followers({ nrOfFollowers: user?.followedBy.length })}
+				</a>
+			</div>
+			<div>
+				<a class="link link-hover" href={`${$page.params.uid}/following`}>
+					{user?.followingIDs.length}
+					{$LL.following()}
+				</a>
+			</div>
 		</div>
 	</div>
 

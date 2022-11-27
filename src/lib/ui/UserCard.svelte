@@ -2,6 +2,7 @@
 	import { locale, LL } from '$i18n/i18n-svelte'
 	import { enhance } from '$app/forms'
 	import { getUserId } from '$utils'
+	import { showLoginModal, user as userStore } from '$stores/auth'
 
 	export let user: User
 	let isSending = false
@@ -26,11 +27,16 @@
 		{#if user.introduction}
 			<p>{user.introduction}</p>
 		{/if}
-		<p>{user.followedByIDs.length} {$LL.follower()}</p>
+		<p>{$LL.followers({ nrOfFollowers: user.followedByIDs.length })}</p>
 		<div class="card-actions">
 			<form
 				method="POST"
-				use:enhance={() => {
+				use:enhance={({ cancel }) => {
+					if (!$userStore) {
+						cancel()
+						$showLoginModal = true
+						return
+					}
 					isSending = true
 					return async ({ update }) => {
 						await update()
@@ -41,7 +47,7 @@
 				<input type="hidden" name="userId" value={user.id} />
 				{#if user.followedByIDs.includes(getUserId() ?? '')}
 					<button
-						formaction="?/unfollow"
+						formaction={`${$locale}/users?/unfollow`}
 						disabled={isSending}
 						class:loading={isSending}
 						class="btn btn-primary"
@@ -50,7 +56,7 @@
 					</button>
 				{:else}
 					<button
-						formaction="?/follow"
+						formaction={`${$locale}/users?/follow`}
 						disabled={isSending}
 						class:loading={isSending}
 						class="btn btn-primary"

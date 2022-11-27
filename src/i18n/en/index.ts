@@ -1,7 +1,10 @@
 import type { Translation } from '../i18n-types'
 
 const en: Translation = {
-	follower: 'follower',
+	profile: 'Profile',
+	nFollowers: '{nrOfFollowers} follower{{s}}',
+	followers: 'followers',
+	following: 'following',
 	introduction: 'Introduction',
 	description: 'Description',
 	collection: 'Collection',

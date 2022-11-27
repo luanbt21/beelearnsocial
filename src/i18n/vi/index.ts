@@ -1,7 +1,10 @@
 import type { BaseTranslation } from '../i18n-types'
 
 const vi: BaseTranslation = {
-	follower: 'người theo dõi',
+	profile: 'Hồ sơ',
+	nFollowers: '{nrOfFollowers} người theo dõi',
+	followers: 'người theo dõi',
+	following: 'đang theo dõi',
 	introduction: 'Giới thiệu tổng quan',
 	description: 'Mô tả',
 	collection: 'Bộ sưu tập',

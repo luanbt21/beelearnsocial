@@ -3,21 +3,23 @@
 	import { authLoading, user } from '$stores/auth'
 	import LocaleSwitcher from '$components/LocaleSwitcher.svelte'
 	import FirebaseUI from './FirebaseUI.svelte'
+	import { CreatePostModalId } from '$lib/constant'
 
-	type MenuItem = { icon: string; title: string }
+	type MenuItem = { icon: string; title: string; id: string }
 
 	const titles = ['note', 'timer', 'message', 'noti']
 
 	const menu: MenuItem[] = titles.map((title) => ({
 		title,
 		icon: `/${title}-icon.svg`,
+		id: title === 'note' ? CreatePostModalId : '',
 	}))
 </script>
 
 {#each menu as item}
-	<button class="btn btn-md btn-ghost btn-square" title={item.title}>
+	<label for={item.id} class="btn btn-md btn-ghost btn-square" title={item.title}>
 		<img class="w-5 md:w-6" src={item.icon} alt={item.title} />
-	</button>
+	</label>
 {/each}
 <LocaleSwitcher />
 

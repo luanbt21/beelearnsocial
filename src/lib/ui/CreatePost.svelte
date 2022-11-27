@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { user } from '$stores/auth'
 	import { locale, LL } from '$i18n/i18n-svelte'
-	import CreatePostModal from '$components/CreatePostModal.svelte'
-
-	let showModal = false
+	import { CreatePostModalId } from '$lib/constant'
 </script>
 
 {#if $user}
@@ -18,17 +16,12 @@
 			</div>
 			<div class="ml-2 w-full">
 				<label
-					for="create-post-modal"
+					for={CreatePostModalId}
 					class="block w-full hover:cursor-pointer outline outline-1 outline-stone-300 p-3 rounded-full font-medium"
 				>
 					{$LL.startAPost()}
 				</label>
 			</div>
 		</div>
-
-		<input type="checkbox" id="create-post-modal" class="modal-toggle" bind:checked={showModal} />
-		{#if showModal}
-			<CreatePostModal id="create-post-modal" />
-		{/if}
 	</div>
 {/if}

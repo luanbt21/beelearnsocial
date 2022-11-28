@@ -2,15 +2,20 @@
 	import type { PageData } from './$types'
 	import { LL } from '$i18n/i18n-svelte'
 	import CollectionCard from '$components/CollectionCard.svelte'
+	import BarChart from '$components/BarChart.svelte'
 	import { fade } from 'svelte/transition'
 	import { page } from '$app/stores'
+	import { getUserId } from '$utils'
 
 	export let data: PageData
-	const { user } = data
+	const chartData = Array.from({ length: 6 }).fill(0) as number[]
+	data.levels.forEach((level) => {
+		chartData[level.level - 1] = level._count._all
+	})
 </script>
 
 <svelte:head>
-	<title>{$LL.profile()}: {user.displayName}</title>
+	<title>{$LL.profile()}: {data.user.displayName}</title>
 </svelte:head>
 <div in:fade class="p-4 bg-base-100">
 	<div class="card  h-72 rounded">
@@ -20,29 +25,34 @@
 			class="object-cover w-full h-full rounded"
 		/>
 	</div>
-	<div class="flex flex-row justify-items-center items-center ml-[5%] -mt-14">
+	<div class="flex flex-row justify-items-center items-end ml-[5%] -mt-14">
 		<div class="avatar">
 			<div class="w-48 rounded-full">
-				<img src={user?.photoURL} alt="user avatar" />
+				<img src={data.user?.photoURL} alt="user avatar" />
 			</div>
 		</div>
 
-		<div class="ml-4">
+		<div class="flex flex-col ml-4 mb-5">
 			<h2 class="text-2xl">
-				{user?.displayName}
+				{data.user?.displayName}
 			</h2>
-			<div>
-				<a class="link link-hover" href={`${$page.params.uid}/followers`}>
-					{$LL.nFollowers({ nrOfFollowers: user?.followedBy.length })}
-				</a>
-			</div>
-			<div>
-				<a class="link link-hover" href={`${$page.params.uid}/following`}>
-					{user?.followingIDs.length}
-					{$LL.following()}
-				</a>
-			</div>
+			<a class="link link-hover" href={`${$page.params.uid}/followers`}>
+				{$LL.nFollowers({ nrOfFollowers: data.user?.followedBy.length })}
+			</a>
+
+			<a class="link link-hover" href={`${$page.params.uid}/following`}>
+				{data.user?.followingIDs.length}
+				{$LL.following()}
+			</a>
+
+			{#if getUserId() === data.user.id}
+				<a class="link link-hover" href={`${$page.params.uid}/hidden-posts`}>Hidden posts</a>
+			{/if}
 		</div>
+	</div>
+
+	<div>
+		<BarChart {chartData} />
 	</div>
 
 	<div class="bg-base-200 min-h-[200px] px-9 py-6 mt-6 rounded">
@@ -51,7 +61,7 @@
 		</h3>
 		<textarea
 			class="textarea textarea-ghost w-full h-full resize-none"
-			value={user?.introduction ?? $LL.description()}
+			value={data.user?.introduction ?? $LL.description()}
 			readonly
 		/>
 	</div>
@@ -60,8 +70,8 @@
 		<h3 class="text-xl">
 			{$LL.collection()}
 		</h3>
-		{#if user?.collections}
-			{#each user?.collections as collection (collection.id)}
+		{#if data.user?.collections}
+			{#each data.user?.collections as collection (collection.id)}
 				<CollectionCard {collection} />
 			{/each}
 		{/if}

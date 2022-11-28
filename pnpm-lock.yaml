@@ -20,6 +20,7 @@ specifiers:
   '@typescript-eslint/parser': ^5.43.0
   '@zerodevx/svelte-toast': ^0.8.2
   autoprefixer: ^10.4.13
+  chart.js: ^4.0.1
   concurrently: ^7.5.0
   cookie: ^0.5.0
   daisyui: ^2.41.0
@@ -41,6 +42,7 @@ specifiers:
   sass: ^1.56.1
   svelte: ^3.53.1
   svelte-carousel: ^1.0.20
+  svelte-chartjs: ^3.1.0
   svelte-check: ^2.9.2
   svelte-preprocess: ^4.10.7
   svelty-picker: ^3.2.3
@@ -61,6 +63,7 @@ dependencies:
   '@tiptap/extension-link': 2.0.0-beta.202_fosglmwb3u6jhi6bbjmnlbdsbu
   '@tiptap/extension-placeholder': 2.0.0-beta.202_fosglmwb3u6jhi6bbjmnlbdsbu
   '@tiptap/starter-kit': 2.0.0-beta.202
+  chart.js: 4.0.1
   cookie: 0.5.0
   daisyui: 2.41.0_2lwn2upnx27dqeg6hqdu7sq75m
   dayjs: 1.11.6
@@ -70,6 +73,7 @@ dependencies:
   firebaseui: 6.0.2_firebase@9.14.0
   pocketbase: 0.8.0
   remixicon: 2.5.0
+  svelte-chartjs: 3.1.0_743oiojquater6p4lx7hicafqu
   svelty-picker: 3.2.3
   typesafe-i18n: 5.16.3_typescript@4.9.3
   web-push: 3.5.0
@@ -2028,6 +2032,11 @@ packages:
     dependencies:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
+
+  /chart.js/4.0.1:
+    resolution: {integrity: sha512-5/8/9eBivwBZK81mKvmIwTb2Pmw4D/5h1RK9fBWZLLZ8mCJ+kfYNmV9rMrGoa5Hgy2/wVDBMLSUDudul2/9ihA==}
+    engines: {pnpm: ^7.0.0}
+    dev: false
 
   /checkpoint-client/1.1.21:
     resolution: {integrity: sha512-bcrcnJncn6uGhj06IIsWvUBPyJWK1ZezDbLCJ//IQEYXkUobhGvOOBlHe9K5x0ZMkAZGinPB4T+lTUmFz/acWQ==}
@@ -4846,6 +4855,16 @@ packages:
       simply-reactive: github.com/vadimkorr/simply-reactive/8d1ae831b2fbba1cf4446543f954b4efe28013e0
     dev: true
 
+  /svelte-chartjs/3.1.0_743oiojquater6p4lx7hicafqu:
+    resolution: {integrity: sha512-tQ+v9fJOXUd44lKYUP3zINyyK4kRAWn2HBs8c1aIkJsodNJyZ6DJZgPywvNv2bbGIVbWXZ8aTgvDawUkday+zw==}
+    peerDependencies:
+      chart.js: ^3.5.0 || ^4.0.0
+      svelte: ^3.45.0
+    dependencies:
+      chart.js: 4.0.1
+      svelte: 3.53.1
+    dev: false
+
   /svelte-check/2.9.2_f3ranzdoxxiidnni4pfcl7bcm4:
     resolution: {integrity: sha512-DRi8HhnCiqiGR2YF9ervPGvtoYrheE09cXieCTEqeTPOTJzfoa54Py8rovIBv4bH4n5HgZYIyTQ3DDLHQLl2uQ==}
     hasBin: true
@@ -4939,7 +4958,6 @@ packages:
   /svelte/3.53.1:
     resolution: {integrity: sha512-Q4/hHkktZogGhN5iqxqSi9sjEVoe/NbIxX4hXEHoasTxj+TxEQVAq66LnDMdAZxjmsodkoI5F3slqsS68U7FNw==}
     engines: {node: '>= 8'}
-    dev: true
 
   /svelty-picker/3.2.3:
     resolution: {integrity: sha512-il+Kmhjw1CiO4ltu84RbI5Tzj+rMf0UY+V7KOmXjn4dzbp2rqGc+Hd4aR9ld8mLbWxKdmOU7GkxfYTTts4sUyw==}

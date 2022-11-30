@@ -3,14 +3,19 @@
 	import Tiptap from '$components/Tiptap'
 	import CreateQuestion from '$components/CreateQuestion.svelte'
 	import { locale, LL } from '$i18n/i18n-svelte'
-	import { user } from '$stores/auth'
-	import { enhance } from '$app/forms'
+	import { showLoginModal, user } from '$stores/auth'
 	import { fileListToUrl } from '$utils'
 	import PostMedia from './PostMedia.svelte'
 	import InputTag from './InputTag.svelte'
 	import type { LocalizedString } from 'typesafe-i18n'
+	import { showCreatePostModal } from '$stores'
 
 	export let id: string
+
+	if (!$user) {
+		$showLoginModal = true
+		$showCreatePostModal = false
+	}
 
 	let title = ''
 	let value = ''
@@ -106,7 +111,6 @@
 					action={`/${$locale}/post?/create`}
 					method="POST"
 					enctype="multipart/form-data"
-					use:enhance
 				>
 					<InputTag />
 

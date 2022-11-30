@@ -18,7 +18,7 @@
 		const target = carousel.querySelector<HTMLDivElement>(href)
 		if (target) {
 			const left = target.offsetLeft
-			carousel.scrollTo({ left: left })
+			carousel.scrollTo({ left: left, behavior: 'smooth' })
 		}
 	}
 </script>
@@ -57,7 +57,7 @@
 {/if}
 
 {#if videos.length + images.length > 0}
-	<div bind:this={mediaCarousel} class="carousel w-full">
+	<div bind:this={mediaCarousel} class="carousel">
 		{#each videos as src, i}
 			<div id={genId('media', i)} class="carousel-item w-full">
 				<video class="w-full my-auto" controls>
@@ -69,7 +69,7 @@
 		{/each}
 		{#each images as src, i}
 			<div id={genId('media', i + videos.length)} class="carousel-item w-full">
-				<img {src} alt="" class="mx-auto my-auto" />
+				<img {src} alt="" class="max-h-[30rem] mx-auto my-auto" />
 			</div>
 		{/each}
 	</div>

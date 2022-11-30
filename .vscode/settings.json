@@ -1,9 +1,10 @@
 {
 	"typescript.tsdk": "node_modules/typescript/lib",
-	"cSpell.words": ["pocketbase", "Tiptap", "unfollow", "webpush"],
+	"cSpell.words": ["pocketbase", "pomodoro", "Tiptap", "unfollow", "webpush"],
 	"svelte.plugin.svelte.compilerWarnings": {
 		"a11y-missing-attribute": "ignore",
 		"a11y-label-has-associated-control": "ignore",
-		"a11y-no-noninteractive-tabindex": "ignore"
+		"a11y-no-noninteractive-tabindex": "ignore",
+		"a11y-click-events-have-key-events": "ignore"
 	}
 }

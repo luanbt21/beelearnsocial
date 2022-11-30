@@ -22,13 +22,13 @@
 				value={option.value}
 				class="radio"
 			/>
-			<span class="label-text ml-4">
+			<span class="ml-4">
 				{option.value}
 			</span>
 		</label>
 	{/each}
 	{#if checked}
-		<div class="mb-2 text-sm text-gray-700 break-all">
+		<div class="mb-2 break-words">
 			{@html post.description}
 		</div>
 	{/if}
@@ -54,7 +54,7 @@
 		</button>
 	{/if}
 {:else}
-	<div class="mb-2 text-sm text-gray-700 break-all">
+	<div class="mb-2 break-words">
 		{@html post.description}
 	</div>
 {/if}

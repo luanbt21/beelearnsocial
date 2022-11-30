@@ -54,7 +54,12 @@
 			<form
 				method="POST"
 				action={isLiked ? `/${$locale}/post?/dislike` : `/${$locale}/post?/like`}
-				use:enhance={() => {
+				use:enhance={({ cancel }) => {
+					if (!$user) {
+						$showLoginModal = true
+						cancel()
+						return
+					}
 					isSending = true
 					return async ({ update }) => {
 						await update()

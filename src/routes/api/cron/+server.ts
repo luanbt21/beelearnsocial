@@ -6,6 +6,9 @@ export const PATCH: RequestHandler = async () => {
 	const learnLevels = await prisma.learnLevel.findMany({
 		where: {
 			repeating: false,
+			level: {
+				lt: 6,
+			},
 		},
 	})
 	await Promise.all(

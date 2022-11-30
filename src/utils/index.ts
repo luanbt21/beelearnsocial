@@ -1,4 +1,7 @@
 import { browser } from '$app/environment'
+import { goto } from '$app/navigation'
+import { locale } from '$i18n/i18n-svelte'
+import type { User } from 'firebase/auth'
 
 // e.g. /en/blog/article-1 => /de/blog/article-1
 export const replaceLocaleInUrl = (path: string, locale: string): string => {
@@ -31,4 +34,10 @@ export const calculateSpaceTime = (level: number) => {
 		return (level - 1 + level) * weight
 	}
 	return 2 * weight
+}
+
+export const handleHideLoginModal = (showLoginModal: boolean, user?: User | null) => {
+	if (!showLoginModal && !user && browser) {
+		locale.subscribe((loc) => goto(`/${loc}/explore`))()
+	}
 }

@@ -73,11 +73,14 @@
 			</div>
 		{/each}
 	</div>
-	<div class="flex justify-center w-full py-2 gap-2">
-		{#each [...videos, ...images] as _, i}
-			<a on:click={(e) => slice(e, mediaCarousel)} href="#{genId('media', i)}" class="btn btn-xs">
-				{i + 1}
-			</a>
-		{/each}
-	</div>
+
+	{#if videos.length + images.length > 1}
+		<div class="flex justify-center w-full py-2 gap-2">
+			{#each [...videos, ...images] as _, i}
+				<a on:click={(e) => slice(e, mediaCarousel)} href="#{genId('media', i)}" class="btn btn-xs">
+					{i + 1}
+				</a>
+			{/each}
+		</div>
+	{/if}
 {/if}

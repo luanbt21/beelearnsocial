@@ -3,7 +3,7 @@ import { prisma } from '$lib/prisma'
 import { error } from '@sveltejs/kit'
 
 export const load: PageServerLoad = async ({ locals }) => {
-	if (!locals.user) throw error(404)
+	if (!locals.user) return
 
 	return {
 		todoList: await getPlans({ userId: locals.user.id, status: false }),

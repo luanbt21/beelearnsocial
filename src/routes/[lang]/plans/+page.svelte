@@ -4,8 +4,16 @@
 	import { fade } from 'svelte/transition'
 	import type { PageData } from './$types'
 	import TodoItem from '$components/TodoItem.svelte'
+	import { authLoading, showLoginModal, user } from '$stores/auth'
+	import { handleHideLoginModal } from '$utils'
 
 	export let data: PageData
+
+	$: if (!$authLoading && !$user) {
+		$showLoginModal = true
+	}
+
+	$: handleHideLoginModal($showLoginModal, $user)
 </script>
 
 <svelte:head>
@@ -46,7 +54,7 @@
 		</form>
 	</div>
 
-	{#if data.todoList.length}
+	{#if data.todoList}
 		<div>
 			<h1 class="text-lg font-semibold text-center">{$LL.todoList()}</h1>
 			<div class="flex flex-col gap-4">
@@ -57,7 +65,7 @@
 		</div>
 	{/if}
 
-	{#if data.completedTodoList.length}
+	{#if data.completedTodoList}
 		<div>
 			<h1 class="text-lg font-semibold text-center">{$LL.completedTodoList()}</h1>
 			<div class="flex flex-col gap-4">

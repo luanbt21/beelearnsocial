@@ -3,14 +3,13 @@ import { join } from 'path'
 import { likePost, dislikePost } from '$lib/db/reaction'
 import { hidePost } from '$lib/db/user'
 import { prisma } from '$lib/prisma'
-import { redirect } from '@sveltejs/kit'
+import { error, redirect } from '@sveltejs/kit'
 import type { Actions } from './$types'
 import { MEDIA_DIR_PATH, MEDIA_BASE_URL } from '$env/static/private'
 
 const verifyId = async ({ locals, request }: { locals: App.Locals; request: Request }) => {
-	if (!locals.user) {
-		throw redirect(307, `/${locals.locale}/login`)
-	}
+	if (!locals.user) throw error(404)
+
 	const data = await request.formData()
 	const postId = <string>data.get('postId')
 	return {
@@ -33,9 +32,8 @@ export const actions: Actions = {
 		return await hidePost(params)
 	},
 	create: async ({ locals, request }) => {
-		if (!locals.user) {
-			throw redirect(307, `/${locals.locale}/login`)
-		}
+		if (!locals.user) throw error(404)
+
 		const data = await request.formData()
 
 		interface Media {

@@ -1,5 +1,5 @@
 import type { Actions, PageServerLoad } from './$types'
-import { redirect } from '@sveltejs/kit'
+import { error } from '@sveltejs/kit'
 import { followUser, getUsers, unfollowUser } from '$lib/db/user'
 
 export const load: PageServerLoad = async () => {
@@ -10,7 +10,7 @@ export const load: PageServerLoad = async () => {
 
 const verifyId = async ({ locals, request }: { locals: App.Locals; request: Request }) => {
 	if (!locals.user) {
-		throw redirect(307, `/${locals.locale}/login`)
+		throw error(404)
 	}
 	const data = await request.formData()
 	const userId = <string>data.get('userId')

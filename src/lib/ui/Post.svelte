@@ -7,6 +7,7 @@
 	import Exercise from '$components/Exercise.svelte'
 	import PostInteractive from '$components/PostInteractive.svelte'
 	import { enhance } from '$app/forms'
+	import { showLoginModal, user } from '$stores/auth'
 
 	export let post: Post & {
 		repeating: boolean
@@ -57,7 +58,12 @@
 						<form
 							method="POST"
 							action={`/${$locale}/post?/hide`}
-							use:enhance={() => {
+							use:enhance={({ cancel }) => {
+								if (!$user) {
+									$showLoginModal = true
+									cancel()
+									return
+								}
 								isSending = true
 								return async ({ update }) => {
 									await update()

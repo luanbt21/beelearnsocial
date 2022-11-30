@@ -41,6 +41,9 @@ const en: Translation = {
 	seeMore: 'See more',
 	haveCommentedOnYourPost: 'have commented on your post.',
 	postTitle: 'Post title',
+	start: 'start',
+	stop: 'stop',
+	pomodoroReminder: "You've been finished studying, take a break!",
 }
 
 export default en

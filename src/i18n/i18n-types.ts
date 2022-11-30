@@ -175,6 +175,18 @@ type RootTranslation = {
 	 * P​o​s​t​ ​t​i​t​l​e
 	 */
 	postTitle: string
+	/**
+	 * s​t​a​r​t
+	 */
+	start: string
+	/**
+	 * s​t​o​p
+	 */
+	stop: string
+	/**
+	 * Y​o​u​'​v​e​ ​b​e​e​n​ ​f​i​n​i​s​h​e​d​ ​s​t​u​d​y​i​n​g​,​ ​t​a​k​e​ ​a​ ​b​r​e​a​k​!
+	 */
+	pomodoroReminder: string
 }
 
 export type TranslationFunctions = {
@@ -338,6 +350,18 @@ export type TranslationFunctions = {
 	 * Post title
 	 */
 	postTitle: () => LocalizedString
+	/**
+	 * start
+	 */
+	start: () => LocalizedString
+	/**
+	 * stop
+	 */
+	stop: () => LocalizedString
+	/**
+	 * You've been finished studying, take a break!
+	 */
+	pomodoroReminder: () => LocalizedString
 }
 
 export type Formatters = {}

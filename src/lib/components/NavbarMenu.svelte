@@ -4,10 +4,11 @@
 	import LocaleSwitcher from '$components/LocaleSwitcher.svelte'
 	import FirebaseUI from './FirebaseUI.svelte'
 	import { CreatePostModalId } from '$lib/constant'
+	import Pomodoro from './Pomodoro.svelte'
 
 	type MenuItem = { icon: string; title: string; id: string }
 
-	const titles = ['note', 'timer', 'message', 'noti']
+	const titles = ['note', 'message', 'noti']
 
 	const menu: MenuItem[] = titles.map((title) => ({
 		title,
@@ -16,8 +17,9 @@
 	}))
 </script>
 
+<Pomodoro />
 {#each menu as item}
-	<label for={item.id} class="btn btn-md btn-ghost btn-square" title={item.title}>
+	<label tabindex="0" for={item.id} class="btn btn-md btn-ghost btn-square" title={item.title}>
 		<img class="w-5 md:w-6" src={item.icon} alt={item.title} />
 	</label>
 {/each}

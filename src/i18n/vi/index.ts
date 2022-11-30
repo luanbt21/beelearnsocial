@@ -41,6 +41,9 @@ const vi: BaseTranslation = {
 	seeMore: 'Xem thêm',
 	haveCommentedOnYourPost: 'đã bình luận về bài viết của bạn.',
 	postTitle: 'Tiêu đề bài đăng',
+	start: 'bắt đầu',
+	stop: 'dừng',
+	pomodoroReminder: 'Bạn đã hoàn thành thời gian học, hãy nghỉ chút nhé!',
 }
 
 export default vi

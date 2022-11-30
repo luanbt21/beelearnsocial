@@ -30,9 +30,9 @@
 	<ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box">
 		{#each locales as l}
 			<li>
-				<button class:active={l === $locale} on:click={() => switchLocale(l)}>
+				<a class:active={l === $locale} on:click={() => switchLocale(l)}>
 					{l}
-				</button>
+				</a>
 			</li>
 		{/each}
 	</ul>

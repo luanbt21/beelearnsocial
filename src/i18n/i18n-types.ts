@@ -187,6 +187,38 @@ type RootTranslation = {
 	 * Y​o​u​'​v​e​ ​b​e​e​n​ ​f​i​n​i​s​h​e​d​ ​s​t​u​d​y​i​n​g​,​ ​t​a​k​e​ ​a​ ​b​r​e​a​k​!
 	 */
 	pomodoroReminder: string
+	/**
+	 * W​h​a​t​ ​d​o​ ​y​o​u​ ​w​a​n​t​ ​t​o​ ​d​o​?
+	 */
+	whatDoYouWantToDo: string
+	/**
+	 * T​a​s​k​ ​d​e​s​c​r​i​p​t​i​o​n
+	 */
+	taskDescription: string
+	/**
+	 * C​r​i​t​i​c​a​l​ ​l​e​v​e​l
+	 */
+	criticalLevel: string
+	/**
+	 * D​u​e​ ​d​a​t​e
+	 */
+	dueDate: string
+	/**
+	 * A​d​d​ ​t​o​ ​l​i​s​t
+	 */
+	addToList: string
+	/**
+	 * T​o​-​d​o​ ​l​i​s​t
+	 */
+	todoList: string
+	/**
+	 * C​o​m​p​l​e​t​e​d​ ​t​o​-​d​o​ ​l​i​s​t
+	 */
+	completedTodoList: string
+	/**
+	 * c​r​e​a​t​e​d
+	 */
+	created: string
 }
 
 export type TranslationFunctions = {
@@ -362,6 +394,38 @@ export type TranslationFunctions = {
 	 * You've been finished studying, take a break!
 	 */
 	pomodoroReminder: () => LocalizedString
+	/**
+	 * What do you want to do?
+	 */
+	whatDoYouWantToDo: () => LocalizedString
+	/**
+	 * Task description
+	 */
+	taskDescription: () => LocalizedString
+	/**
+	 * Critical level
+	 */
+	criticalLevel: () => LocalizedString
+	/**
+	 * Due date
+	 */
+	dueDate: () => LocalizedString
+	/**
+	 * Add to list
+	 */
+	addToList: () => LocalizedString
+	/**
+	 * To-do list
+	 */
+	todoList: () => LocalizedString
+	/**
+	 * Completed to-do list
+	 */
+	completedTodoList: () => LocalizedString
+	/**
+	 * created
+	 */
+	created: () => LocalizedString
 }
 
 export type Formatters = {}

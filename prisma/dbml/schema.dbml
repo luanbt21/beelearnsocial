@@ -77,6 +77,7 @@ Table User {
   followingIDs String[] [not null]
   hiddenPostIDs String[] [not null]
   pushSubscriptions PushSubscription[] [not null]
+  Plan Plan [not null]
 }
 
 Table Reaction {
@@ -132,6 +133,18 @@ Table Collection {
   posts Post [not null]
 }
 
+Table Plan {
+  id String [pk]
+  user User [not null]
+  userId String [not null]
+  description String [not null]
+  priority Int [not null, default: 0]
+  due DateTime
+  status Boolean [not null, default: false]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
 Enum Locale {
   en
   vi
@@ -166,3 +179,5 @@ Ref: Tag.postIDs > Post.id
 Ref: Collection.userId > User.id
 
 Ref: Collection.postIDs > Post.id
+
+Ref: Plan.userId > User.id

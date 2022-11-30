@@ -44,6 +44,14 @@ const en: Translation = {
 	start: 'start',
 	stop: 'stop',
 	pomodoroReminder: "You've been finished studying, take a break!",
+	whatDoYouWantToDo: 'What do you want to do?',
+	taskDescription: 'Task description',
+	criticalLevel: 'Critical level',
+	dueDate: 'Due date',
+	addToList: 'Add to list',
+	todoList: 'To-do list',
+	completedTodoList: 'Completed to-do list',
+	created: 'created',
 }
 
 export default en

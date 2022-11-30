@@ -48,17 +48,12 @@
 
 			minute = Math.floor(remaining / (60 * 1000))
 			second = Math.floor(remaining / 1000) % 60
-			if (second === 0) {
-				if (minute === 0) {
-					stop()
-					showCongratulation = true
-					return
-				}
-				second = 59
-				minute--
+			if (second === 0 && minute === 0) {
+				stop()
+				showCongratulation = true
+				return
 			}
-			second--
-		}, 200)
+		}, 100)
 	}
 
 	const stop = () => {

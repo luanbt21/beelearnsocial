@@ -44,6 +44,14 @@ const vi: BaseTranslation = {
 	start: 'bắt đầu',
 	stop: 'dừng',
 	pomodoroReminder: 'Bạn đã hoàn thành thời gian học, hãy nghỉ chút nhé!',
+	whatDoYouWantToDo: 'Bạn đang cần làm gì?',
+	taskDescription: 'Mô tả công việc',
+	criticalLevel: 'Mức độ quan trọng',
+	dueDate: 'Ngày đến hạn',
+	addToList: 'Thêm vào danh sách',
+	todoList: 'Danh sách việc cần làm',
+	completedTodoList: 'Danh sách việc đã hoàn thành',
+	created: 'tạo',
 }
 
 export default vi

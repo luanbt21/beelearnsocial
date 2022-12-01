@@ -12,15 +12,16 @@
 	export let data: PageData
 
 	let page = 1
-	let newPost: PageData['posts'] = []
+	let newPosts: PageData['posts'] = []
 
 	async function fetchData() {
 		const response = await fetch(`?page=${page}`)
-		newPost = await response.json()
+		const data = await response.json()
+		newPosts = [...newPosts, ...data]
 		page++
 	}
 
-	$: posts = [...data.posts, ...newPost]
+	$: posts = [...data.posts, ...newPosts]
 
 	onMount(() => {
 		if (browser && $user) {

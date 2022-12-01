@@ -8,48 +8,19 @@ export const loadPosts = async ({ user, page = 0 }: { user?: User; page?: number
 		return newPosts.map((p) => ({ ...p, repeating: false }))
 	}
 
-	const learnLevels = await prisma.learnLevel.findMany({
-		where: {
-			userId: user.id,
-		},
-		select: {
-			id: true,
-			repeating: true,
-			post: {
-				select: {
-					id: true,
-				},
-			},
-		},
-		orderBy: {
-			updatedAt: 'asc',
-		},
-		take: page > 0 ? 2 * limit : limit,
-	})
-
 	// Up level for learned post.
-	if (page > 0 && learnLevels.length > 0) {
+	if (page > 0) {
+		const upLearnLevels = await findLearnLevels({ userId: user.id, limit })
 		await prisma.learnLevel.updateMany({
-			where: {
-				id: {
-					in: learnLevels.slice(0, limit).map(({ id }) => id),
-				},
-			},
-			data: {
-				repeating: false,
-			},
+			where: { id: { in: upLearnLevels.map(({ id }) => id) } },
+			data: { repeating: false },
 		})
 	}
 
-	const repeatingPostIDs = learnLevels
-		.slice(page === 0 ? 0 : limit)
-		.reduce<Array<string>>((array, learnLevel) => {
-			if (learnLevel.repeating) {
-				array.push(learnLevel.post.id)
-			}
-			return array
-		}, [])
+	const learnLevels = await findLearnLevels({ userId: user.id, limit })
+	const repeatingPostIDs = learnLevels.map(({ post }) => post.id)
 
+	// need to hide hidden posts
 	const repeatingPosts = repeatingPostIDs.length
 		? await getPosts({
 				where: {
@@ -81,4 +52,25 @@ export const loadPosts = async ({ user, page = 0 }: { user?: User; page?: number
 		posts.push(...newPosts.map((p) => ({ ...p, repeating: false })))
 	}
 	return posts
+}
+
+export const findLearnLevels = async ({ userId, limit }: { userId: string; limit: number }) => {
+	return await prisma.learnLevel.findMany({
+		where: {
+			userId,
+			repeating: true,
+		},
+		select: {
+			id: true,
+			post: {
+				select: {
+					id: true,
+				},
+			},
+		},
+		orderBy: {
+			updatedAt: 'asc',
+		},
+		take: limit,
+	})
 }

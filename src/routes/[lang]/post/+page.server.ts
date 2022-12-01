@@ -6,6 +6,7 @@ import { prisma } from '$lib/prisma'
 import { error, redirect } from '@sveltejs/kit'
 import type { Actions } from './$types'
 import { MEDIA_DIR_PATH, MEDIA_BASE_URL } from '$env/static/private'
+import { deletePost } from '$lib/db/post'
 
 const verifyId = async ({ locals, request }: { locals: App.Locals; request: Request }) => {
 	if (!locals.user) throw error(404)
@@ -30,6 +31,10 @@ export const actions: Actions = {
 	hide: async ({ locals, request }) => {
 		const params = await verifyId({ locals, request })
 		return await hidePost(params)
+	},
+	delete: async ({ locals, request }) => {
+		const params = await verifyId({ locals, request })
+		return await deletePost(params.postId)
 	},
 	create: async ({ locals, request }) => {
 		if (!locals.user) throw error(404)

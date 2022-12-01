@@ -6,7 +6,8 @@
 	import PostMedia from '$components/PostMedia.svelte'
 	import Exercise from '$components/Exercise.svelte'
 	import PostInteractive from '$components/PostInteractive.svelte'
-	import { enhance } from '$app/forms'
+	import PostAction from '$components/PostAction.svelte'
+	import { getUserId } from '$utils'
 	import { showLoginModal, user } from '$stores/auth'
 
 	export let post: Post & {
@@ -18,7 +19,8 @@
 		tags: Tag[]
 	}
 	export let showComments = false
-	let isSending = false
+
+	let showReportModal = false
 </script>
 
 <div class="mx-auto mb-4 px-4 py-6 overflow-hidden card shadow-md bg-base-100">
@@ -49,33 +51,26 @@
 
 		<div class="dropdown dropdown-end">
 			<label tabindex="0" class="p-1 font-bold text-lg">&vellip;</label>
-			<ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-200 rounded-box">
+			<ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-200 rounded-box gap-1">
 				<li>
 					<a class="link-success">{$LL.save()}</a>
 				</li>
-				<div class="mt-4">
-					<li class="bg-red-400 rounded-md">
-						<form
-							method="POST"
-							action={`/${$locale}/post?/hide`}
-							use:enhance={({ cancel }) => {
-								if (!$user) {
-									$showLoginModal = true
-									cancel()
-									return
-								}
-								isSending = true
-								return async ({ update }) => {
-									await update()
-									isSending = false
-								}
-							}}
-						>
-							<input type="hidden" name="postId" value={post.id} />
-							<button>{$LL.hide()}</button>
-						</form>
-					</li>
-				</div>
+				{#if post.authorId !== getUserId()}
+					<button
+						for={`report-${post.id}`}
+						on:click={() => {
+							if (!$user) $showLoginModal = true
+							else showReportModal = true
+						}}
+						class="btn btn-outline btn-warning"
+					>
+						{$LL.report()}
+					</button>
+				{/if}
+				<PostAction action="hide" postId={post.id} label={$LL.hide} />
+				<!-- {#if post.authorId === getUserId()}
+					<PostAction action="delete" postId={post.id} label={$LL.delete} />
+				{/if} -->
 			</ul>
 		</div>
 	</div>
@@ -103,4 +98,27 @@
 		{showComments}
 		repeating={post.repeating}
 	/>
+
+	{#if showReportModal}
+		<input
+			type="checkbox"
+			id={`report-${post.id}`}
+			class="modal-toggle"
+			bind:checked={showReportModal}
+		/>
+		<div class="modal">
+			<div class="modal-box relative">
+				<label for={`report-${post.id}`} class="btn btn-sm btn-circle absolute right-2 top-2">
+					✕
+				</label>
+				<h3 class="text-lg font-bold">{$LL.report()}</h3>
+				<p class="py-4">
+					{$LL.theReasonYouWantToReportThisPost()}
+				</p>
+				<form action="/api/report?/create">
+					<input type="hidden" name="postId" value={post.id} />
+				</form>
+			</div>
+		</div>
+	{/if}
 </div>

@@ -52,6 +52,9 @@ const vi: BaseTranslation = {
 	todoList: 'Danh sách việc cần làm',
 	completedTodoList: 'Danh sách việc đã hoàn thành',
 	created: 'tạo',
+	delete: 'Xoá',
+	report: 'Báo cáo',
+	theReasonYouWantToReportThisPost: 'Lý do bạn muốn báo cáo bài đăng này',
 }
 
 export default vi

@@ -219,6 +219,18 @@ type RootTranslation = {
 	 * c​r​e​a​t​e​d
 	 */
 	created: string
+	/**
+	 * D​e​l​e​t​e
+	 */
+	'delete': string
+	/**
+	 * R​e​p​o​r​t
+	 */
+	report: string
+	/**
+	 * T​h​e​ ​r​e​a​s​o​n​ ​y​o​u​ ​w​a​n​t​ ​t​o​ ​r​e​p​o​r​t​ ​t​h​i​s​ ​p​o​s​t
+	 */
+	theReasonYouWantToReportThisPost: string
 }
 
 export type TranslationFunctions = {
@@ -426,6 +438,18 @@ export type TranslationFunctions = {
 	 * created
 	 */
 	created: () => LocalizedString
+	/**
+	 * Delete
+	 */
+	'delete': () => LocalizedString
+	/**
+	 * Report
+	 */
+	report: () => LocalizedString
+	/**
+	 * The reason you want to report this post
+	 */
+	theReasonYouWantToReportThisPost: () => LocalizedString
 }
 
 export type Formatters = {}

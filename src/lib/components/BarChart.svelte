@@ -42,7 +42,6 @@
 		const element = getElementAtEvent(chart, event as PointerEvent)
 		if (!element.length) return
 		const { index } = element[0]
-		console.log(data.labels[index])
 		goto(`${$page.params.uid}/posts-level/${data.labels[index]}`)
 	}
 </script>

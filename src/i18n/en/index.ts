@@ -52,6 +52,9 @@ const en: Translation = {
 	todoList: 'To-do list',
 	completedTodoList: 'Completed to-do list',
 	created: 'created',
+	delete: 'Delete',
+	report: 'Report',
+	theReasonYouWantToReportThisPost: 'The reason you want to report this post',
 }
 
 export default en

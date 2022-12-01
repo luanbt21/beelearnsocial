@@ -25,8 +25,7 @@ export const actions: Actions = {
 			data: {
 				userId: locals.user.id,
 				description,
-				due: due ? due : undefined,
-
+				due: due ? new Date(due) : undefined,
 				priority: Number(data.get('priority')) || undefined,
 			},
 		})

@@ -78,7 +78,12 @@
 		>
 			<h2 class="text-lg font-bold">Pomodoro</h2>
 			<div class="flex justify-center align-middle gap-1">
-				<button class="btn btn-square" on:click={() => (minuteInput -= 1)}>-</button>
+				<button
+					class="btn btn-square"
+					on:click={() => (minuteInput = minuteInput ? minuteInput - 1 : -1)}
+				>
+					-
+				</button>
 				<input
 					type="number"
 					class="input input-bordered text-xl w-full max-w-xs text-center"
@@ -86,7 +91,12 @@
 					{max}
 					bind:value={minuteInput}
 				/>
-				<button class="btn btn-square" on:click={() => (minuteInput += 1)}>+</button>
+				<button
+					class="btn btn-square"
+					on:click={() => (minuteInput = minuteInput ? minuteInput + 1 : +1)}
+				>
+					+
+				</button>
 			</div>
 
 			<a class="btn rounded" on:click={setup}>{$LL.start()}</a>

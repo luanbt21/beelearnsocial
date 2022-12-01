@@ -2,26 +2,26 @@ import { prisma } from '$lib/prisma'
 import type { PageServerLoad } from './$types'
 
 export const load: PageServerLoad = async ({ params }) => {
-	const learnLevel = await prisma.learnLevel.findMany({
+	const posts = await prisma.post.findMany({
 		where: {
-			level: Number(params.level),
-			user: {
-				uid: params.uid,
-			},
-		},
-		select: {
-			post: {
-				include: {
-					author: true,
-					tags: true,
-					reactions: {
-						select: {
-							userId: true,
-						},
+			learnLevels: {
+				some: {
+					level: Number(params.level),
+					user: {
+						uid: params.uid,
 					},
 				},
 			},
 		},
+		include: {
+			author: true,
+			tags: true,
+			reactions: {
+				select: {
+					userId: true,
+				},
+			},
+		},
 	})
-	return { posts: learnLevel.map((l) => ({ ...l.post, repeating: true })) }
+	return { posts: posts.map((post) => ({ ...post, repeating: true })) }
 }

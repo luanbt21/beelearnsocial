@@ -7,8 +7,6 @@ export const createLearnLevel = async (arg: { userId: string; postId: string }) 
 			data: {
 				...arg,
 				level: 1,
-				icon: '',
-				description: '',
 			},
 		})
 	}

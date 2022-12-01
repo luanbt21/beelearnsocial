@@ -23,31 +23,46 @@
 	<div class="p-4 bg-base-100 rounded">
 		<h2 class="mb-2">{$LL.whatDoYouWantToDo()}</h2>
 		<form class=" flex flex-col gap-2" action="?/create" method="post" use:enhance>
-			<div class="form-control">
+			<div class="form-control" for="task-description">
 				<label class="label">
 					<span class="label-text">{$LL.taskDescription()}</span>
 				</label>
 				<input
+					id="task-description"
 					type="text"
 					placeholder="..."
 					name="description"
 					class="input input-bordered"
+					autocomplete="off"
 					required
 				/>
 			</div>
 
 			<!-- <div class="form-control">
-				<label class="label">
+				<label class="label" for="task-priority">
 					<span class="label-text">{$LL.criticalLevel()}</span>
 				</label>
-				<input type="text" placeholder="..." name="priority" class="input input-bordered" />
+				<input
+					id="task-priority"
+					type="text"
+					placeholder="..."
+					name="priority"
+					class="input input-bordered"
+					autocomplete="off"
+				/>
 			</div> -->
 
 			<div>
-				<label class="label">
+				<label class="label" for="task-due">
 					<span class="label-text">{$LL.dueDate()}</span>
 				</label>
-				<input type="datetime-local" name="due" class="input input-bordered" />
+				<input
+					id="task-due"
+					type="date"
+					name="due"
+					min={new Date().toISOString().split('T')[0]}
+					class="input input-bordered"
+				/>
 			</div>
 
 			<button class="btn btn-sm normal-case">{$LL.addToList()}</button>

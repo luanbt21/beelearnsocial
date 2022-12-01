@@ -1,5 +1,4 @@
-import { getPosts } from '$lib/db/post'
-import { prisma } from '$lib/prisma'
+import { isRepeating, getPosts } from '$lib/db/post'
 
 export const loadPosts = async ({
 	tagName,
@@ -15,22 +14,13 @@ export const loadPosts = async ({
 		page,
 	})
 
-	const posts = user
-		? await Promise.all(
-				postsData.map(async (post) => {
-					const repeating = (await prisma.learnLevel.findFirst({
-						where: {
-							userId: user?.id,
-							postId: post.id,
-						},
-					}))
-						? true
-						: false
-
-					return { ...post, repeating }
-				}),
-		  )
-		: postsData.map((p) => ({ ...p, repeating: false }))
-
-	return posts
+	return await Promise.all(
+		postsData.map(async (post) => ({
+			...post,
+			repeating: await isRepeating({
+				userId: user?.id,
+				postId: post.id,
+			}),
+		})),
+	)
 }

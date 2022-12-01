@@ -1,6 +1,19 @@
 import { prisma } from '$lib/prisma'
 import type { Option, Post, Prisma, Tag, User } from '@prisma/client'
 
+export const isRepeating = async ({ userId, postId }: { userId?: string; postId: string }) => {
+	if (!userId) return false
+
+	return (await prisma.learnLevel.findFirst({
+		where: {
+			userId,
+			postId,
+		},
+	}))
+		? true
+		: false
+}
+
 export const getPost = async (id: string) => {
 	return prisma.post.findFirst({
 		where: {
@@ -114,16 +127,22 @@ export interface ID {
 export interface Timestamp {
 	$date: string
 }
-export const searchPost = async (
-	q: string,
+export const searchPost = async ({
+	q,
 	page = 0,
-): Promise<
+	userId,
+}: {
+	q: string
+	page?: number
+	userId?: string
+}): Promise<
 	(Post & {
 		author: User
 		reactions: {
 			userId: string
 		}[]
 		tags: Tag[]
+		repeating: boolean
 	})[]
 > => {
 	const postsRaw = (await prisma.post.findRaw({
@@ -159,6 +178,10 @@ export const searchPost = async (
 				videos: raw.videos || [],
 				images: raw.images || [],
 				collectionIDs: [],
+				repeating: await isRepeating({
+					postId,
+					userId,
+				}),
 			}
 		}),
 	)

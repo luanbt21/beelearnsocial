@@ -1,5 +1,4 @@
-import { getPost } from '$lib/db/post'
-import { prisma } from '$lib/prisma'
+import { isRepeating, getPost } from '$lib/db/post'
 import { error } from '@sveltejs/kit'
 import type { PageServerLoad } from './$types'
 
@@ -10,13 +9,10 @@ export const load: PageServerLoad = async ({ url, locals }) => {
 	const post = await getPost(id)
 	if (!post) throw error(404, 'Post not found')
 
-	if (!locals.user) {
-		return { post: { ...post, repeating: false } }
+	return {
+		post: {
+			...post,
+			repeating: await isRepeating({ userId: locals.user?.id, postId: id }),
+		},
 	}
-	const repeating = (await prisma.learnLevel.findFirst({
-		where: { userId: locals.user.id, postId: id },
-	}))
-		? true
-		: false
-	return { post: { ...post, repeating } }
 }

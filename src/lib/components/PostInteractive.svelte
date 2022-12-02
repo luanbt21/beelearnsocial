@@ -4,7 +4,7 @@
 	import { locale } from '$i18n/i18n-svelte'
 	import { toast } from '@zerodevx/svelte-toast'
 	import PostComments from './PostComments.svelte'
-	import { getUserId } from '$utils'
+	import { getUserId } from '$utils/client'
 	import { enhance } from '$app/forms'
 	import { user, showLoginModal } from '$stores/auth'
 

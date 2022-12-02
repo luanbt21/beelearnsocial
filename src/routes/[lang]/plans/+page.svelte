@@ -5,7 +5,7 @@
 	import type { PageData } from './$types'
 	import TodoItem from '$components/TodoItem.svelte'
 	import { authLoading, showLoginModal, user } from '$stores/auth'
-	import { handleHideLoginModal } from '$utils'
+	import { handleHideLoginModal } from '$utils/client'
 
 	export let data: PageData
 

@@ -2,7 +2,7 @@
 	import type { User } from '@prisma/client'
 	import { locale, LL } from '$i18n/i18n-svelte'
 	import { enhance } from '$app/forms'
-	import { getUserId } from '$utils'
+	import { getUserId } from '$utils/client'
 	import { showLoginModal, user as userStore } from '$stores/auth'
 
 	export let user: User

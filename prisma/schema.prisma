@@ -96,6 +96,7 @@ model User {
   uid               String             @unique
   displayName       String
   photoURL          String?
+  coverImageURL     String?
   introduction      String?
   locale            Locale?
   posts             Post[]

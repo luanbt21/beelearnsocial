@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { logout } from '$utils/auth'
+	import { logout } from '$utils/client'
 	import { authLoading, user } from '$stores/auth'
 	import LocaleSwitcher from '$components/LocaleSwitcher.svelte'
 	import FirebaseUI from './FirebaseUI.svelte'

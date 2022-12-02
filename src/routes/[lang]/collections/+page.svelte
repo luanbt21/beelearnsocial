@@ -4,7 +4,7 @@
 	import { LL } from '$i18n/i18n-svelte'
 	import { fade } from 'svelte/transition'
 	import { authLoading, showLoginModal, user } from '$stores/auth'
-	import { handleHideLoginModal } from '$utils'
+	import { handleHideLoginModal } from '$utils/client'
 
 	export let data: PageData
 

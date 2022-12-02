@@ -1,12 +1,10 @@
-import { appendFile } from 'fs/promises'
-import { join } from 'path'
 import { likePost, dislikePost } from '$lib/db/reaction'
 import { hidePost } from '$lib/db/user'
 import { prisma } from '$lib/prisma'
 import { error, redirect } from '@sveltejs/kit'
 import type { Actions } from './$types'
-import { MEDIA_DIR_PATH, MEDIA_BASE_URL } from '$env/static/private'
 import { deletePost } from '$lib/db/post'
+import { saveMediaFile } from '$utils/server'
 
 const verifyId = async ({ locals, request }: { locals: App.Locals; request: Request }) => {
 	if (!locals.user) throw error(404)
@@ -67,10 +65,7 @@ export const actions: Actions = {
 				continue
 			}
 			if (k in media && v instanceof Blob && v.size !== 0) {
-				const name = crypto.randomUUID() + v.name
-				const data = Buffer.from(await v.arrayBuffer())
-				await appendFile(join(MEDIA_DIR_PATH, name), data)
-				media[k as keyof Media].push(MEDIA_BASE_URL + name)
+				media[k as keyof Media].push(await saveMediaFile({ blob: v }))
 				continue
 			}
 		}

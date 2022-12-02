@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte'
 	import PostComment from './PostComment.svelte'
 	import { user } from '$stores/auth'
-	import { getUserId } from '$utils'
+	import { getUserId } from '$utils/client'
 	import Tiptap from './Tiptap'
 	import type { Record, RecordSubscription } from 'pocketbase'
 	import { pocket } from '$stores'

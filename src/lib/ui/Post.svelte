@@ -7,7 +7,7 @@
 	import Exercise from '$components/Exercise.svelte'
 	import PostInteractive from '$components/PostInteractive.svelte'
 	import PostAction from '$components/PostAction.svelte'
-	import { getUserId } from '$utils'
+	import { getUserId } from '$utils/client'
 	import { showLoginModal, user } from '$stores/auth'
 
 	export let post: Post & {

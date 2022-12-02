@@ -80,6 +80,7 @@ model Post {
   tags          Tag[]        @relation(fields: [tagIDs], references: [id])
   collectionIDs String[]     @db.ObjectId
   collections   Collection[] @relation(fields: [collectionIDs], references: [id])
+  Report        Report[]
 
   @@fulltext([title])
 }
@@ -109,6 +110,10 @@ model User {
   hiddenPostIDs     String[]           @db.ObjectId
   pushSubscriptions PushSubscription[]
   Plan              Plan[]
+  inboxs            Inbox[]            @relation(fields: [inboxIDs], references: [id])
+  inboxIDs          String[]           @db.ObjectId
+  messages          Message[]
+  Report            Report[]
 
   @@fulltext([displayName, email])
 }
@@ -187,4 +192,35 @@ model Plan {
   status      Boolean   @default(false)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+}
+
+model Report {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  sender    User     @relation(fields: [senderId], references: [id])
+  senderId  String   @db.ObjectId
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    String   @db.ObjectId
+  reason    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Inbox {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  participants   User[]    @relation(fields: [participantIDS], references: [id])
+  participantIDS String[]  @db.ObjectId
+  messages       Message[]
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+model Message {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  inbox     Inbox?   @relation(fields: [inboxId], references: [id])
+  inboxId   String?  @db.ObjectId
+  sender    User     @relation(fields: [senderId], references: [id])
+  content   String
+  senderId  String   @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

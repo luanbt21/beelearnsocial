@@ -56,6 +56,7 @@ Table Post {
   tags Tag [not null]
   collectionIDs String[] [not null]
   collections Collection [not null]
+  Report Report [not null]
 }
 
 Table User {
@@ -78,6 +79,10 @@ Table User {
   hiddenPostIDs String[] [not null]
   pushSubscriptions PushSubscription[] [not null]
   Plan Plan [not null]
+  inboxs Inbox [not null]
+  inboxIDs String[] [not null]
+  messages Message [not null]
+  Report Report [not null]
 }
 
 Table Reaction {
@@ -145,6 +150,37 @@ Table Plan {
   updatedAt DateTime [not null]
 }
 
+Table Report {
+  id String [pk]
+  sender User [not null]
+  senderId String [not null]
+  post Post [not null]
+  postId String [not null]
+  reason String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table Inbox {
+  id String [pk]
+  participants User [not null]
+  participantIDS String[] [not null]
+  messages Message [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
+Table Message {
+  id String [pk]
+  inbox Inbox
+  inboxId String
+  sender User [not null]
+  content String [not null]
+  senderId String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+}
+
 Enum Locale {
   en
   vi
@@ -161,6 +197,8 @@ Ref: Post.collectionIDs > Collection.id
 Ref: User.followedByIDs > User.id
 
 Ref: User.followingIDs > User.id
+
+Ref: User.inboxIDs > Inbox.id
 
 Ref: Reaction.postId > Post.id
 
@@ -181,3 +219,13 @@ Ref: Collection.userId > User.id
 Ref: Collection.postIDs > Post.id
 
 Ref: Plan.userId > User.id
+
+Ref: Report.senderId > User.id
+
+Ref: Report.postId > Post.id
+
+Ref: Inbox.participantIDS > User.id
+
+Ref: Message.inboxId > Inbox.id
+
+Ref: Message.senderId > User.id

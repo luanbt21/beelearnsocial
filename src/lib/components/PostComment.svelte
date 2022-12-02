@@ -4,12 +4,13 @@
 	import type { User } from '@prisma/client'
 	import dayjs from 'dayjs'
 	import type { IComment } from 'src/global'
+	import { appGet } from '$utils/client'
 
 	export let comment: IComment
 	let user: User
 
 	onMount(async () => {
-		const res = await fetch(`/${$locale}/users/${comment.userId}`)
+		const res = await appGet(`/${$locale}/users/${comment.userId}`)
 		user = await res.json()
 	})
 </script>

@@ -29,7 +29,6 @@ export const loadPosts = async ({ user, page = 0 }: { user?: User; page?: number
 						notIn: user.hiddenPostIDs,
 					},
 				},
-				page,
 		  })
 		: []
 

@@ -22,6 +22,8 @@ const vi: BaseTranslation = {
 	italic: 'nghiêng',
 	strike: 'gạch ngang',
 	save: 'Lưu',
+	unsave: 'Bỏ lưu',
+
 	hide: 'Ẩn',
 	startAPost: 'Tạo bài đăng',
 	words: 'từ',
@@ -55,6 +57,11 @@ const vi: BaseTranslation = {
 	delete: 'Xoá',
 	report: 'Báo cáo',
 	theReasonYouWantToReportThisPost: 'Lý do bạn muốn báo cáo bài đăng này',
+	saveTo: 'Lưu vào',
+	savedTo: 'Đã lưu vào',
+	newCollection: 'Bộ sưu tập mới',
+	done: 'Xong',
+	create: 'Tạo',
 }
 
 export default vi

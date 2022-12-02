@@ -8,6 +8,7 @@
 	import { browser } from '$app/environment'
 	import { registerServiceWorker } from '$lib/notification/client'
 	import { onMount } from 'svelte'
+	import { appGet } from '$utils/client'
 
 	export let data: PageData
 
@@ -15,7 +16,7 @@
 	let newPosts: PageData['posts'] = []
 
 	async function fetchData() {
-		const response = await fetch(`?page=${page}`)
+		const response = await appGet(`?page=${page}`)
 		const postsDate = await response.json()
 		newPosts = [...newPosts, ...postsDate]
 		page++

@@ -3,12 +3,13 @@
 	import { locale } from '$i18n/i18n-svelte'
 	import type { Tag } from '@prisma/client'
 	import { LL } from '$i18n/i18n-svelte'
+	import { appGet } from '$utils/client'
 	let q = ''
 	let tags: Tag[] = []
 
 	const fetchSuggest = async () => {
-		q = q.replaceAll(/\W/g, '')
-		const res = await fetch(`/${$locale}/search/tag?q=${q}`)
+		q = q.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '')
+		const res = await appGet(`/${$locale}/search/tag?q=${q}`)
 		tags = await res.json()
 	}
 </script>

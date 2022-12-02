@@ -1,7 +1,7 @@
 <script lang="ts">
 	import PostCard from '$components/PostCard.svelte'
 	import type { PageData } from './$types'
-	import { LL } from '$i18n/i18n-svelte'
+	import { LL, locale } from '$i18n/i18n-svelte'
 	import { fade } from 'svelte/transition'
 	import { authLoading, showLoginModal, user } from '$stores/auth'
 	import { handleHideLoginModal } from '$utils/client'
@@ -23,9 +23,15 @@
 	{#if data.collections}
 		{#each data.collections as collection (collection.name)}
 			<div class="mb-12">
-				<h2 class="text-xl font-bold">{collection.name}</h2>
+				<a
+					class="text-xl font-bold link link-hover"
+					href={`/${$locale}/collections/${collection.id}`}
+				>
+					{collection.name}
+				</a>
+
 				<p>{collection.postIDs.length} {$LL.posts()}</p>
-				<div class="p-1 space-x-4 rounded-box">
+				<div class="carousel p-1 space-x-4 rounded-box">
 					{#each collection.posts as post (post.id)}
 						<div class="carousel-item rounded-box bg-base-100">
 							<PostCard {post} />

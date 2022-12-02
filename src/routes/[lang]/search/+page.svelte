@@ -5,13 +5,14 @@
 	import Post from '$ui/Post.svelte'
 	import InfiniteScroll from '$components/InfiniteScroll.svelte'
 	import { page as appPage } from '$app/stores'
+	import { appGet } from '$utils/client'
 
 	export let data: PageData
 	let page = 0
 	let newPosts: PageData['posts'] = []
 
 	async function fetchData() {
-		const response = await fetch(`${$appPage.url.search}&page=${page}`)
+		const response = await appGet(`${$appPage.url.search}&page=${page}`)
 		const postsDate = await response.json()
 		newPosts = [...newPosts, ...postsDate]
 		page++

@@ -57,20 +57,20 @@
 	<div class="flex flex-wrap justify-center sm:justify-start items-end ml-[5%] -mt-10">
 		<div class="avatar">
 			<div class="w-48 rounded-full">
-				<img src={data.user?.photoURL} alt="user avatar" />
+				<img src={data.user.photoURL} alt="user avatar" />
 			</div>
 		</div>
 
 		<div class="flex flex-col ml-4 mb-5">
 			<h2 class="text-2xl">
-				{data.user?.displayName}
+				{data.user.displayName}
 			</h2>
 			<a class="link link-hover" href={`${$page.params.uid}/followers`}>
-				{$LL.nFollowers({ nrOfFollowers: data.user?.followedByIDs.length })}
+				{$LL.nFollowers({ nrOfFollowers: data.user.followedByIDs.length })}
 			</a>
 
 			<a class="link link-hover" href={`${$page.params.uid}/following`}>
-				{data.user?.followingIDs.length}
+				{data.user.followingIDs.length}
 				{$LL.following()}
 			</a>
 
@@ -114,10 +114,12 @@
 		<h3 class="text-xl">
 			{$LL.collection()}
 		</h3>
-		{#if data.user?.collections}
-			{#each data.user?.collections as collection (collection.id)}
-				<CollectionCard {collection} />
-			{/each}
+		{#if data.user.collections}
+			<div class="flex gap-2 justify-evenly">
+				{#each data.user.collections as collection (collection.id)}
+					<CollectionCard {collection} />
+				{/each}
+			</div>
 		{/if}
 	</div>
 </div>

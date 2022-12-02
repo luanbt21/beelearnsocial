@@ -1,3 +1,4 @@
+import { postInclude } from '$lib/constant'
 import { prisma } from '$lib/prisma'
 import type { Option, Post, Prisma, Tag, User } from '@prisma/client'
 
@@ -19,15 +20,7 @@ export const getPost = async (id: string) => {
 		where: {
 			id,
 		},
-		include: {
-			author: true,
-			tags: true,
-			reactions: {
-				select: {
-					userId: true,
-				},
-			},
-		},
+		include: postInclude,
 	})
 }
 
@@ -47,15 +40,7 @@ export const getPosts = async ({
 		orderBy: {
 			createdAt: 'desc',
 		},
-		include: {
-			author: true,
-			tags: true,
-			reactions: {
-				select: {
-					userId: true,
-				},
-			},
-		},
+		include: postInclude,
 	})
 }
 

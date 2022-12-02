@@ -16,8 +16,8 @@
 
 	async function fetchData() {
 		const response = await fetch(`?page=${page}`)
-		const data = await response.json()
-		newPosts = [...newPosts, ...data]
+		const postsDate = await response.json()
+		newPosts = [...newPosts, ...postsDate]
 		page++
 	}
 

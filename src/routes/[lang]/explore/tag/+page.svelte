@@ -7,14 +7,16 @@
 	export let data: PageData
 
 	let page = 0
-	let newPost: PageData['posts'] = []
+	let newPosts: PageData['posts'] = []
 
 	async function fetchData() {
 		const response = await fetch(`?page=${page}&name=${data.tagName}`)
-		newPost = await response.json()
+		const postsData = await response.json()
+		newPosts = [...newPosts, ...postsData]
+		page++
 	}
 
-	$: posts = [...data.posts, ...newPost]
+	$: posts = [...data.posts, ...newPosts]
 </script>
 
 <svelte:head>
@@ -24,11 +26,5 @@
 	{#each posts as post (post.id)}
 		<Post {post} />
 	{/each}
-	<InfiniteScroll
-		threshold={100}
-		on:loadMore={() => {
-			page++
-			fetchData()
-		}}
-	/>
+	<InfiniteScroll threshold={100} on:loadMore={fetchData} />
 </div>

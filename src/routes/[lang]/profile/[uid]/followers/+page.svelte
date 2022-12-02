@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition'
 	import type { PageData } from './$types'
-	import { getUserId } from '$utils'
+	import { getUserId } from '$utils/client'
 	import UserCard from '$ui/UserCard.svelte'
 	import { user } from '$stores/auth'
 	import LL from '$i18n/i18n-svelte'

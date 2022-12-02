@@ -1,5 +1,4 @@
 import { json, type RequestHandler } from '@sveltejs/kit'
-import { getPosts } from '$lib/db/post'
 import { loadPosts } from './service'
 
 export const GET: RequestHandler = async ({ url, locals }) => {

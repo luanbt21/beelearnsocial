@@ -65,6 +65,7 @@ Table User {
   uid String [unique, not null]
   displayName String [not null]
   photoURL String
+  coverImageURL String
   introduction String
   locale Locale
   posts Post [not null]

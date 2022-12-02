@@ -114,7 +114,7 @@
 			</label>
 		</div>
 		<div tabindex="0" class="dropdown-content p-2 shadow bg-base-100 rounded-box mt-4">
-			<a class="btn rounded btn-error" on:click={stop}>{$LL.stop()}</a>
+			<a class="btn rounded btn-error" on:click={stop} on:keydown={stop}>{$LL.stop()}</a>
 		</div>
 	</div>
 {/if}

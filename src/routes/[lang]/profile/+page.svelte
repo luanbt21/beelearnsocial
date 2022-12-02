@@ -3,7 +3,7 @@
 	import { user, authLoading, showLoginModal } from '$stores/auth'
 	import { locale } from '$i18n/i18n-svelte'
 	import type { User } from 'firebase/auth'
-	import { handleHideLoginModal } from '$utils'
+	import { handleHideLoginModal } from '$utils/client'
 
 	$: if (!$authLoading) {
 		$showLoginModal = true

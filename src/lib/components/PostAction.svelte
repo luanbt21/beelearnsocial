@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms'
-	import LL, { locale } from '$i18n/i18n-svelte'
+	import { locale } from '$i18n/i18n-svelte'
 	import { showLoginModal, user } from '$stores/auth'
 	import type { LocalizedString } from 'typesafe-i18n'
 

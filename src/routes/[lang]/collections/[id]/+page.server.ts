@@ -10,8 +10,13 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 	const collection = await prisma.collection.findFirst({
 		where: { id: params.id },
 		select: {
-			userId: true,
 			name: true,
+			user: {
+				select: {
+					displayName: true,
+					uid: true,
+				},
+			},
 			posts: {
 				include: postInclude,
 			},
@@ -26,5 +31,5 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 			repeating: await isRepeating({ userId: locals.user?.id, postId: post.id }),
 		})),
 	)
-	return { name: collection.name, posts }
+	return { ...collection, posts }
 }

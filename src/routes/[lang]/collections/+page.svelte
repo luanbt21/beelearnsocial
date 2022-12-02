@@ -23,10 +23,7 @@
 	{#if data.collections}
 		{#each data.collections as collection (collection.name)}
 			<div class="mb-12">
-				<a
-					class="text-xl font-bold link link-hover"
-					href={`/${$locale}/collections/${collection.id}`}
-				>
+				<a class="text-xl font-bold link link-hover" href="/{$locale}/collections/{collection.id}">
 					{collection.name}
 				</a>
 

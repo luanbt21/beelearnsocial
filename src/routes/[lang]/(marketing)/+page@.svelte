@@ -42,7 +42,7 @@
 					learning, spaced repetiton,.....
 				</p>
 				<a
-					href={`${$locale}/feed`}
+					href="{$locale}/feed"
 					class="btn inline-flex justify-center items-center py-3 px-5 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900 co"
 				>
 					Bắt đầu
@@ -292,7 +292,7 @@
 					Ấn nút bắt đầu và chúng mình sẽ dẫn bạn vào hành trình học tập mới!
 				</p>
 				<a
-					href={`${$locale}/feed`}
+					href="{$locale}/feed"
 					class="text-white btn bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
 				>
 					bắt đầu ngay

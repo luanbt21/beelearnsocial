@@ -23,7 +23,7 @@
 				</svg>
 			</label>
 		</div>
-		<a href={`/${$locale}`}>
+		<a href="/{$locale}">
 			<div class="flex flex-1 mx-1">
 				<img class="mr-2 w-7 md:w-auto" src="/logo.svg" alt="" />
 				<div class="hidden lg:block">

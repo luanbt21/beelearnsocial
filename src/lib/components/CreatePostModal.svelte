@@ -134,7 +134,7 @@
 								<div class="tooltip" data-tip={item.dataTip()}>
 									<label class="btn btn-ghost btn-square btn-sm" tabindex="0">
 										<svg class="remix w-full h-full fill-current">
-											<use href={`${remixiconUrl}#ri-${item.icon}`} />
+											<use href="{remixiconUrl}#ri-${item.icon}" />
 										</svg>
 										{media?.[item.name] ? media[item.name]?.length : ''}
 										<input
@@ -156,7 +156,7 @@
 									on:click={() => (addQuestion = true)}
 								>
 									<svg class="remix w-full h-full fill-current">
-										<use href={`${remixiconUrl}#ri-checkbox-multiple-fill`} />
+										<use href="{remixiconUrl}#ri-checkbox-multiple-fill" />
 									</svg>
 								</button>
 							</div>

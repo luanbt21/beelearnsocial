@@ -7,7 +7,7 @@
 </script>
 
 <div class="card card-compact w-80 shadow">
-	<a href={`/${$locale}/explore/post?id=${post.id}`}>
+	<a href="/{$locale}/explore/post?id={post.id}">
 		<figure class="h-60 bg-base-200">
 			{#if post.images.length}
 				<img class="object-cover w-full h-full" src={post.images[0]} alt="post" />
@@ -20,11 +20,11 @@
 		</figure>
 	</a>
 	<div class="card-body">
-		<a class="link link-hover" href={`/${$locale}/explore/post?id=${post.id}`}>
+		<a class="link link-hover" href="/{$locale}/explore/post?id={post.id}">
 			<h2 class="card-title">{post.title}</h2>
 		</a>
 		<div class="mt-auto">
-			<a class="link link-hover" href={`/${$locale}/profile/${post.author.uid}`}>
+			<a class="link link-hover" href="/{$locale}/profile/{post.author.uid}">
 				{post.author.displayName}
 			</a>
 			•

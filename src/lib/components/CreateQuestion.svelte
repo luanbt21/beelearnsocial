@@ -108,7 +108,7 @@
 	{#if options.length < 4}
 		<button type="button" class="btn btn-outline btn-sm normal-case mt-4" on:click={addOption}>
 			<svg class="remix w-5 h-5 fill-current">
-				<use href={`${remixiconUrl}#ri-add-fill`} />
+				<use href="{remixiconUrl}#ri-add-fill" />
 			</svg>
 			<i class="ri-add-fill" />
 			{$LL.addOption()}

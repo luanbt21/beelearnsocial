@@ -255,6 +255,10 @@ type RootTranslation = {
 	 * C​r​e​a​t​e
 	 */
 	create: string
+	/**
+	 * B​y
+	 */
+	by: string
 }
 
 export type TranslationFunctions = {
@@ -498,6 +502,10 @@ export type TranslationFunctions = {
 	 * Create
 	 */
 	create: () => LocalizedString
+	/**
+	 * By
+	 */
+	by: () => LocalizedString
 }
 
 export type Formatters = {}

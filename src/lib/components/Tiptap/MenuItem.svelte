@@ -17,7 +17,7 @@
 		{title}
 	>
 		<svg class="remix w-full h-full fill-current">
-			<use href={`${remixiconUrl}#ri-${icon}`} />
+			<use href="{remixiconUrl}#ri-{icon}" />
 		</svg>
 	</button>
 </template>

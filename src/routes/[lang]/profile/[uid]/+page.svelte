@@ -65,17 +65,17 @@
 			<h2 class="text-2xl">
 				{data.user.displayName}
 			</h2>
-			<a class="link link-hover" href={`${$page.params.uid}/followers`}>
+			<a class="link link-hover" href="{$page.params.uid}/followers">
 				{$LL.nFollowers({ nrOfFollowers: data.user.followedByIDs.length })}
 			</a>
 
-			<a class="link link-hover" href={`${$page.params.uid}/following`}>
+			<a class="link link-hover" href="{$page.params.uid}/following">
 				{data.user.followingIDs.length}
 				{$LL.following()}
 			</a>
 
 			{#if getUserId() === data.user.id}
-				<a class="link link-hover" href={`${$page.params.uid}/hidden-posts`}>Hidden posts</a>
+				<a class="link link-hover" href="{$page.params.uid}/hidden-posts">Hidden posts</a>
 			{/if}
 		</div>
 	</div>

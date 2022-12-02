@@ -61,6 +61,7 @@ const en: Translation = {
 	newCollection: 'New collection',
 	done: 'Done',
 	create: 'Create',
+	by: 'By',
 }
 
 export default en

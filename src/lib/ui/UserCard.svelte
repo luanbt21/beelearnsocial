@@ -12,7 +12,7 @@
 <div
 	class="card card-compact shadow-xl text-center transition duration-200 transform border border-transparent hover:border-current bg-base-100"
 >
-	<a href={`/${$locale}/profile/${user.uid}`}>
+	<a href="/{$locale}/profile/{user.uid}">
 		<figure class="pt-10">
 			<div class="avatar">
 				<div class="w-24 rounded-full">
@@ -22,7 +22,7 @@
 		</figure>
 	</a>
 	<div class="card-body items-center text-center">
-		<a href={`/${$locale}/profile/${user.uid}`} class="link link-hover">
+		<a href="/{$locale}/profile/{user.uid}" class="link link-hover">
 			<h2 class="card-title">{user.displayName}</h2>
 		</a>
 		{#if user.introduction}

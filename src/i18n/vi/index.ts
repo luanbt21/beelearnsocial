@@ -23,7 +23,6 @@ const vi: BaseTranslation = {
 	strike: 'gạch ngang',
 	save: 'Lưu',
 	unsave: 'Bỏ lưu',
-
 	hide: 'Ẩn',
 	startAPost: 'Tạo bài đăng',
 	words: 'từ',
@@ -62,6 +61,7 @@ const vi: BaseTranslation = {
 	newCollection: 'Bộ sưu tập mới',
 	done: 'Xong',
 	create: 'Tạo',
+	by: 'Bởi'
 }
 
 export default vi

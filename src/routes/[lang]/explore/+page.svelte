@@ -11,11 +11,11 @@
 	<title>Explore</title>
 </svelte:head>
 <div in:fade class="p-4">
-	{#each data.tags as tag (tag?.name)}
+	{#each data.tags as tag (tag.name)}
 		{#if tag}
 			<div class="pb-10 mb-10 border-b-2">
 				<div class="flex justify-between">
-					<h2 class="text-xl">#{tag?.name}</h2>
+					<h2 class="text-xl">#{tag.name}</h2>
 					<a class="link" href={`/${$locale}/explore/tag?name=${tag.name}`}>{$LL.seeMore()}</a>
 				</div>
 				<div class="carousel p-1 space-x-4 rounded-box">

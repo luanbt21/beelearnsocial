@@ -1,3 +1,4 @@
+import { postInclude } from '$lib/constant'
 import { prisma } from '$lib/prisma'
 import type { PageServerLoad } from './$types'
 
@@ -13,15 +14,7 @@ export const load: PageServerLoad = async ({ params }) => {
 				},
 			},
 		},
-		include: {
-			author: true,
-			tags: true,
-			reactions: {
-				select: {
-					userId: true,
-				},
-			},
-		},
+		include: postInclude,
 	})
 	return { posts: posts.map((post) => ({ ...post, repeating: true })) }
 }

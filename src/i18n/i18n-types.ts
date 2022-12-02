@@ -100,6 +100,10 @@ type RootTranslation = {
 	 */
 	save: string
 	/**
+	 * U​n​s​a​v​e
+	 */
+	unsave: string
+	/**
 	 * H​i​d​e
 	 */
 	hide: string
@@ -231,6 +235,26 @@ type RootTranslation = {
 	 * T​h​e​ ​r​e​a​s​o​n​ ​y​o​u​ ​w​a​n​t​ ​t​o​ ​r​e​p​o​r​t​ ​t​h​i​s​ ​p​o​s​t
 	 */
 	theReasonYouWantToReportThisPost: string
+	/**
+	 * S​a​v​e​ ​t​o
+	 */
+	saveTo: string
+	/**
+	 * S​a​v​e​d​ ​t​o
+	 */
+	savedTo: string
+	/**
+	 * N​e​w​ ​c​o​l​l​e​c​t​i​o​n
+	 */
+	newCollection: string
+	/**
+	 * D​o​n​e
+	 */
+	done: string
+	/**
+	 * C​r​e​a​t​e
+	 */
+	create: string
 }
 
 export type TranslationFunctions = {
@@ -318,6 +342,10 @@ export type TranslationFunctions = {
 	 * Save
 	 */
 	save: () => LocalizedString
+	/**
+	 * Unsave
+	 */
+	unsave: () => LocalizedString
 	/**
 	 * Hide
 	 */
@@ -450,6 +478,26 @@ export type TranslationFunctions = {
 	 * The reason you want to report this post
 	 */
 	theReasonYouWantToReportThisPost: () => LocalizedString
+	/**
+	 * Save to
+	 */
+	saveTo: () => LocalizedString
+	/**
+	 * Saved to
+	 */
+	savedTo: () => LocalizedString
+	/**
+	 * New collection
+	 */
+	newCollection: () => LocalizedString
+	/**
+	 * Done
+	 */
+	done: () => LocalizedString
+	/**
+	 * Create
+	 */
+	create: () => LocalizedString
 }
 
 export type Formatters = {}

@@ -22,6 +22,7 @@ const en: Translation = {
 	italic: 'italic',
 	strike: 'strike',
 	save: 'Save',
+	unsave: 'Unsave',
 	hide: 'Hide',
 	startAPost: 'Start a post',
 	words: 'words',
@@ -55,6 +56,11 @@ const en: Translation = {
 	delete: 'Delete',
 	report: 'Report',
 	theReasonYouWantToReportThisPost: 'The reason you want to report this post',
+	saveTo: 'Save to',
+	savedTo: 'Saved to',
+	newCollection: 'New collection',
+	done: 'Done',
+	create: 'Create',
 }
 
 export default en

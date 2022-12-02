@@ -9,6 +9,7 @@
 	import PostAction from '$components/PostAction.svelte'
 	import { getUserId } from '$utils/client'
 	import { showLoginModal, user } from '$stores/auth'
+	import AddCollection from '$components/AddCollection.svelte'
 
 	export let post: Post & {
 		repeating: boolean
@@ -21,6 +22,7 @@
 	export let showComments = false
 
 	let showReportModal = false
+	let addToCollection = false
 </script>
 
 <div class="mx-auto mb-4 px-4 py-6 overflow-hidden card shadow-md bg-base-100">
@@ -53,7 +55,9 @@
 			<label tabindex="0" class="p-1 font-bold text-lg">&vellip;</label>
 			<ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-200 rounded-box gap-1">
 				<li>
-					<a class="link-success">{$LL.save()}</a>
+					<button on:click={() => (addToCollection = true)} class="link-success">
+						{$LL.save()}
+					</button>
 				</li>
 				{#if post.authorId !== getUserId()}
 					<button
@@ -74,6 +78,10 @@
 			</ul>
 		</div>
 	</div>
+	{addToCollection}
+	{#if addToCollection}
+		<AddCollection postId={post.id} destroy={() => (addToCollection = false)} />
+	{/if}
 
 	<div class=" mb-2">
 		{#each post.tags as tag}

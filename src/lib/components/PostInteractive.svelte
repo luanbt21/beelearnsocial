@@ -4,7 +4,7 @@
 	import { locale } from '$i18n/i18n-svelte'
 	import { toast } from '@zerodevx/svelte-toast'
 	import PostComments from './PostComments.svelte'
-	import { getUserId } from '$utils/client'
+	import { appPost, getUserId } from '$utils/client'
 	import { enhance } from '$app/forms'
 	import { user, showLoginModal } from '$stores/auth'
 
@@ -29,13 +29,7 @@
 		try {
 			btn.disabled = true
 			btn.classList.add('loading')
-			const res = await fetch(`/api/post/repeat`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ postId }),
-			})
+			const res = await appPost(`/api/post/repeat`, { postId })
 			if (res.ok) {
 				btn.classList.add('hidden')
 			} else if (res.status === 401) {

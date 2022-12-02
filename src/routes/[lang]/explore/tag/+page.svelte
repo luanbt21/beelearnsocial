@@ -3,6 +3,7 @@
 	import Post from '$ui/Post.svelte'
 	import InfiniteScroll from '$components/InfiniteScroll.svelte'
 	import { fade } from 'svelte/transition'
+	import { appGet } from '$utils/client'
 
 	export let data: PageData
 
@@ -10,7 +11,7 @@
 	let newPosts: PageData['posts'] = []
 
 	async function fetchData() {
-		const response = await fetch(`?page=${page}&name=${data.tagName}`)
+		const response = await appGet(`?page=${page}&name=${data.tagName}`)
 		const postsData = await response.json()
 		newPosts = [...newPosts, ...postsData]
 		page++

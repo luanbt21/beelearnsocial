@@ -78,12 +78,11 @@
 			</ul>
 		</div>
 	</div>
-	{addToCollection}
 	{#if addToCollection}
 		<AddCollection postId={post.id} destroy={() => (addToCollection = false)} />
 	{/if}
 
-	<div class=" mb-2">
+	<div class="mb-2">
 		{#each post.tags as tag}
 			<Hashtag {tag} />
 		{/each}

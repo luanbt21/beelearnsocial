@@ -12,7 +12,7 @@
 
 <form
 	method="POST"
-	action={`/${$locale}/post?/${action}`}
+	action="/{$locale}/post?/{action}"
 	use:enhance={({ cancel }) => {
 		if (!$user) {
 			$showLoginModal = true

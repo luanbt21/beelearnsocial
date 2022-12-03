@@ -108,7 +108,7 @@
 				<form
 					id="create-post-form"
 					class="flex flex-col gap-y-2"
-					action={`/${$locale}/post?/create`}
+					action="/{$locale}/post?/create"
 					method="POST"
 					enctype="multipart/form-data"
 				>
@@ -134,7 +134,7 @@
 								<div class="tooltip" data-tip={item.dataTip()}>
 									<label class="btn btn-ghost btn-square btn-sm" tabindex="0">
 										<svg class="remix w-full h-full fill-current">
-											<use href="{remixiconUrl}#ri-${item.icon}" />
+											<use href="{remixiconUrl}#ri-{item.icon}" />
 										</svg>
 										{media?.[item.name] ? media[item.name]?.length : ''}
 										<input

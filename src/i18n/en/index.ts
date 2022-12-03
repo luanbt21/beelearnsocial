@@ -62,6 +62,7 @@ const en: Translation = {
 	done: 'Done',
 	create: 'Create',
 	by: 'By',
+	update: 'Update',
 }
 
 export default en

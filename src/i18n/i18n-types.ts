@@ -263,6 +263,19 @@ type RootTranslation = {
 	 * U​p​d​a​t​e
 	 */
 	update: string
+	/**
+	 * m​i​n​u​t​e​s
+	 */
+	minutes: string
+	/**
+	 * S​o​m​e​t​h​i​n​g​ ​w​e​n​t​ ​w​r​o​n​g
+	 */
+	somethingWentWrong: string
+	/**
+	 * F​a​i​l​e​d​ ​t​o​ ​{​s​t​}
+	 * @param {string} st
+	 */
+	failedTo: RequiredParams<'st'>
 }
 
 export type TranslationFunctions = {
@@ -514,6 +527,18 @@ export type TranslationFunctions = {
 	 * Update
 	 */
 	update: () => LocalizedString
+	/**
+	 * minutes
+	 */
+	minutes: () => LocalizedString
+	/**
+	 * Something went wrong
+	 */
+	somethingWentWrong: () => LocalizedString
+	/**
+	 * Failed to {st}
+	 */
+	failedTo: (arg: { st: string }) => LocalizedString
 }
 
 export type Formatters = {}

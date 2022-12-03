@@ -115,7 +115,9 @@
 			{$LL.collection()}
 		</h3>
 		{#if data.user.collections}
-			<div class="flex gap-2 justify-evenly">
+			<div
+				class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-2 "
+			>
 				{#each data.user.collections as collection (collection.id)}
 					<CollectionCard {collection} />
 				{/each}

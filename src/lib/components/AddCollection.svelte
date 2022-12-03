@@ -18,7 +18,7 @@
 	onMount(async () => {
 		const res = await appGet('/api/collections')
 		if (!res.ok) {
-			toastError('Failed')
+			toastError()
 			destroy()
 		}
 		collections = await res.json()
@@ -33,7 +33,7 @@
 				newCollectionName,
 			})
 			if (!res.ok) {
-				toastError('Failed')
+				toastError($LL.failedTo({ st: $LL.save() }))
 				return
 			}
 			const data = (await res.json()) as { id: string; name: string }

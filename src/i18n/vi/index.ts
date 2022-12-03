@@ -1,6 +1,6 @@
-import type { BaseTranslation } from '../i18n-types'
+import type { Translations } from '../i18n-types'
 
-const vi: BaseTranslation = {
+const vi: Translations = {
 	profile: 'Hồ sơ',
 	nFollowers: '{nrOfFollowers} người theo dõi',
 	followers: 'người theo dõi',
@@ -63,6 +63,9 @@ const vi: BaseTranslation = {
 	create: 'Tạo',
 	by: 'Bởi',
 	update: 'Cập nhật',
+	minutes: 'số phút',
+	somethingWentWrong: 'Đã xảy ra sự cố',
+	failedTo: '{st} thất bại',
 }
 
 export default vi

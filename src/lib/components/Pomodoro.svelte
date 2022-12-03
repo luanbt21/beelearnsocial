@@ -1,20 +1,25 @@
 <script lang="ts">
 	import { browser } from '$app/environment'
 	import LL from '$i18n/i18n-svelte'
+	import alarmURL from '$lib/assets/alarm.mp3'
 
 	let isCounting = false
 
-	let minuteInput: number | null = null
+	let minuteInput: number | null = 25
 	const min = 0
 	const max = 99
-	$: {
-		minuteInput = minuteInput ? (minuteInput = (minuteInput + max + 1) % (max + 1)) : null
+
+	$: if (minuteInput) {
+		if (minuteInput % 100 === 0) minuteInput = null
+		else minuteInput = Math.abs(minuteInput % 100)
 	}
 
 	let minute: number
 	let second: number
 	let percent: number
-	let showCongratulation = false
+	let showCongratulation: boolean
+
+	if (browser) showCongratulation = localStorage.getItem('showCongratulation') === 'true'
 
 	$: if (browser) {
 		localStorage.setItem('showCongratulation', showCongratulation.toString())
@@ -49,11 +54,11 @@
 			minute = Math.floor(remaining / (60 * 1000))
 			second = Math.floor(remaining / 1000) % 60
 			if (second === 0 && minute === 0) {
-				stop()
 				showCongratulation = true
-				return
+				new Audio(alarmURL).play()
+				stop()
 			}
-		}, 100)
+		}, 150)
 	}
 
 	const stop = () => {
@@ -64,12 +69,7 @@
 
 {#if !isCounting}
 	<div class="dropdown">
-		<label
-			tabindex="0"
-			on:focus={() => (minuteInput = 0)}
-			class="btn btn-md btn-ghost btn-square"
-			title="Timer"
-		>
+		<label tabindex="0" class="btn btn-md btn-ghost btn-square" title="Timer">
 			<img class="w-5 md:w-6" src="/timer-icon.svg" />
 		</label>
 		<div
@@ -89,6 +89,7 @@
 					class="input input-bordered text-xl w-full max-w-xs text-center"
 					{min}
 					{max}
+					placeholder={$LL.minutes()}
 					bind:value={minuteInput}
 				/>
 				<button
@@ -108,9 +109,13 @@
 			<label
 				tabindex="0"
 				class="radial-progress text-primary cursor-pointer"
-				style="--value:{percent}; --size:3rem;"
+				style="--value:{percent}; --size:3rem; --thickness: 2px;"
 			>
-				{minute}:{second}
+				<span class="countdown font-mono text-sm">
+					<span style="--value:{minute};" />
+					:
+					<span style="--value:{second};" />
+				</span>
 			</label>
 		</div>
 		<div tabindex="0" class="dropdown-content p-2 shadow bg-base-100 rounded-box mt-4">

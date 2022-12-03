@@ -1,6 +1,6 @@
 import { browser } from '$app/environment'
 import { goto } from '$app/navigation'
-import { locale } from '$i18n/i18n-svelte'
+import { locale, LL } from '$i18n/i18n-svelte'
 import { toast, type SvelteToastOptions } from '@zerodevx/svelte-toast'
 import { getAuth, type User } from 'firebase/auth'
 
@@ -34,13 +34,23 @@ export const toastSuccess = (msg: string, options?: SvelteToastOptions) => {
 	})
 }
 
-export const toastError = (msg: string, options?: SvelteToastOptions) => {
+export const toastError = (msg?: string, options?: SvelteToastOptions) => {
+	const theme = {
+		'--toastColor': 'mintcream',
+		'--toastBackground': 'rgba(248,114,114,0.9)',
+		'--toastBarBackground': '#2F855A',
+	}
+	if (!msg) {
+		LL.subscribe(({ somethingWentWrong }) => {
+			toast.push(somethingWentWrong(), {
+				theme,
+				...options,
+			})
+		})
+		return
+	}
 	toast.push(msg, {
-		theme: {
-			'--toastColor': 'mintcream',
-			'--toastBackground': 'rgba(248,114,114,0.9)',
-			'--toastBarBackground': '#2F855A',
-		},
+		theme,
 		...options,
 	})
 }

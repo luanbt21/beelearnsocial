@@ -1,6 +1,6 @@
-import type { Translation } from '../i18n-types'
+import type { BaseTranslation } from '../i18n-types'
 
-const en: Translation = {
+const en: BaseTranslation = {
 	profile: 'Profile',
 	nFollowers: '{nrOfFollowers} follower{{s}}',
 	followers: 'followers',
@@ -63,6 +63,9 @@ const en: Translation = {
 	create: 'Create',
 	by: 'By',
 	update: 'Update',
+	minutes: 'minutes',
+	somethingWentWrong: 'Something went wrong',
+	failedTo: 'Failed to {st:string}',
 }
 
 export default en

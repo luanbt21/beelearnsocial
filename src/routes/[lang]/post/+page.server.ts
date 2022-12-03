@@ -34,10 +34,28 @@ export const actions: Actions = {
 		const params = await verifyId({ locals, request })
 		return await deletePost(params.postId)
 	},
+	update: async ({ locals, request }) => {
+		if (!locals.user) throw error(404)
+		const data = await request.formData()
+
+		const validatedData = validateData(data)
+		const postId = data.get('postId') as string | null
+
+		return await prisma.post.update({
+			where: { id: postId || undefined },
+			data: validatedData,
+			select: {
+				title: true,
+				description: true,
+				options: true,
+			},
+		})
+	},
 	create: async ({ locals, request }) => {
 		if (!locals.user) throw error(404)
 
 		const data = await request.formData()
+		const validatedData = validateData(data)
 
 		interface Media {
 			images: string[]
@@ -50,16 +68,8 @@ export const actions: Actions = {
 			audios: [],
 		}
 		const tags: string[] = []
-		const options: { value: string; type: number }[] = []
-		const rightOption = data.get('rightOption')
 
 		for (const [k, v] of data.entries()) {
-			if (k === 'option') {
-				const value = v as string
-				const type = v === rightOption ? 1 : 0
-				options.push({ value, type })
-				continue
-			}
 			if (k === 'tag') {
 				tags.push(v as string)
 				continue
@@ -72,31 +82,47 @@ export const actions: Actions = {
 
 		const post = await prisma.post.create({
 			data: {
-				title: data.get('title') as string,
-				description: data.get('description') as string,
-				author: {
-					connect: {
-						id: locals.user.id,
-					},
-				},
+				...validatedData,
+				author: { connect: { id: locals.user.id } },
 				tags: {
-					connectOrCreate: tags.map((name) => {
-						return {
-							where: {
-								name,
-							},
-							create: {
-								name,
-								description: '',
-							},
-						}
-					}),
+					connectOrCreate: tags.map((name) => ({
+						where: { name },
+						create: { name, description: '' },
+					})),
 				},
 				...media,
-				options,
 			},
 		})
 
 		throw redirect(307, `/${locals.locale}/explore/post?id=${post.id}`)
 	},
+}
+
+const validateData = (data: FormData) => {
+	const title = data.get('title') as string | null
+	if (!title) throw error(400, 'Title is empty')
+
+	const description = data.get('description') as string | null
+	if (!description) throw error(400, 'Description is empty')
+
+	const options: { value: string; type: number }[] = []
+	const rightOption = data.get('rightOption') as string | null
+
+	for (const [k, v] of data.entries()) {
+		if (k === 'option') {
+			const value = v as string
+			const type = value === rightOption ? 1 : 0
+			options.push({ value, type })
+			continue
+		}
+	}
+	if (options.length === 1 || (options.length > 1 && !rightOption)) {
+		throw error(400, 'Your question is not ok')
+	}
+
+	return {
+		title,
+		description,
+		options,
+	}
 }

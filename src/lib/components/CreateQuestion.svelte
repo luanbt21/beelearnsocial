@@ -1,62 +1,51 @@
 <script lang="ts">
 	import remixiconUrl from 'remixicon/fonts/remixicon.symbol.svg'
 	import { LL } from '$i18n/i18n-svelte'
+	import type { Option } from '@prisma/client'
 
 	export let isQuestionOk: boolean
+	export let options: Option[] | null = null
 
-	let rightOption: string
-	let options: { id: string; value: string; isDuplicated: boolean }[] = [
-		{
-			id: crypto.randomUUID(),
-			value: '',
-			isDuplicated: false,
-		},
-		{
-			id: crypto.randomUUID(),
-			value: '',
-			isDuplicated: false,
-		},
-	]
+	let rightOption: string | undefined = options?.find(({ type }) => !!type)?.value
+
+	const initOption = (value = '') => ({ id: crypto.randomUUID(), value, isDuplicated: false })
+
+	let optionsInput: { id: string; value: string; isDuplicated: boolean }[] = options?.length
+		? options.map(({ value }) => initOption(value))
+		: [initOption(), initOption()]
 
 	$: isQuestionOk =
-		options.length > 0 &&
-		!options.some((option) => !option.value || option.isDuplicated) &&
+		optionsInput.length > 0 &&
+		!optionsInput.some((option) => !option.value || option.isDuplicated) &&
 		!!rightOption
 
 	const addOption = () => {
-		options = [
-			...options,
-			{
-				id: crypto.randomUUID(),
-				value: '',
-				isDuplicated: false,
-			},
-		]
+		optionsInput = [...optionsInput, initOption()]
 	}
 
 	let id: number
 	const checkDuplicate = () => {
 		if (id) clearTimeout(id)
 		id = window.setTimeout(() => {
-			out: for (let i = 0; i < options.length; i++) {
+			out: for (let i = 0; i < optionsInput.length; i++) {
 				let isDuplicated = false
-				for (let j = 0; j < options.length; j++) {
+				for (let j = 0; j < optionsInput.length; j++) {
 					if (i === j) continue
-					if (options[j].value === '') continue
-					if (options[i].value === options[j].value) {
-						options[i].isDuplicated = true
-						options[j].isDuplicated = true
+					if (optionsInput[j].value === '') continue
+					if (optionsInput[i].value === optionsInput[j].value) {
+						optionsInput[i].isDuplicated = true
+						optionsInput[j].isDuplicated = true
 						continue out
 					}
 				}
-				options[i].isDuplicated = isDuplicated
+				optionsInput[i].isDuplicated = isDuplicated
 			}
 		}, 100)
 	}
 </script>
 
 <div class="flex flex-col gap-y-2">
-	{#each options as option, i (option.id)}
+	{#each optionsInput as option, i (option.id)}
 		<div class="form-control">
 			<div class="flex gap-x-2 items-end">
 				<div class="w-full">
@@ -70,7 +59,7 @@
 								type="button"
 								class="btn btn-ghost btn-sm normal-case"
 								on:click={() => {
-									options = options.filter((o) => o.id !== option.id)
+									optionsInput = optionsInput.filter((o) => o.id !== option.id)
 								}}
 							>
 								{$LL.remove()}
@@ -105,7 +94,7 @@
 			</div>
 		</div>
 	{/each}
-	{#if options.length < 4}
+	{#if optionsInput.length < 4}
 		<button type="button" class="btn btn-outline btn-sm normal-case mt-4" on:click={addOption}>
 			<svg class="remix w-5 h-5 fill-current">
 				<use href="{remixiconUrl}#ri-add-fill" />

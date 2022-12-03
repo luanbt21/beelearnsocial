@@ -22,7 +22,7 @@
 		<slot />
 		<input
 			type="checkbox"
-			id="create-post-modal"
+			id={CreatePostModalId}
 			class="modal-toggle"
 			bind:checked={$showCreatePostModal}
 		/>

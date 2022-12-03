@@ -10,6 +10,7 @@
 	import { getUserId } from '$utils/client'
 	import { showLoginModal, user } from '$stores/auth'
 	import AddCollection from '$components/AddCollection.svelte'
+	import UpdatePostModal from '$components/UpdatePostModal.svelte'
 
 	export let post: Post & {
 		repeating: boolean
@@ -23,6 +24,11 @@
 
 	let showReportModal = false
 	let addToCollection = false
+	let updatePost = false
+
+	const updateUI = (data: Pick<Post, 'title' | 'description' | 'options'>) => {
+		post = { ...post, ...data }
+	}
 </script>
 
 <div class="mx-auto mb-4 px-4 py-6 overflow-hidden card shadow-md bg-base-100">
@@ -51,35 +57,48 @@
 			</div>
 		</div>
 
-		<div class="dropdown dropdown-end">
-			<label tabindex="0" class="p-1 font-bold text-lg">&vellip;</label>
-			<ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-200 rounded-box gap-1">
+		<div class="dropdown dropdown-end dropdown-hover">
+			<label tabindex="0" class="btn btn-ghost font-bold text-lg">&vellip;</label>
+			<ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-200 rounded-box w-28 gap-1">
 				<li>
-					<button on:click={() => (addToCollection = true)} class="link-success">
+					<button on:click={() => (addToCollection = true)} class="btn btn-ghost normal-case">
 						{$LL.save()}
 					</button>
 				</li>
 				{#if post.authorId !== getUserId()}
 					<button
-						for={`report-${post.id}`}
 						on:click={() => {
 							if (!$user) $showLoginModal = true
 							else showReportModal = true
 						}}
-						class="btn btn-outline btn-warning"
+						class="btn btn-ghost normal-case"
 					>
 						{$LL.report()}
 					</button>
 				{/if}
+				{#if post.authorId === getUserId()}
+					<label for="update-{post.id}" class="btn btn-outline normal-case">{$LL.update()}</label>
+					<!-- <PostAction action="delete" postId={post.id} label={$LL.delete} /> -->
+				{/if}
 				<PostAction action="hide" postId={post.id} label={$LL.hide} />
-				<!-- {#if post.authorId === getUserId()}
-					<PostAction action="delete" postId={post.id} label={$LL.delete} />
-				{/if} -->
 			</ul>
 		</div>
 	</div>
 	{#if addToCollection}
 		<AddCollection postId={post.id} destroy={() => (addToCollection = false)} />
+	{/if}
+	{#if post.authorId === getUserId()}
+		<input type="checkbox" id="update-{post.id}" class="modal-toggle" bind:checked={updatePost} />
+	{/if}
+	{#if updatePost}
+		<UpdatePostModal
+			id="update-{post.id}"
+			postId={post.id}
+			title={post.title}
+			description={post.description}
+			options={post.options}
+			{updateUI}
+		/>
 	{/if}
 
 	<div class="mb-2">
@@ -109,13 +128,13 @@
 	{#if showReportModal}
 		<input
 			type="checkbox"
-			id={`report-${post.id}`}
+			id="report-${post.id}"
 			class="modal-toggle"
 			bind:checked={showReportModal}
 		/>
 		<div class="modal">
 			<div class="modal-box relative">
-				<label for={`report-${post.id}`} class="btn btn-sm btn-circle absolute right-2 top-2">
+				<label for="report-${post.id}" class="btn btn-sm btn-circle absolute right-2 top-2">
 					✕
 				</label>
 				<h3 class="text-lg font-bold">{$LL.report()}</h3>

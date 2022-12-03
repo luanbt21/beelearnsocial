@@ -61,7 +61,8 @@ const vi: BaseTranslation = {
 	newCollection: 'Bộ sưu tập mới',
 	done: 'Xong',
 	create: 'Tạo',
-	by: 'Bởi'
+	by: 'Bởi',
+	update: 'Cập nhật',
 }
 
 export default vi

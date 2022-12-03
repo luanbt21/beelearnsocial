@@ -39,8 +39,8 @@ Table Item {
 
 Table Post {
   id String [pk]
-  title String
-  description String
+  title String [not null]
+  description String [not null]
   audios String[] [not null]
   images String[] [not null]
   videos String[] [not null]

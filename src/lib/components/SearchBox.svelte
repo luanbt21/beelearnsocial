@@ -14,12 +14,7 @@
 	}
 </script>
 
-<form
-	action={`/${$locale}/search`}
-	on:submit|preventDefault={() => {
-		goto(`/${$locale}/search?q=${q}`)
-	}}
->
+<form action="/{$locale}/search">
 	<div class="form-control">
 		<div class="dropdown dropdown-end">
 			<input

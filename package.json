@@ -6,6 +6,7 @@
 		"seed": "node prisma/seed.js"
 	},
 	"scripts": {
+		"genqr": " node genQRCode.mjs",
 		"dev": "concurrently 'vite' 'typesafe-i18n'",
 		"generate": "prisma generate",
 		"prebuild": "prisma generate",
@@ -62,6 +63,7 @@
 		"cookie": "^0.5.0",
 		"daisyui": "^2.42.1",
 		"dayjs": "^1.11.6",
+		"easyqrcodejs-nodejs": "^4.4.5",
 		"eventsource": "^2.0.2",
 		"firebase": "^9.14.0",
 		"firebase-admin": "^11.3.0",

@@ -7,7 +7,7 @@
 
 	export let data: PageData
 
-	let page = 0
+	let page = 1
 	let newPosts: PageData['posts'] = []
 
 	async function fetchData() {

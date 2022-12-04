@@ -10,7 +10,7 @@ export const load: PageServerLoad = async ({ params }) => {
 	})
 	if (!user) throw error(404, 'User not found')
 
-	const levels = await prisma.learnLevel.groupBy({
+	const levels = prisma.learnLevel.groupBy({
 		by: ['level'],
 		where: { userId: user.id },
 		_count: { _all: true },

@@ -8,7 +8,7 @@ const en: BaseTranslation = {
 	introduction: 'Introduction',
 	description: 'Description',
 	collection: 'Collection',
-	posts: 'posts',
+	posts: 'Posts',
 	post: 'Post',
 	check: 'check',
 	reset: 'reset',
@@ -66,6 +66,7 @@ const en: BaseTranslation = {
 	minutes: 'minutes',
 	somethingWentWrong: 'Something went wrong',
 	failedTo: 'Failed to {st:string}',
+	hiddenPosts: 'Hidden posts',
 }
 
 export default en

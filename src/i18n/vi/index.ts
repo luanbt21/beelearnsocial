@@ -8,7 +8,7 @@ const vi: Translations = {
 	introduction: 'Giới thiệu tổng quan',
 	description: 'Mô tả',
 	collection: 'Bộ sưu tập',
-	posts: 'bài đăng',
+	posts: 'Bài đăng',
 	post: 'Đăng',
 	check: 'kiểm tra',
 	reset: 'đặt lại',
@@ -66,6 +66,7 @@ const vi: Translations = {
 	minutes: 'số phút',
 	somethingWentWrong: 'Đã xảy ra sự cố',
 	failedTo: '{st} thất bại',
+	hiddenPosts: 'Bài đăng đã ẩn',
 }
 
 export default vi

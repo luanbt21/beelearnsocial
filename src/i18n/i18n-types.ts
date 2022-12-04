@@ -44,7 +44,7 @@ type RootTranslation = {
 	 */
 	collection: string
 	/**
-	 * p​o​s​t​s
+	 * P​o​s​t​s
 	 */
 	posts: string
 	/**
@@ -276,6 +276,10 @@ type RootTranslation = {
 	 * @param {string} st
 	 */
 	failedTo: RequiredParams<'st'>
+	/**
+	 * H​i​d​d​e​n​ ​p​o​s​t​s
+	 */
+	hiddenPosts: string
 }
 
 export type TranslationFunctions = {
@@ -308,7 +312,7 @@ export type TranslationFunctions = {
 	 */
 	collection: () => LocalizedString
 	/**
-	 * posts
+	 * Posts
 	 */
 	posts: () => LocalizedString
 	/**
@@ -539,6 +543,10 @@ export type TranslationFunctions = {
 	 * Failed to {st}
 	 */
 	failedTo: (arg: { st: string }) => LocalizedString
+	/**
+	 * Hidden posts
+	 */
+	hiddenPosts: () => LocalizedString
 }
 
 export type Formatters = {}

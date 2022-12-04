@@ -5,10 +5,12 @@
 	import BarChart from '$components/BarChart.svelte'
 	import { fade, scale } from 'svelte/transition'
 	import { page } from '$app/stores'
-	import { getUserId } from '$utils/client'
+	import { appGet, getUserId } from '$utils/client'
 	import { user } from '$stores/auth'
 	import { fileListToUrl } from '$utils'
 	import { enhance } from '$app/forms'
+	import InfiniteScroll from '$components/InfiniteScroll.svelte'
+	import Post from '$ui/Post.svelte'
 
 	export let data: PageData
 	const chartData = Array.from({ length: 6 }).fill(0) as number[]
@@ -21,12 +23,30 @@
 	$: previewURL = fileListToUrl(uploadImage)[0]
 
 	let introductionValue = data.user.introduction
+
+	let loadingPost = false
+	let haveMorePost = true
+	let postPage = 0
+	let posts: any[] = []
+
+	async function fetchData() {
+		loadingPost = true
+		const response = await appGet(`?page=${postPage}`)
+		const postsData = await response.json()
+		loadingPost = false
+		if (postsData.length === 0) {
+			haveMorePost = false
+			return
+		}
+		posts = [...posts, ...postsData]
+		postPage++
+	}
 </script>
 
 <svelte:head>
 	<title>{$LL.profile()}: {data.user.displayName}</title>
 </svelte:head>
-<div in:fade class="p-4 bg-base-100">
+<div in:fade class="p-4 bg-base-100 relative top-0 overflow-auto">
 	<div
 		class="card h-72 rounded relative"
 		on:mouseenter={() => (hoverCover = true)}
@@ -75,7 +95,7 @@
 			</a>
 
 			{#if getUserId() === data.user.id}
-				<a class="link link-hover" href="{$page.params.uid}/hidden-posts">Hidden posts</a>
+				<a class="link link-hover" href="{$page.params.uid}/hidden-posts">{$LL.hiddenPosts()}</a>
 			{/if}
 		</div>
 	</div>
@@ -124,4 +144,21 @@
 			</div>
 		{/if}
 	</div>
+
+	<div class="mt-20">
+		{#if posts.length}
+			<h3 class="text-xl px-9">
+				{$LL.posts()}
+			</h3>
+		{/if}
+		{#each posts as post (post.id)}
+			<Post {post} />
+		{/each}
+		{#if loadingPost}
+			<progress class="progress w-full" />
+		{/if}
+	</div>
+	{#if haveMorePost}
+		<InfiniteScroll threshold={10} on:loadMore={fetchData} />
+	{/if}
 </div>

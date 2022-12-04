@@ -6,10 +6,18 @@
 	import InfiniteScroll from '$components/InfiniteScroll.svelte'
 	import { page as appPage } from '$app/stores'
 	import { appGet } from '$utils/client'
+	import { afterNavigate } from '$app/navigation'
 
 	export let data: PageData
 	let page = 1
 	let newPosts: PageData['posts'] = []
+
+	afterNavigate(({ from, to }) => {
+		if (to?.url.href !== from?.url.href) {
+			page = 1
+			newPosts = []
+		}
+	})
 
 	async function fetchData() {
 		const response = await appGet(`${$appPage.url.search}&page=${page}`)

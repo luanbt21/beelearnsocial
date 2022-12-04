@@ -11,6 +11,7 @@
 	import { enhance } from '$app/forms'
 	import InfiniteScroll from '$components/InfiniteScroll.svelte'
 	import Post from '$ui/Post.svelte'
+	import { afterNavigate } from '$app/navigation'
 
 	export let data: PageData
 	const chartData = Array.from({ length: 6 }).fill(0) as number[]
@@ -21,6 +22,7 @@
 	let hoverCover = false
 	let uploadImage: FileList
 	$: previewURL = fileListToUrl(uploadImage)[0]
+	$: myProfile = data.user.uid === $user?.uid
 
 	let introductionValue = data.user.introduction
 
@@ -28,6 +30,15 @@
 	let haveMorePost = true
 	let postPage = 0
 	let posts: any[] = []
+
+	afterNavigate(({ from, to }) => {
+		if (to?.url.href !== from?.url.href) {
+			loadingPost = false
+			haveMorePost = true
+			postPage = 0
+			posts = []
+		}
+	})
 
 	async function fetchData() {
 		loadingPost = true
@@ -59,7 +70,7 @@
 			alt="user cover"
 			class="object-cover w-full h-full rounded"
 		/>
-		<div class="absolute bottom-2 right-2" class:hidden={!hoverCover}>
+		<div class="absolute bottom-2 right-2" class:hidden={!myProfile || !hoverCover}>
 			<form action="?/update" method="post" enctype="multipart/form-data" use:enhance>
 				<input
 					type="file"
@@ -124,7 +135,7 @@
 				maxlength="500"
 				required
 			/>
-			{#if data.user.uid === $user?.uid && introductionValue !== data.user.introduction}
+			{#if myProfile && introductionValue && introductionValue !== data.user.introduction}
 				<button out:scale class="btn btn-block">{$LL.save()}</button>
 			{/if}
 		</form>

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Post } from '@prisma/client'
 	import { LL } from '$i18n/i18n-svelte'
+	import remixiconUrl from 'remixicon/fonts/remixicon.symbol.svg'
 
 	export let post: Post
 	let isQuestion = post.options.length > 0
@@ -12,8 +13,8 @@
 	{#each post.options as option}
 		<label
 			class="label justify-start cursor-pointer rounded-lg mb-1 mx-[10%]"
-			class:bg-red-400={checked && answer === option.value && !option.type}
-			class:bg-green-400={checked && option.type}
+			class:text-error={checked && answer === option.value && !option.type}
+			class:text-success={checked && option.type}
 		>
 			<input
 				type="radio"
@@ -21,10 +22,23 @@
 				bind:group={answer}
 				value={option.value}
 				class="radio"
+				class:radio-error={checked && answer === option.value && !option.type}
+				class:radio-success={checked && option.type}
 			/>
 			<span class="ml-4">
 				{option.value}
 			</span>
+
+			{#if checked && answer === option.value && !option.type}
+				<svg class="ml-4 remix w-6 h-6 fill-current">
+					<use href="{remixiconUrl}#ri-close-fill" />
+				</svg>
+			{/if}
+			{#if checked && option.type}
+				<svg class="ml-4 remix w-6 h-6 fill-current">
+					<use href="{remixiconUrl}#ri-check-fill" />
+				</svg>
+			{/if}
 		</label>
 	{/each}
 	{#if checked}
@@ -43,7 +57,7 @@
 		</button>
 	{:else}
 		<button
-			class="btn btn-sm w-full btn-secondary"
+			class="btn btn-sm w-full btn-warning"
 			disabled={!answer}
 			on:click={() => {
 				answer = ''

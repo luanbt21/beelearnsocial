@@ -32,7 +32,9 @@ self.addEventListener(
 						}
 					}
 					if (data && data.postId) {
-						return clients.openWindow(`/${locale}/post?id=${event.notification.data.postId}`)
+						return clients.openWindow(
+							`/${locale}/explore/post?id=${event.notification.data.postId}`,
+						)
 					}
 					if (clients.openWindow) {
 						return clients.openWindow(`/${locale}/feed`)

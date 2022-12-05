@@ -24,7 +24,7 @@
 		</div>
 		<div class="ml-3 w-full">
 			<div>
-				<a class="link link-hover font-medium" href="{$locale}/profile/{user.uid}">
+				<a class="link link-hover font-medium" href="/{$locale}/profile/{user.uid}">
 					{user.displayName}
 				</a>
 			</div>

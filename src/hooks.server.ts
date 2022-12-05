@@ -30,17 +30,6 @@ if (!getApps().length) {
 }
 
 export const handle: Handle = async ({ event, resolve }) => {
-	const token = event.cookies.get('token')
-	if (token) {
-		const user = await getAuth()
-			.verifyIdToken(token)
-			.catch(() => {
-				event.cookies.delete('token', { path: '/' })
-				event.cookies.delete('userId', { path: '/' })
-			})
-		event.locals.user = await saveUser(user)
-	}
-
 	const [, lang, ...path] = event.url.pathname.split('/')
 	const bypassPaths = ['api', 'favicon.png', 'service-worker.js']
 
@@ -53,6 +42,17 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 
 	const locale = isLocale(lang) ? (lang as Locales) : getPreferredLocale(event)
+
+	const token = event.cookies.get('token')
+	if (token) {
+		const user = await getAuth()
+			.verifyIdToken(token)
+			.catch(() => {
+				event.cookies.delete('token', { path: '/' })
+				event.cookies.delete('userId', { path: '/' })
+			})
+		event.locals.user = await saveUser(user, locale)
+	}
 
 	const LL = L[locale]
 	event.locals.locale = locale

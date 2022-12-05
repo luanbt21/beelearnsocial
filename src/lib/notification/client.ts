@@ -12,6 +12,7 @@ export async function registerServiceWorker() {
 	})
 	await fetch('/api/notification', {
 		method: 'POST',
+		credentials: 'include',
 		headers: {
 			'Content-Type': 'application/json',
 		},

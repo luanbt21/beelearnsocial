@@ -1,9 +1,10 @@
 import { prisma } from '$lib/prisma'
+import type { Locale } from '@prisma/client'
 import type { DecodedIdToken } from 'firebase-admin/auth'
 
 export const getUsers = async () => prisma.user.findMany()
 
-export const saveUser = async (user: DecodedIdToken | void) => {
+export const saveUser = async (user: DecodedIdToken | void, locale: Locale) => {
 	if (!user) return
 	return await prisma.user.upsert({
 		where: {
@@ -13,12 +14,14 @@ export const saveUser = async (user: DecodedIdToken | void) => {
 			uid: user.uid,
 			displayName: user.name,
 			photoURL: user.picture,
+			locale,
 		},
 		create: {
 			uid: user.uid,
 			displayName: user.name,
 			photoURL: user.picture,
 			email: user.email,
+			locale,
 		},
 	})
 }

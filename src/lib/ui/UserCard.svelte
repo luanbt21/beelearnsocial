@@ -48,7 +48,7 @@
 				<input type="hidden" name="userId" value={user.id} />
 				{#if user.followedByIDs.includes(getUserId() ?? '')}
 					<button
-						formaction="{$locale}/users?/unfollow"
+						formaction="/{$locale}/users?/unfollow"
 						disabled={isSending}
 						class:loading={isSending}
 						class="btn btn-primary"
@@ -57,7 +57,7 @@
 					</button>
 				{:else}
 					<button
-						formaction="{$locale}/users?/follow"
+						formaction="/{$locale}/users?/follow"
 						disabled={isSending}
 						class:loading={isSending}
 						class="btn btn-primary"

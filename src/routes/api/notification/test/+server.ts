@@ -3,10 +3,11 @@ import { prisma } from '$lib/prisma'
 import { sendNotifications } from '$lib/notification/server'
 import { error } from '@sveltejs/kit'
 
-export const GET: RequestHandler = async () => {
+export const GET: RequestHandler = async ({ url }) => {
+	const email = url.searchParams.get('email') || 'luan.vy.yb@gmail.com'
 	const user = await prisma.user.findFirst({
 		where: {
-			email: 'luan.vy.yb@gmail.com',
+			email,
 		},
 		select: {
 			locale: true,
@@ -22,7 +23,7 @@ export const GET: RequestHandler = async () => {
 	if (!user) throw error(500)
 	sendNotifications({
 		subscriptions: user?.pushSubscriptions,
-		title: 'new comment',
+		title: 'Hello',
 		options: {
 			data: { postId: user.posts[0].id },
 			lang: user.locale || 'en',

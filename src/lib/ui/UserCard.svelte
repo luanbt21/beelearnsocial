@@ -51,7 +51,7 @@
 						formaction="/{$locale}/users?/unfollow"
 						disabled={isSending}
 						class:loading={isSending}
-						class="btn btn-primary"
+						class="btn"
 					>
 						{$LL.unfollow()}
 					</button>

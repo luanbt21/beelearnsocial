@@ -14,10 +14,10 @@ export const fileListToUrl = (fileList?: FileList) => {
 }
 
 /** Return space repetition time in mini seconds */
-export const calculateSpaceTime = (level: number) => {
-	const weight = 10 * 60 * 1000
-	if (level > 1) {
-		return (level - 1 + level) * weight
-	}
-	return 2 * weight
+export const calculateSpaceTime = (level: number): number => {
+	const day = 1
+	if (level === 1) return 1 * day
+	if (level === 2) return 6 * day
+	const EF = 2.5
+	return calculateSpaceTime(level - 1) * (EF + (level - 1) * 0.02)
 }

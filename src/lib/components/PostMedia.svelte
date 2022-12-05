@@ -60,7 +60,7 @@
 	<div bind:this={mediaCarousel} class="carousel">
 		{#each videos as src, i}
 			<div id={genId('media', i)} class="carousel-item w-full">
-				<video class="w-full my-auto" controls>
+				<video class="w-full my-auto max-h-[30rem]" controls>
 					<track kind="captions" />
 					<source {src} type="video/mp4" />
 					Failed to load video

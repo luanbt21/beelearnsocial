@@ -67,6 +67,28 @@ const en: BaseTranslation = {
 	somethingWentWrong: 'Something went wrong',
 	failedTo: 'Failed to {st:string}',
 	hiddenPosts: 'Hidden posts',
+	startNow: 'Start Now',
+	landingIntroduction:
+		'BeeLearnSocial is a learning social networking platform. BeeLeanSocial is designed based on research on user behavior, applying highly appreciated learning methods such as micro learning, spaced repetition, .....',
+	landingSlogan: 'BeeLearnSocial is designed to fit modern learning life',
+	landingSloganDetail:
+		'BeeLeanSocial with the slogan enjoy learning - keep learning, we want to bring an enjoyable learning experience and encourage lifelong learning, learning anytime, anywhere.',
+	spacedRepetition: 'Spaced Repetition',
+	spacedRepetitionDetail:
+		'BeeLeanSocial applies spaced Repetition algorithm to repeat the posts posted on the feed and help learners remember knowledge better.',
+	microlearning: 'Microlearning',
+	microlearningDetail:
+		'BeeLeanSocial is geared towards microlearning lessons such as images, short videos, multiple choice questions, helping users quickly grasp knowledge.',
+	landingCollection: 'Collection',
+	landingCollectionDetail:
+		'Users can easily save microlearning cards to their collection. Convenient for the review process and knowledge system.',
+	landingAward: 'BeeLeanSocial - top 10 best projects at UI/UX hackathon 2022',
+	landingAwardDetail:
+		'The impressive design and ideas of BeeLeanSocial convinced the jury of the UI/UX hackathon and excelled in the top 10 of this contest.',
+	landingUserResearch:
+		'During this project, BeeLeanSocial team interviewed and surveyed nearly 150 young people from 15 to 35 years old in Hanoi city.',
+	letStartNow: "Let's start now!",
+	letStartNowDetail: "Press Start Now button and we'll take you into new learning journey",
 }
 
 export default en

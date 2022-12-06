@@ -37,8 +37,7 @@ export const actions: Actions = {
 		const description = data.get('description') as string
 		if (!description) throw error(400, 'description is empty')
 
-		const status = data.get('status') === 'true' ? true : false
-
+		const status = data.get('status') === 'true'
 		await prisma.plan.update({
 			where: { id: data.get('id') as string },
 			data: {

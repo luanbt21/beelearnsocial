@@ -67,6 +67,29 @@ const vi: Translations = {
 	somethingWentWrong: 'Đã xảy ra sự cố',
 	failedTo: '{st} thất bại',
 	hiddenPosts: 'Bài đăng đã ẩn',
+	startNow: 'Bắt đầu ngay',
+	landingIntroduction:
+		'BeeLearnSocial là nền tảng mạng xã hội học tập. BeeLeanSocial được thiết kế dựa trên những nghiên cứu về hành vi người dùng, ứng dụng các phương pháp học tập được đánh giá cao như học vi mô, lặp lại khoảng cách,.....',
+	landingSlogan: 'BeeLearnSocial được thiết kế để phù hợp với cuộc sống học tập hiện đại',
+	landingSloganDetail:
+		'BeeLeanSocial với slogan enjoy learning - keep learning, chúng mình mong muốn mang lại trải nghiệm học tập thú vị và khuyến khích việc học tập suốt đời, học tập mọi lúc, mọi nơi.',
+	spacedRepetition: 'Lặp ngắt quãng',
+	spacedRepetitionDetail:
+		'Hệ thống ứng dụng thuật toán lặp ngắt quãng để lặp lại các bài đã đăng trên trang feed và giúp người học ghi nhớ kiến ​​thức tốt hơn',
+	microlearning: 'Ứng dụng Microlearning',
+	microlearningDetail:
+		'Hệ thống hướng tới các bài học dạng microlearning như dạng hình ảnh, dạng video ngắn, dạng câu hỏi trắc nghiệm, giúp người dùng nhanh chóng nắm được kiến thức',
+	landingCollection: 'Bộ sưu tập',
+	landingCollectionDetail:
+		'Người dùng có thể dễ dàng lưu các thẻ microlearning vào bộ sưu tập của mình. Thuận tiện cho quá trình ôn tập và hệ thống kiến thức.',
+	landingAward: 'BeeLeanSocial - top 10 bài dự thi xuất sắc nhất tại UI/UX hackathon 2022',
+	landingAwardDetail:
+		'Thiết kế và ý tưởng mới lạ của BeeLeanSocial đã thuyết phục được dàn ban giám khảo của cuộc thi UI/UX hackathon và xuất sắc ở trong top 10 của cuộc thi.',
+	landingUserResearch:
+		'Trong quá trình thực hiện, BeeLeanSocial đã phỏng vấn và khảo sát gần 150 bạn trẻ tuổi từ 15 đến 35 tuổi trên địa bàn thành phố Hà Nội.',
+	letStartNow: 'Bắt đầu ngay thôi!',
+	letStartNowDetail:
+		'Nhấn nút bắt đầu ngay và chúng mình sẽ hướng dẫn bạn vào hành trình học tập mới!',
 }
 
 export default vi

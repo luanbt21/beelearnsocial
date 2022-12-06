@@ -280,6 +280,66 @@ type RootTranslation = {
 	 * H​i​d​d​e​n​ ​p​o​s​t​s
 	 */
 	hiddenPosts: string
+	/**
+	 * S​t​a​r​t​ ​N​o​w
+	 */
+	startNow: string
+	/**
+	 * B​e​e​L​e​a​r​n​S​o​c​i​a​l​ ​i​s​ ​a​ ​l​e​a​r​n​i​n​g​ ​s​o​c​i​a​l​ ​n​e​t​w​o​r​k​i​n​g​ ​p​l​a​t​f​o​r​m​.​ ​B​e​e​L​e​a​n​S​o​c​i​a​l​ ​i​s​ ​d​e​s​i​g​n​e​d​ ​b​a​s​e​d​ ​o​n​ ​r​e​s​e​a​r​c​h​ ​o​n​ ​u​s​e​r​ ​b​e​h​a​v​i​o​r​,​ ​a​p​p​l​y​i​n​g​ ​h​i​g​h​l​y​ ​a​p​p​r​e​c​i​a​t​e​d​ ​l​e​a​r​n​i​n​g​ ​m​e​t​h​o​d​s​ ​s​u​c​h​ ​a​s​ ​m​i​c​r​o​ ​l​e​a​r​n​i​n​g​,​ ​s​p​a​c​e​d​ ​r​e​p​e​t​i​t​i​o​n​,​ ​.​.​.​.​.
+	 */
+	landingIntroduction: string
+	/**
+	 * B​e​e​L​e​a​r​n​S​o​c​i​a​l​ ​i​s​ ​d​e​s​i​g​n​e​d​ ​t​o​ ​f​i​t​ ​m​o​d​e​r​n​ ​l​e​a​r​n​i​n​g​ ​l​i​f​e
+	 */
+	landingSlogan: string
+	/**
+	 * B​e​e​L​e​a​n​S​o​c​i​a​l​ ​w​i​t​h​ ​t​h​e​ ​s​l​o​g​a​n​ ​e​n​j​o​y​ ​l​e​a​r​n​i​n​g​ ​-​ ​k​e​e​p​ ​l​e​a​r​n​i​n​g​,​ ​w​e​ ​w​a​n​t​ ​t​o​ ​b​r​i​n​g​ ​a​n​ ​e​n​j​o​y​a​b​l​e​ ​l​e​a​r​n​i​n​g​ ​e​x​p​e​r​i​e​n​c​e​ ​a​n​d​ ​e​n​c​o​u​r​a​g​e​ ​l​i​f​e​l​o​n​g​ ​l​e​a​r​n​i​n​g​,​ ​l​e​a​r​n​i​n​g​ ​a​n​y​t​i​m​e​,​ ​a​n​y​w​h​e​r​e​.
+	 */
+	landingSloganDetail: string
+	/**
+	 * S​p​a​c​e​d​ ​R​e​p​e​t​i​t​i​o​n
+	 */
+	spacedRepetition: string
+	/**
+	 * B​e​e​L​e​a​n​S​o​c​i​a​l​ ​a​p​p​l​i​e​s​ ​s​p​a​c​e​d​ ​R​e​p​e​t​i​t​i​o​n​ ​a​l​g​o​r​i​t​h​m​ ​t​o​ ​r​e​p​e​a​t​ ​t​h​e​ ​p​o​s​t​s​ ​p​o​s​t​e​d​ ​o​n​ ​t​h​e​ ​f​e​e​d​ ​a​n​d​ ​h​e​l​p​ ​l​e​a​r​n​e​r​s​ ​r​e​m​e​m​b​e​r​ ​k​n​o​w​l​e​d​g​e​ ​b​e​t​t​e​r​.
+	 */
+	spacedRepetitionDetail: string
+	/**
+	 * M​i​c​r​o​l​e​a​r​n​i​n​g
+	 */
+	microlearning: string
+	/**
+	 * B​e​e​L​e​a​n​S​o​c​i​a​l​ ​i​s​ ​g​e​a​r​e​d​ ​t​o​w​a​r​d​s​ ​m​i​c​r​o​l​e​a​r​n​i​n​g​ ​l​e​s​s​o​n​s​ ​s​u​c​h​ ​a​s​ ​i​m​a​g​e​s​,​ ​s​h​o​r​t​ ​v​i​d​e​o​s​,​ ​m​u​l​t​i​p​l​e​ ​c​h​o​i​c​e​ ​q​u​e​s​t​i​o​n​s​,​ ​h​e​l​p​i​n​g​ ​u​s​e​r​s​ ​q​u​i​c​k​l​y​ ​g​r​a​s​p​ ​k​n​o​w​l​e​d​g​e​.
+	 */
+	microlearningDetail: string
+	/**
+	 * C​o​l​l​e​c​t​i​o​n
+	 */
+	landingCollection: string
+	/**
+	 * U​s​e​r​s​ ​c​a​n​ ​e​a​s​i​l​y​ ​s​a​v​e​ ​m​i​c​r​o​l​e​a​r​n​i​n​g​ ​c​a​r​d​s​ ​t​o​ ​t​h​e​i​r​ ​c​o​l​l​e​c​t​i​o​n​.​ ​C​o​n​v​e​n​i​e​n​t​ ​f​o​r​ ​t​h​e​ ​r​e​v​i​e​w​ ​p​r​o​c​e​s​s​ ​a​n​d​ ​k​n​o​w​l​e​d​g​e​ ​s​y​s​t​e​m​.
+	 */
+	landingCollectionDetail: string
+	/**
+	 * B​e​e​L​e​a​n​S​o​c​i​a​l​ ​-​ ​t​o​p​ ​1​0​ ​b​e​s​t​ ​p​r​o​j​e​c​t​s​ ​a​t​ ​U​I​/​U​X​ ​h​a​c​k​a​t​h​o​n​ ​2​0​2​2
+	 */
+	landingAward: string
+	/**
+	 * T​h​e​ ​i​m​p​r​e​s​s​i​v​e​ ​d​e​s​i​g​n​ ​a​n​d​ ​i​d​e​a​s​ ​o​f​ ​B​e​e​L​e​a​n​S​o​c​i​a​l​ ​c​o​n​v​i​n​c​e​d​ ​t​h​e​ ​j​u​r​y​ ​o​f​ ​t​h​e​ ​U​I​/​U​X​ ​h​a​c​k​a​t​h​o​n​ ​a​n​d​ ​e​x​c​e​l​l​e​d​ ​i​n​ ​t​h​e​ ​t​o​p​ ​1​0​ ​o​f​ ​t​h​i​s​ ​c​o​n​t​e​s​t​.
+	 */
+	landingAwardDetail: string
+	/**
+	 * D​u​r​i​n​g​ ​t​h​i​s​ ​p​r​o​j​e​c​t​,​ ​B​e​e​L​e​a​n​S​o​c​i​a​l​ ​t​e​a​m​ ​i​n​t​e​r​v​i​e​w​e​d​ ​a​n​d​ ​s​u​r​v​e​y​e​d​ ​n​e​a​r​l​y​ ​1​5​0​ ​y​o​u​n​g​ ​p​e​o​p​l​e​ ​f​r​o​m​ ​1​5​ ​t​o​ ​3​5​ ​y​e​a​r​s​ ​o​l​d​ ​i​n​ ​H​a​n​o​i​ ​c​i​t​y​.
+	 */
+	landingUserResearch: string
+	/**
+	 * L​e​t​'​s​ ​s​t​a​r​t​ ​n​o​w​!
+	 */
+	letStartNow: string
+	/**
+	 * P​r​e​s​s​ ​S​t​a​r​t​ ​N​o​w​ ​b​u​t​t​o​n​ ​a​n​d​ ​w​e​'​l​l​ ​t​a​k​e​ ​y​o​u​ ​i​n​t​o​ ​n​e​w​ ​l​e​a​r​n​i​n​g​ ​j​o​u​r​n​e​y
+	 */
+	letStartNowDetail: string
 }
 
 export type TranslationFunctions = {
@@ -547,6 +607,66 @@ export type TranslationFunctions = {
 	 * Hidden posts
 	 */
 	hiddenPosts: () => LocalizedString
+	/**
+	 * Start Now
+	 */
+	startNow: () => LocalizedString
+	/**
+	 * BeeLearnSocial is a learning social networking platform. BeeLeanSocial is designed based on research on user behavior, applying highly appreciated learning methods such as micro learning, spaced repetition, .....
+	 */
+	landingIntroduction: () => LocalizedString
+	/**
+	 * BeeLearnSocial is designed to fit modern learning life
+	 */
+	landingSlogan: () => LocalizedString
+	/**
+	 * BeeLeanSocial with the slogan enjoy learning - keep learning, we want to bring an enjoyable learning experience and encourage lifelong learning, learning anytime, anywhere.
+	 */
+	landingSloganDetail: () => LocalizedString
+	/**
+	 * Spaced Repetition
+	 */
+	spacedRepetition: () => LocalizedString
+	/**
+	 * BeeLeanSocial applies spaced Repetition algorithm to repeat the posts posted on the feed and help learners remember knowledge better.
+	 */
+	spacedRepetitionDetail: () => LocalizedString
+	/**
+	 * Microlearning
+	 */
+	microlearning: () => LocalizedString
+	/**
+	 * BeeLeanSocial is geared towards microlearning lessons such as images, short videos, multiple choice questions, helping users quickly grasp knowledge.
+	 */
+	microlearningDetail: () => LocalizedString
+	/**
+	 * Collection
+	 */
+	landingCollection: () => LocalizedString
+	/**
+	 * Users can easily save microlearning cards to their collection. Convenient for the review process and knowledge system.
+	 */
+	landingCollectionDetail: () => LocalizedString
+	/**
+	 * BeeLeanSocial - top 10 best projects at UI/UX hackathon 2022
+	 */
+	landingAward: () => LocalizedString
+	/**
+	 * The impressive design and ideas of BeeLeanSocial convinced the jury of the UI/UX hackathon and excelled in the top 10 of this contest.
+	 */
+	landingAwardDetail: () => LocalizedString
+	/**
+	 * During this project, BeeLeanSocial team interviewed and surveyed nearly 150 young people from 15 to 35 years old in Hanoi city.
+	 */
+	landingUserResearch: () => LocalizedString
+	/**
+	 * Let's start now!
+	 */
+	letStartNow: () => LocalizedString
+	/**
+	 * Press Start Now button and we'll take you into new learning journey
+	 */
+	letStartNowDetail: () => LocalizedString
 }
 
 export type Formatters = {}

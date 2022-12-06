@@ -31,7 +31,7 @@ if (!getApps().length) {
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const [, lang, ...path] = event.url.pathname.split('/')
-	const bypassPaths = ['api', 'favicon.png', 'service-worker.js']
+	const bypassPaths = ['api', 'favicon2.png', 'service-worker.js']
 
 	if (!isLocale(lang) && !bypassPaths.includes(lang)) {
 		const locale = getPreferredLocale(event)

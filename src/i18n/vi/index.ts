@@ -88,8 +88,7 @@ const vi: Translations = {
 	landingUserResearch:
 		'Trong quá trình thực hiện, BeeLeanSocial đã phỏng vấn và khảo sát gần 150 bạn trẻ tuổi từ 15 đến 35 tuổi trên địa bàn thành phố Hà Nội.',
 	letStartNow: 'Bắt đầu ngay thôi!',
-	letStartNowDetail:
-		'Nhấn nút bắt đầu ngay và chúng mình sẽ hướng dẫn bạn vào hành trình học tập mới!',
+	letStartNowDetail: 'Nhấn nút bắt đầu ngay và chúng mình sẽ đưa bạn vào hành trình học tập mới!',
 }
 
 export default vi

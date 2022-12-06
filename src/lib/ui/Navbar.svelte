@@ -25,7 +25,7 @@
 		</div>
 		<a href="/{$locale}">
 			<div class="flex flex-1 mx-1">
-				<img class="mr-2 w-5 h-11 md:w-auto" src="/logo.png" alt="BeeLeanSocialLogo" />
+				<img class="mr-2 mt-1 w-8 h-7 md:w-auto" src="/logo.png" alt="BeeLeanSocialLogo" />
 				<div class="hidden lg:block">
 					<h3 class="font-medium leading-tight text-xl">BeeLearnSocial</h3>
 					<p class="text-xs text-gray-300">enjoy learning - keep learning</p>

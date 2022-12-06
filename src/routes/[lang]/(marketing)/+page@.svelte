@@ -182,7 +182,7 @@
 			<div class="md:flex md:justify-between">
 				<div class="mb-6 md:mb-0">
 					<a href="https://beelearn.social" class="flex items-center">
-						<img src="/logo.png" class="mr-3 h-8" alt="BeeLeanSocial Logo" />
+						<img src="/favicon2.png" class="mr-3 mt-1 h-8" alt="BeeLeanSocial Logo" />
 						<span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
 							BeeLeanSocial
 						</span>

@@ -23,8 +23,8 @@
 	<div class="p-4 bg-base-100 rounded">
 		<h2 class="mb-2">{$LL.whatDoYouWantToDo()}</h2>
 		<form class=" flex flex-col gap-2" action="?/create" method="post" use:enhance>
-			<div class="form-control" for="task-description">
-				<label class="label">
+			<div class="form-control">
+				<label class="label" for="task-description">
 					<span class="label-text">{$LL.taskDescription()}</span>
 				</label>
 				<input

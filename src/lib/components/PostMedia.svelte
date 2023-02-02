@@ -32,7 +32,7 @@
 						on:click={(e) => slice(e, audioCarousel)}
 						href="#{genId('audio', i - 1)}"
 						class="btn btn-sm btn-ghost btn-circle"
-						disabled={i === 0 ? true : undefined}
+						class:disabled={i === 0}
 					>
 						❮
 					</a>
@@ -46,7 +46,7 @@
 						on:click={(e) => slice(e, audioCarousel)}
 						href="#{genId('audio', i + 1)}"
 						class="btn btn-sm btn-ghost btn-circle"
-						disabled={i === audios.length - 1 ? true : undefined}
+						class:disabled={i === audios.length - 1}
 					>
 						❯
 					</a>

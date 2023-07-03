@@ -1,7 +1,6 @@
 import type { Actions, PageServerLoad } from './$types'
 import { prisma } from '$lib/prisma'
 import { error } from '@sveltejs/kit'
-import { saveMediaFile } from '$utils/server'
 
 export const load: PageServerLoad = async ({ params }) => {
 	const user = await prisma.user.findFirst({
@@ -27,25 +26,11 @@ export const actions: Actions = {
 
 		const data = await request.formData()
 		const introduction = (data.get('introduction') as string) || undefined
-		const coverImage = data.get('coverImage') as Blob | null
+		const coverImageURL = (data.get('coverImageURL') as string) || undefined
 
-		if (coverImage && coverImage.size) {
-			if (!coverImage.type.includes('image')) {
-				throw error(400, 'File type not match')
-			}
-
-			const coverImageURL = await saveMediaFile({ blob: coverImage })
-			return await prisma.user.update({
-				where: { id: locals.user.id },
-				data: { coverImageURL },
-			})
-		}
-
-		if (introduction) {
-			return await prisma.user.update({
-				where: { id: locals.user.id },
-				data: { introduction },
-			})
-		}
+		return await prisma.user.update({
+			where: { id: locals.user.id },
+			data: { introduction, coverImageURL },
+		})
 	},
 }

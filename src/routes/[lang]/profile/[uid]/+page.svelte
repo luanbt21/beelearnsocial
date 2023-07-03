@@ -5,7 +5,7 @@
 	import BarChart from '$components/BarChart.svelte'
 	import { fade, scale } from 'svelte/transition'
 	import { page } from '$app/stores'
-	import { appGet, getUserId } from '$utils/client'
+	import { appGet, getUserId, toastError, toastSuccess, uploadMediaFile } from '$utils/client'
 	import { user } from '$stores/auth'
 	import { fileListToUrl } from '$utils'
 	import { enhance } from '$app/forms'
@@ -52,12 +52,37 @@
 		posts = [...posts, ...postsData]
 		postPage++
 	}
+
+	async function handleSubmit(event: SubmitEvent) {
+		const form = event.target as HTMLFormElement
+		const data = new FormData(form)
+
+		if (uploadImage && uploadImage.length) {
+			const url = await uploadMediaFile('media', uploadImage[0])
+			data.append('coverImageURL', url)
+		}
+
+		try {
+			await fetch(form.action, {
+				method: 'POST',
+				credentials: 'include',
+				body: data,
+				headers: {
+					'x-sveltekit-action': 'true',
+				},
+			})
+			toastSuccess($LL.done())
+		} catch (error) {
+			toastError($LL.failedTo({ st: $LL.save() }))
+		}
+	}
 </script>
 
 <svelte:head>
 	<title>{$LL.profile()}: {data.user.displayName}</title>
 </svelte:head>
 <div in:fade class="p-4 bg-base-100 relative top-0 overflow-auto">
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div
 		class="card h-72 rounded relative"
 		on:mouseenter={() => (hoverCover = true)}
@@ -71,14 +96,8 @@
 			class="object-cover w-full h-full rounded"
 		/>
 		<div class="absolute bottom-2 right-2" class:hidden={!myProfile || !hoverCover}>
-			<form action="?/update" method="post" enctype="multipart/form-data" use:enhance>
-				<input
-					type="file"
-					class="file-input glass"
-					name="coverImage"
-					accept="image/*"
-					bind:files={uploadImage}
-				/>
+			<input type="file" class="file-input glass" accept="image/*" bind:files={uploadImage} />
+			<form action="?/update" method="post" on:submit|preventDefault={handleSubmit}>
 				{#if uploadImage && uploadImage.length}
 					<button class="btn glass">{$LL.save()}</button>
 				{/if}
@@ -147,7 +166,7 @@
 		</h3>
 		{#if data.user.collections}
 			<div
-				class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-2 "
+				class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-2"
 			>
 				{#each data.user.collections as collection (collection.id)}
 					<CollectionCard {collection} />

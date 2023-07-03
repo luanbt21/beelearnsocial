@@ -1,6 +1,3 @@
-import { readable, writable } from 'svelte/store'
-import PocketBase from 'pocketbase'
-
-export const pocket = readable(new PocketBase('https://pocket.beelearn.social'))
+import { writable } from 'svelte/store'
 
 export const showCreatePostModal = writable(false)

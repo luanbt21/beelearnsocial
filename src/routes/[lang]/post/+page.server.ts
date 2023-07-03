@@ -4,7 +4,6 @@ import { prisma } from '$lib/prisma'
 import { error, redirect } from '@sveltejs/kit'
 import type { Actions } from './$types'
 import { deletePost } from '$lib/db/post'
-import { saveMediaFile } from '$utils/server'
 
 const verifyId = async ({ locals, request }: { locals: App.Locals; request: Request }) => {
 	if (!locals.user) throw error(404)
@@ -38,12 +37,20 @@ export const actions: Actions = {
 		if (!locals.user) throw error(404)
 		const data = await request.formData()
 
-		const validatedData = validateData(data)
+		const { tags, ...validatedData } = validateData(data)
 		const postId = data.get('postId') as string | null
 
 		return await prisma.post.update({
 			where: { id: postId || undefined },
-			data: validatedData,
+			data: {
+				...validatedData,
+				tags: {
+					connectOrCreate: tags.map((name) => ({
+						where: { name },
+						create: { name, description: '' },
+					})),
+				},
+			},
 			select: {
 				title: true,
 				description: true,
@@ -55,30 +62,7 @@ export const actions: Actions = {
 		if (!locals.user) throw error(404)
 
 		const data = await request.formData()
-		const validatedData = validateData(data)
-
-		interface Media {
-			images: string[]
-			videos: string[]
-			audios: string[]
-		}
-		const media: Media = {
-			images: [],
-			videos: [],
-			audios: [],
-		}
-		const tags: string[] = []
-
-		for (const [k, v] of data.entries()) {
-			if (k === 'tag') {
-				tags.push(v as string)
-				continue
-			}
-			if (k in media && v instanceof Blob && v.size !== 0) {
-				media[k as keyof Media].push(await saveMediaFile({ blob: v }))
-				continue
-			}
-		}
+		const { tags, ...validatedData } = validateData(data)
 
 		const post = await prisma.post.create({
 			data: {
@@ -90,7 +74,6 @@ export const actions: Actions = {
 						create: { name, description: '' },
 					})),
 				},
-				...media,
 			},
 		})
 
@@ -108,11 +91,31 @@ const validateData = (data: FormData) => {
 	const options: { value: string; type: number }[] = []
 	const rightOption = data.get('rightOption') as string | null
 
-	for (const [k, v] of data.entries()) {
+	type Media = 'images' | 'videos' | 'audios'
+	const media: Record<Media, string[]> = {
+		images: [],
+		videos: [],
+		audios: [],
+	}
+	const tags: string[] = []
+
+	for (const [k, value] of data.entries()) {
+		if (!value || typeof value !== 'string') {
+			throw error(400, `Invalid value for ${k}`)
+		}
 		if (k === 'option') {
-			const value = v as string
 			const type = value === rightOption ? 1 : 0
 			options.push({ value, type })
+			continue
+		}
+
+		if (k === 'tag') {
+			tags.push(value)
+			continue
+		}
+
+		if (k in media) {
+			media[k as Media].push(value)
 			continue
 		}
 	}
@@ -124,5 +127,7 @@ const validateData = (data: FormData) => {
 		title,
 		description,
 		options,
+		tags,
+		...media,
 	}
 }

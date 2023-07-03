@@ -10,7 +10,6 @@
 	$: suggest = tags.some(({ name }) => name === q)
 		? [...tags.map((tag) => tag.name)]
 		: [...tags.map((tag) => tag.name), q]
-	let inputFocused = false
 
 	const fetchSuggest = async () => {
 		q = q.trim()
@@ -75,17 +74,12 @@
 			bind:value={q}
 			on:input={fetchSuggest}
 			on:keydown={handleEnter}
-			on:focusin={() => (inputFocused = true)}
-			on:focusout={() => (inputFocused = false)}
 		/>
 		{#if q}
-			<ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-full">
-				{#each suggest as tag, i (tag)}
+			<ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-200 rounded-box w-full z-10">
+				{#each suggest as tag (tag)}
 					<li>
-						<button
-							class:bg-gray-200={inputFocused && i === 0}
-							on:click={() => completeTagName(tag)}
-						>
+						<button on:click={() => completeTagName(tag)}>
 							#{tag}
 						</button>
 					</li>

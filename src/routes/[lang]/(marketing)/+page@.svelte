@@ -208,7 +208,7 @@
 						</h2>
 						<ul class="text-gray-600 dark:text-gray-400">
 							<li class="mb-4">
-								<a href="https://github.com/luanbt21/bayquamon.git" class="hover:underline ">
+								<a href="https://github.com/luanbt21/bayquamon.git" class="hover:underline">
 									Github
 								</a>
 							</li>

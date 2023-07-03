@@ -3,6 +3,8 @@ import { goto } from '$app/navigation'
 import { locale, LL } from '$i18n/i18n-svelte'
 import { toast, type SvelteToastOptions } from '@zerodevx/svelte-toast'
 import { getAuth, type User } from 'firebase/auth'
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
+import type { Writable } from 'svelte/store'
 
 export const logout = async () => {
 	await getAuth().signOut()
@@ -89,5 +91,38 @@ export const appFetch = async (
 		},
 		body: JSON.stringify(body),
 		...init,
+	})
+}
+
+// uploadMediaFile return the downloadURL of the uploaded file
+export const uploadMediaFile = async (
+	path: string,
+	file: File,
+	progress?: Writable<number>,
+): Promise<string> => {
+	if (!file.size) throw new Error(`File is empty: ${file.name}}`)
+	const name = +file.name + crypto.randomUUID()
+	const storageRef = ref(getStorage(), path + '/' + name)
+	const uploadTask = uploadBytesResumable(storageRef, file)
+
+	return new Promise((resolve, reject) => {
+		uploadTask.on(
+			'state_changed',
+			(snapshot) => {
+				progress?.set((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+			},
+			(error) => {
+				reject(error)
+			},
+			() => {
+				getDownloadURL(uploadTask.snapshot.ref)
+					.then((downloadURL) => {
+						resolve(downloadURL)
+					})
+					.catch((error) => {
+						reject(error)
+					})
+			},
+		)
 	})
 }

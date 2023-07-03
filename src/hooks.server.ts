@@ -4,12 +4,12 @@ import { loadAllLocales } from '$i18n/i18n-util.sync'
 import type { Handle, RequestEvent } from '@sveltejs/kit'
 import { initAcceptLanguageHeaderDetector } from 'typesafe-i18n/detectors'
 import { initializeApp, getApps, cert } from 'firebase-admin/app'
+import { getFirestore } from 'firebase-admin/firestore'
 import { getAuth } from 'firebase-admin/auth'
 import { saveUser } from '$lib/db/user'
 import { FIREBASE_SERVICE_ACCOUNT_KEY } from '$env/static/private'
 import dayjs from 'dayjs'
 import EventSource from 'eventsource'
-import PocketBase from 'pocketbase'
 import { notificationOnComment } from '$lib/notification/server'
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -19,13 +19,16 @@ global.EventSource = EventSource
 loadAllLocales()
 const L = i18n()
 
-const pocket = new PocketBase('https://pocket.beelearn.social')
-pocket.realtime.subscribe('comment', (data) => notificationOnComment(data, L))
-
 if (!getApps().length) {
 	const serviceAccount = JSON.parse(FIREBASE_SERVICE_ACCOUNT_KEY)
-	initializeApp({
+	const app = initializeApp({
 		credential: cert(serviceAccount),
+	})
+	const db = getFirestore(app)
+	db.collection('comment').onSnapshot((snapshot) => {
+		snapshot.docChanges().forEach((change) => {
+			notificationOnComment(change, L)
+		})
 	})
 }
 

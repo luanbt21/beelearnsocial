@@ -1,6 +1,4 @@
-import type { Record } from 'pocketbase'
-
-interface IComment extends Record {
+export interface IComment {
 	postId?: string
 	userId?: string
 	content?: string

@@ -7,7 +7,7 @@
 	import type { Option, Post } from '@prisma/client'
 	import { enhance } from '$app/forms'
 	import { toastError, toastSuccess } from '$utils/client'
-	import type { ActionResult } from '@sveltejs/kit'
+	import type { ActionResult, SubmitFunction } from '@sveltejs/kit'
 
 	export let id: string
 	export let postId: string
@@ -21,9 +21,9 @@
 	let loading = false
 	$: isFormOk = isQuestion ? title && description && isQuestionOk : title && description
 
-	const handleSubmit = () => {
+	const handleSubmit: SubmitFunction = () => {
 		loading = true
-		return ({ result }: { result: ActionResult<Record<string, any>, Record<string, any>> }) => {
+		return ({ result }) => {
 			if (result.type === 'success') {
 				toastSuccess('Update post successfully')
 				document.getElementById(id)?.click()

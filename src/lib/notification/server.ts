@@ -2,18 +2,19 @@ import webpush from 'web-push'
 import { PRIVATE_VAPID_KEY, VAPID_SUBJECT } from '$env/static/private'
 import { PUBLIC_VAPID_KEY } from '$env/static/public'
 import { prisma } from '$lib/prisma'
-import type { RecordSubscription } from 'pocketbase'
-import type { IComment } from 'src/global'
 import type { i18n } from '$i18n/i18n-util'
 import { logoPath } from '$lib/constant'
+import type { IComment } from '../../global'
+import type { DocumentChange } from 'firebase-admin/firestore'
 
 export async function notificationOnComment(
-	data: RecordSubscription<IComment>,
+	change: DocumentChange<IComment>,
 	L: ReturnType<typeof i18n>,
 ) {
+	const data = change.doc.data()
 	const post = await prisma.post.findFirst({
 		where: {
-			id: data.record.postId,
+			id: data.postId,
 		},
 		select: {
 			title: true,
@@ -28,11 +29,11 @@ export async function notificationOnComment(
 	})
 
 	// ignore if commenter and the post author are the same person
-	if (data.record.userId === post?.author.id) return
+	if (data.userId === post?.author.id) return
 
 	const commenter = await prisma.user.findFirst({
 		where: {
-			id: data.record.userId,
+			id: data.userId,
 		},
 		select: {
 			displayName: true,

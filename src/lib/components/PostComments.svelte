@@ -4,42 +4,54 @@
 	import { user } from '$stores/auth'
 	import { getUserId } from '$utils/client'
 	import Tiptap from './Tiptap'
-	import type { Record, RecordSubscription } from 'pocketbase'
-	import { pocket } from '$stores'
-	import type { IComment } from 'src/global'
+	import {
+		getFirestore,
+		collection,
+		onSnapshot,
+		query,
+		where,
+		addDoc,
+		getDocs,
+	} from 'firebase/firestore'
+	import type { IComment } from '../../global'
 
 	export let postId: string
 	export let length = 0
-	let comments: Record[] = []
+	let comments: IComment & { id: string }[] = []
 	$: length = comments.length
 
 	let value = ''
 
-	$pocket.realtime.subscribe('comment', (e: RecordSubscription<IComment>) => {
-		if (e.record.postId !== postId) return
-		switch (e.action) {
-			case 'create':
-				comments = [...comments, e.record]
-				break
-			case 'update':
-				comments = comments.map((r) => {
-					if (r.id === e.record.id) {
-						return e.record
-					}
-					return r
-				})
-				break
-			case 'delete':
-				comments = comments.filter((r) => r.id !== e.record.id)
-				break
+	const collectionRef = collection(getFirestore(), 'comment')
+	const q = query(collectionRef, where('postId', '==', postId))
 
-			default:
-				break
-		}
+	onSnapshot(q, {
+		next: (snapshot) => {
+			snapshot.docChanges().forEach((change) => {
+				const data = { ...(change.doc.data() as IComment), id: change.doc.id }
+				switch (change.type) {
+					case 'added':
+						comments = [...comments, data]
+						break
+					case 'modified':
+						comments = comments.map((r) => (r.id === data.id ? data : r))
+						break
+					case 'removed':
+						comments = comments.filter((r) => r.id !== data.id)
+						break
+
+					default:
+						break
+				}
+			})
+		},
+		error: (err) => {
+			console.error(err)
+		},
 	})
 
 	const sentComment = async () => {
-		$pocket.collection('comment').create({
+		addDoc(collectionRef, {
 			postId,
 			userId: getUserId(),
 			content: value,
@@ -48,8 +60,14 @@
 	}
 
 	onMount(async () => {
-		comments = await $pocket.collection('comment').getFullList(200, {
-			filter: `postId = "${postId}"`,
+		comments = await getDocs(q).then((snapshot) => {
+			return snapshot.docs.map((doc) => {
+				const data = doc.data() as IComment
+				return {
+					...data,
+					id: doc.id,
+				}
+			})
 		})
 	})
 </script>
